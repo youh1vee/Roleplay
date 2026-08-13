@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Roleplay — Seasons</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top, #17191d 0%, #0c0d0f 45%, #08090a 100%);
+            color: #f2f2f2;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page {
+            width: min(1100px, calc(100% - 28px));
+            margin: auto;
+            padding: 28px 0 50px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 8px 4px 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid #34363a;
+            border-radius: 10px;
+
+            background: #151619;
+
+            font-size: 14px;
+            color: #bdbfc3;
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .archive {
+            color: #686b70;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            padding: 35px 6px 28px;
+        }
+
+        .hero-label {
+            color: #73767c;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 7vw, 64px);
+            font-weight: 500;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .hero p {
+            margin-top: 13px;
+            color: #777a80;
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            height: 48px;
+
+            padding: 0 17px;
+
+            background: #17181b;
+            border: 1px solid #292b2f;
+            border-radius: 13px;
+
+            margin-bottom: 10px;
+
+            transition: border-color .2s ease,
+                        background .2s ease;
+        }
+
+        .search-box:focus-within {
+            border-color: #484b50;
+            background: #1a1b1e;
+        }
+
+        .search-icon {
+            color: #686b70;
+            font-size: 17px;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: #eeeeee;
+            font-size: 13px;
+        }
+
+        .search-box input::placeholder {
+            color: #64676c;
+        }
+
+
+        /* =========================
+           FILTER BAR
+        ========================= */
+
+        .toolbar {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+
+            margin-bottom: 22px;
+        }
+
+        .filter {
+            height: 44px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 15px;
+
+            border: 1px solid #292b2f;
+            border-radius: 11px;
+
+            background: #151619;
+
+            color: #8b8e93;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .filter:hover {
+            background: #1b1c1f;
+            border-color: #3a3c40;
+            color: #dddddd;
+        }
+
+        .filter strong {
+            color: #dddddd;
+            font-weight: 500;
+        }
+
+
+        /* =========================
+           SECTION HEADER
+        ========================= */
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+
+            margin: 10px 2px 10px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .section-count {
+            color: #62656a;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           SEASON CARDS
+        ========================= */
+
+        .seasons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .season-card {
+            position: relative;
+
+            min-height: 132px;
+
+            display: grid;
+            grid-template-columns: 76px 1fr auto;
+            align-items: center;
+
+            overflow: hidden;
+
+            border: 1px solid #292b2f;
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    #18191c 0%,
+                    #111214 55%,
+                    #0d0e10 100%
+                );
+
+            cursor: pointer;
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                background .25s ease;
+        }
+
+        .season-card:hover {
+            transform: translateY(-2px);
+            border-color: #44474c;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    #1d1e21 0%,
+                    #141518 55%,
+                    #101113 100%
+                );
+        }
+
+
+        /* subtle background number */
+
+        .season-card::before {
+            content: attr(data-number);
+
+            position: absolute;
+            right: 30px;
+            bottom: -34px;
+
+            font-size: 150px;
+            font-weight: 700;
+
+            color: rgba(255,255,255,.018);
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           CARD NUMBER
+        ========================= */
+
+        .season-number {
+            width: 50px;
+            height: 50px;
+
+            margin-left: 16px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid #34363a;
+            border-radius: 12px;
+
+            background: #111214;
+
+            color: #8c8f94;
+
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           CARD CONTENT
+        ========================= */
+
+        .season-content {
+            padding: 22px 10px;
+        }
+
+        .season-name {
+            font-size: clamp(19px, 3vw, 25px);
+            font-weight: 500;
+
+            letter-spacing: .5px;
+
+            margin-bottom: 8px;
+        }
+
+        .season-description {
+            max-width: 600px;
+
+            color: #696c71;
+
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           TAGS
+        ========================= */
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+
+            margin-top: 12px;
+        }
+
+        .tag {
+            padding: 5px 8px;
+
+            border-radius: 6px;
+
+            border: 1px solid #2c2e32;
+
+            background: #151619;
+
+            color: #777a7f;
+
+            font-size: 9px;
+            letter-spacing: .5px;
+        }
+
+
+        /* =========================
+           CHAPTERS
+        ========================= */
+
+        .chapters {
+            min-width: 125px;
+
+            padding-right: 22px;
+
+            text-align: right;
+        }
+
+        .chapter-label {
+            color: #55585d;
+
+            font-size: 9px;
+            letter-spacing: 2px;
+
+            margin-bottom: 6px;
+        }
+
+        .chapter-number {
+            color: #dedfe1;
+
+            font-size: 15px;
+            font-weight: 500;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 28px;
+            padding: 18px 4px;
+
+            border-top: 1px solid #1d1f22;
+
+            color: #484b50;
+
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+                width: min(100% - 18px, 600px);
+                padding-top: 18px;
+            }
+
+            .archive {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 28px;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .season-card {
+                min-height: 145px;
+
+                grid-template-columns: 58px 1fr;
+            }
+
+            .season-number {
+                width: 42px;
+                height: 42px;
+                margin-left: 10px;
+            }
+
+            .season-content {
+                padding: 22px 12px 15px 5px;
+            }
+
+            .chapters {
+                grid-column: 2;
+
+                min-width: unset;
+
+                padding:
+                    0 12px 18px 5px;
+
+                text-align: left;
+            }
+
+            .chapter-label {
+                display: inline;
+                margin-right: 7px;
+            }
+
+            .chapter-number {
+                display: inline;
+            }
+
+            .season-card::before {
+                font-size: 100px;
+                right: 5px;
+                bottom: -20px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                RP
+            </div>
+
+            <div class="brand-name">
+                ROLEPLAY
+            </div>
+
+        </div>
+
+        <div class="archive">
+            STORY ARCHIVE
+        </div>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-label">
+            Roleplay Universe
+        </div>
+
+        <h1>
+            Seasons
+        </h1>
+
+        <p>
+            Explore the eras that shaped the story.
+        </p>
+
+    </section>
+
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <div class="search-icon">
+            ⌕
+        </div>
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search seasons..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+
+    <!-- FILTERS -->
+
+    <div class="toolbar">
+
+        <button class="filter">
+
+            <span>View</span>
+
+            <strong>All Seasons</strong>
+
+        </button>
+
+
+        <button class="filter">
+
+            <span>Order</span>
+
+            <strong>Chronological</strong>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- SECTION HEADER -->
+
+    <div class="section-header">
+
+        <div class="section-title">
+            Seasons
+        </div>
+
+        <div class="section-count">
+            07 ENTRIES
+        </div>
+
+    </div>
+
+
+
+    <!-- SEASONS -->
+
+    <section class="seasons" id="seasons">
+
+
+        <!-- 01 -->
+
+        <article
+            class="season-card"
+            data-number="01"
+            data-search="genesis season 1"
+        >
+
+            <div class="season-number">
+                01
+            </div>
+
+
+            <div class="season-content">
+
+                <h2 class="season-name">
+                    Genesis
+                </h2>
+
+                <p class="season-description">
+                    The beginning of the Roleplay universe and the foundation of its story.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        ORIGIN
+                    </span>
+
+                    <span class="tag">
+                        ERA I
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chapters">
+
+                <div class="chapter-label">
+                    CHAPTERS
+                </div>
+
+                <div class="chapter-number">
+                    001 — 031
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 02 -->
+
+        <article
+            class="season-card"
+            data-number="02"
+            data-search="dark days season 2"
+        >
+
+            <div class="season-number">
+                02
+            </div>
+
+
+            <div class="season-content">
+
+                <h2 class="season-name">
+                    Dark Days
+                </h2>
+
+                <p class="season-description">
+                    A darker period in the history of the Roleplay.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        DARK ERA
+                    </span>
+
+                    <span class="tag">
+                        ERA II
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chapters">
+
+                <div class="chapter-label">
+                    CHAPTERS
+                </div>
+
+                <div class="chapter-number">
+                    032 — 049
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 03 -->
+
+        <article
+            class="season-card"
+            data-number="03"
+            data-search="titanfall season 3 titans"
+        >
+
+            <div class="season-number">
+                03
+            </div>
+
+
+            <div class="season-content">
+
+                <h2 class="season-name">
+                    Titanfall
+                </h2>
+
+                <p class="season-description">
+                    The return of the Titans marks a major turning point.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        TITANS
+                    </span>
+
+                    <span class="tag">
+                        ERA III
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chapters">
+
+                <div class="chapter-label">
+                    CHAPTERS
+                </div>
+
+                <div class="chapter-number">
+                    050 — 065
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 04 -->
+
+        <article
+            class="season-card"
+            data-number="04"
+            data-search="alpha hills season 4"
+        >
+
+            <div class="season-number">
+                04
+            </div>
+
+
+            <div class="season-content">
+
+                <h2 class="season-name">
+                    Alpha Hills
+                </h2>
+
+                <p class="season-description">
+                    A new stage of the story centered around Alpha Hills.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        ALPHA HILLS
+                    </span>
+
+                    <span class="tag">
+                        ERA IV
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chapters">
+
+                <div class="chapter-label">
+                    CHAPTERS
+                </div>
+
+                <div class="chapter-number">
+                    066 — 073
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 05 -->
+
+        <article
+            class="season-card"
+            data-number="05"
+            data-search="astral dawn season 5 astro"
+        >
+
+            <div class="season-number">
+                05
+            </div>
+
+
+            <div class="season-content">
+
+                <h2 class="season-name">
+                    Astral Dawn
+                </h2>
+
+                <p class="season-description">
+                    A new era begins. What comes next remains unknown.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        UNKNOWN
+                    </span>
+
+                    <span class="tag">
+                        ERA V
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chapters">
+
+                <div class="chapter-label">
+                    CHAPTERS
+                </div>
+
+                <div class="chapter-number">
+                    074 — ???
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 06 -->
+
+        <article
+            class="season-card"
+            data-number="06"
+            data-search="you can't see this season 6"
+        >
+
+            <div class="season-number">
+                06
+            </div>
+
+
+            <div class="season-content">
+
+                <h2 class="season-name">
+                    You can't see this
+                </h2>
+
+                <p class="season-description">
+                    This information has not been revealed yet.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        CLASSIFIED
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chapters">
+
+                <div class="chapter-label">
+                    CHAPTERS
+                </div>
+
+                <div class="chapter-number">
+                    ??? — ???
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 07 -->
+
+        <article
+            class="season-card"
+            data-number="07"
+            data-search="you can't see this season 7"
+        >
+
+            <div class="season-number">
+                07
+            </div>
+
+
+            <div class="season-content">
+
+                <h2 class="season-name">
+                    You can't see this
+                </h2>
+
+                <p class="season-description">
+                    Information about this season is currently unavailable.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        CLASSIFIED
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chapters">
+
+                <div class="chapter-label">
+                    CHAPTERS
+                </div>
+
+                <div class="chapter-number">
+                    ??? — ???
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <span>
+            ROLEPLAY ARCHIVE
+        </span>
+
+        <span>
+            2026
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- SEARCH FUNCTION -->
+
+<script>
+
+    const search = document.getElementById("search");
+    const seasons = document.querySelectorAll(".season-card");
+
+    search.addEventListener("input", function () {
+
+        const value = search.value.toLowerCase().trim();
+
+        seasons.forEach(season => {
+
+            const text = season.dataset.search;
+
+            if (text.includes(value)) {
+
+                season.style.display = "grid";
+
+            } else {
+
+                season.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+</html>
