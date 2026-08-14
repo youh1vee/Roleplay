@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Roleplay — Seasons</title>
+    <title>VOID CORE — Seasons</title>
 
     <style>
 
         /* =========================
            RESET
-        ========================= */
+           ========================= */
 
         * {
             box-sizing: border-box;
@@ -20,9 +20,20 @@
 
         body {
             background:
-                radial-gradient(circle at top, #17191d 0%, #0c0d0f 45%, #08090a 100%);
+                radial-gradient(
+                    circle at top,
+                    #17191d 0%,
+                    #0c0d0f 45%,
+                    #08090a 100%
+                );
+
             color: #f2f2f2;
-            font-family: Arial, Helvetica, sans-serif;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
             min-height: 100vh;
         }
 
@@ -34,7 +45,7 @@
 
         /* =========================
            PAGE
-        ========================= */
+           ========================= */
 
         .page {
             width: min(1100px, calc(100% - 28px));
@@ -45,7 +56,7 @@
 
         /* =========================
            HEADER
-        ========================= */
+           ========================= */
 
         .header {
             display: flex;
@@ -92,7 +103,7 @@
 
         /* =========================
            HERO
-        ========================= */
+           ========================= */
 
         .hero {
             padding: 35px 6px 28px;
@@ -100,33 +111,67 @@
 
         .hero-label {
             color: #73767c;
+
             font-size: 11px;
             letter-spacing: 3px;
+
             text-transform: uppercase;
+
+            margin-bottom: 8px;
+        }
+
+        /* VOID CORE */
+
+        .void-core {
+            font-family:
+                "FWC26",
+                "Arial Black",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: clamp(18px, 3vw, 27px);
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            line-height: 1;
+
+            color: #eeeeee;
+
             margin-bottom: 10px;
+
+            text-transform: uppercase;
         }
 
         .hero h1 {
             font-size: clamp(36px, 7vw, 64px);
+
             font-weight: 500;
+
             letter-spacing: -2px;
+
             line-height: 1;
         }
 
         .hero p {
             margin-top: 13px;
+
             color: #777a80;
+
             font-size: 13px;
         }
 
 
         /* =========================
            SEARCH
-        ========================= */
+           ========================= */
 
         .search-box {
             display: flex;
             align-items: center;
+
             gap: 12px;
 
             height: 48px;
@@ -134,7 +179,9 @@
             padding: 0 17px;
 
             background: #17181b;
+
             border: 1px solid #292b2f;
+
             border-radius: 13px;
 
             margin-bottom: 10px;
@@ -146,11 +193,13 @@
 
         .search-box:focus-within {
             border-color: #484b50;
+
             background: #1a1b1e;
         }
 
         .search-icon {
             color: #686b70;
+
             font-size: 17px;
         }
 
@@ -163,6 +212,7 @@
             background: transparent;
 
             color: #eeeeee;
+
             font-size: 13px;
         }
 
@@ -173,11 +223,13 @@
 
         /* =========================
            FILTER BAR
-        ========================= */
+           ========================= */
 
         .toolbar {
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 10px;
 
             margin-bottom: 22px;
@@ -193,6 +245,7 @@
             padding: 0 15px;
 
             border: 1px solid #292b2f;
+
             border-radius: 11px;
 
             background: #151619;
@@ -206,19 +259,22 @@
 
         .filter:hover {
             background: #1b1c1f;
+
             border-color: #3a3c40;
+
             color: #dddddd;
         }
 
         .filter strong {
             color: #dddddd;
+
             font-weight: 500;
         }
 
 
         /* =========================
            SECTION HEADER
-        ========================= */
+           ========================= */
 
         .section-header {
             display: flex;
@@ -230,24 +286,29 @@
 
         .section-title {
             font-size: 13px;
+
             font-weight: 600;
+
             letter-spacing: 1px;
         }
 
         .section-count {
             color: #62656a;
+
             font-size: 10px;
+
             letter-spacing: 1px;
         }
 
 
         /* =========================
            SEASON CARDS
-        ========================= */
+           ========================= */
 
         .seasons {
             display: flex;
             flex-direction: column;
+
             gap: 10px;
         }
 
@@ -257,12 +318,16 @@
             min-height: 132px;
 
             display: grid;
-            grid-template-columns: 76px 1fr auto;
+
+            grid-template-columns:
+                76px 1fr auto;
+
             align-items: center;
 
             overflow: hidden;
 
             border: 1px solid #292b2f;
+
             border-radius: 15px;
 
             background:
@@ -283,6 +348,7 @@
 
         .season-card:hover {
             transform: translateY(-2px);
+
             border-color: #44474c;
 
             background:
@@ -301,10 +367,12 @@
             content: attr(data-number);
 
             position: absolute;
+
             right: 30px;
             bottom: -34px;
 
             font-size: 150px;
+
             font-weight: 700;
 
             color: rgba(255,255,255,.018);
@@ -315,7 +383,7 @@
 
         /* =========================
            CARD NUMBER
-        ========================= */
+           ========================= */
 
         .season-number {
             width: 50px;
@@ -327,6 +395,7 @@
             place-items: center;
 
             border: 1px solid #34363a;
+
             border-radius: 12px;
 
             background: #111214;
@@ -334,13 +403,14 @@
             color: #8c8f94;
 
             font-size: 13px;
+
             letter-spacing: 1px;
         }
 
 
         /* =========================
            CARD CONTENT
-        ========================= */
+           ========================= */
 
         .season-content {
             padding: 22px 10px;
@@ -348,6 +418,7 @@
 
         .season-name {
             font-size: clamp(19px, 3vw, 25px);
+
             font-weight: 500;
 
             letter-spacing: .5px;
@@ -361,17 +432,19 @@
             color: #696c71;
 
             font-size: 11px;
+
             line-height: 1.5;
         }
 
 
         /* =========================
            TAGS
-        ========================= */
+           ========================= */
 
         .tags {
             display: flex;
             flex-wrap: wrap;
+
             gap: 6px;
 
             margin-top: 12px;
@@ -389,13 +462,14 @@
             color: #777a7f;
 
             font-size: 9px;
+
             letter-spacing: .5px;
         }
 
 
         /* =========================
            CHAPTERS
-        ========================= */
+           ========================= */
 
         .chapters {
             min-width: 125px;
@@ -409,6 +483,7 @@
             color: #55585d;
 
             font-size: 9px;
+
             letter-spacing: 2px;
 
             margin-bottom: 6px;
@@ -418,6 +493,7 @@
             color: #dedfe1;
 
             font-size: 15px;
+
             font-weight: 500;
 
             letter-spacing: 1px;
@@ -426,7 +502,7 @@
 
         /* =========================
            EPISODE RANKING
-        ========================= */
+           ========================= */
 
         .ranking {
             margin-top: 38px;
@@ -434,6 +510,7 @@
             padding: 20px;
 
             border: 1px solid #292b2f;
+
             border-radius: 15px;
 
             background:
@@ -455,26 +532,34 @@
 
         .ranking-title {
             font-size: 13px;
+
             font-weight: 600;
+
             letter-spacing: 1px;
         }
 
         .ranking-subtitle {
             color: #55585d;
+
             font-size: 9px;
+
             letter-spacing: 1.5px;
+
             text-transform: uppercase;
         }
 
         .ranking-list {
             display: flex;
             flex-direction: column;
+
             gap: 7px;
         }
 
         .ranking-item {
             display: grid;
-            grid-template-columns: 34px 1fr auto;
+
+            grid-template-columns:
+                34px 1fr auto;
 
             align-items: center;
 
@@ -483,6 +568,7 @@
             padding: 0 12px;
 
             border: 1px solid #24262a;
+
             border-radius: 9px;
 
             background: #111214;
@@ -494,6 +580,7 @@
 
         .ranking-item:hover {
             background: #17181b;
+
             border-color: #35373b;
         }
 
@@ -501,7 +588,9 @@
             color: #55585d;
 
             font-size: 10px;
+
             font-weight: 600;
+
             letter-spacing: 1px;
         }
 
@@ -509,6 +598,7 @@
             color: #d8d9db;
 
             font-size: 12px;
+
             font-weight: 500;
         }
 
@@ -516,25 +606,29 @@
             color: #8b8e93;
 
             font-size: 11px;
+
             letter-spacing: 1px;
         }
 
         .ranking-count span {
             color: #55585d;
+
             font-size: 9px;
+
             letter-spacing: 1px;
         }
 
 
         /* =========================
            FOOTER
-        ========================= */
+           ========================= */
 
         .footer {
             display: flex;
             justify-content: space-between;
 
             margin-top: 28px;
+
             padding: 18px 4px;
 
             border-top: 1px solid #1d1f22;
@@ -542,19 +636,22 @@
             color: #484b50;
 
             font-size: 9px;
+
             letter-spacing: 2px;
+
             text-transform: uppercase;
         }
 
 
         /* =========================
            MOBILE
-        ========================= */
+           ========================= */
 
         @media (max-width: 700px) {
 
             .page {
                 width: min(100% - 18px, 600px);
+
                 padding-top: 18px;
             }
 
@@ -566,23 +663,33 @@
                 padding-top: 28px;
             }
 
+            .void-core {
+                font-size: 20px;
+
+                letter-spacing: 1.5px;
+            }
+
             .toolbar {
                 grid-template-columns: 1fr 1fr;
             }
 
             .season-card {
                 min-height: 145px;
-                grid-template-columns: 58px 1fr;
+
+                grid-template-columns:
+                    58px 1fr;
             }
 
             .season-number {
                 width: 42px;
                 height: 42px;
+
                 margin-left: 10px;
             }
 
             .season-content {
-                padding: 22px 12px 15px 5px;
+                padding:
+                    22px 12px 15px 5px;
             }
 
             .chapters {
@@ -598,6 +705,7 @@
 
             .chapter-label {
                 display: inline;
+
                 margin-right: 7px;
             }
 
@@ -607,17 +715,21 @@
 
             .season-card::before {
                 font-size: 100px;
+
                 right: 5px;
                 bottom: -20px;
             }
 
             .ranking {
                 padding: 15px;
+
                 margin-top: 30px;
             }
 
             .ranking-item {
-                grid-template-columns: 30px 1fr auto;
+                grid-template-columns:
+                    30px 1fr auto;
+
                 padding: 0 10px;
             }
 
@@ -627,6 +739,7 @@
 
             .footer {
                 flex-direction: column;
+
                 gap: 8px;
             }
         }
@@ -667,6 +780,10 @@
     <!-- HERO -->
 
     <section class="hero">
+
+        <div class="void-core">
+            VOID CORE
+        </div>
 
         <div class="hero-label">
             Roleplay Universe
@@ -709,18 +826,26 @@
 
         <button class="filter">
 
-            <span>View</span>
+            <span>
+                View
+            </span>
 
-            <strong>All Seasons</strong>
+            <strong>
+                All Seasons
+            </strong>
 
         </button>
 
 
         <button class="filter">
 
-            <span>Order</span>
+            <span>
+                Order
+            </span>
 
-            <strong>Chronological</strong>
+            <strong>
+                Chronological
+            </strong>
 
         </button>
 
@@ -1136,16 +1261,22 @@
 
 <script>
 
-    const search = document.getElementById("search");
-    const seasons = document.querySelectorAll(".season-card");
+    const search =
+        document.getElementById("search");
+
+    const seasons =
+        document.querySelectorAll(".season-card");
+
 
     search.addEventListener("input", function () {
 
-        const value = search.value.toLowerCase().trim();
+        const value =
+            search.value.toLowerCase().trim();
 
         seasons.forEach(season => {
 
-            const text = season.dataset.search;
+            const text =
+                season.dataset.search;
 
             if (text.includes(value)) {
 
@@ -1167,31 +1298,49 @@
        EPISODE RANKING
        ========================= */
 
-    const rankingList = document.getElementById("ranking-list");
+    const rankingList =
+        document.getElementById("ranking-list");
 
     const rankingData = [];
+
 
     seasons.forEach(season => {
 
         const chapterText =
-            season.querySelector(".chapter-number").textContent.trim();
+            season
+                .querySelector(".chapter-number")
+                .textContent
+                .trim();
+
 
         const numbers =
             chapterText.match(/\d+/g);
+
 
         if (!numbers || numbers.length < 2) {
             return;
         }
 
-        const start = parseInt(numbers[0]);
-        const end = parseInt(numbers[1]);
 
-        if (isNaN(start) || isNaN(end) || end < start) {
+        const start =
+            parseInt(numbers[0]);
+
+        const end =
+            parseInt(numbers[1]);
+
+
+        if (
+            isNaN(start) ||
+            isNaN(end) ||
+            end < start
+        ) {
             return;
         }
 
+
         const episodeCount =
             end - start + 1;
+
 
         rankingData.push({
 
@@ -1199,7 +1348,10 @@
                 season.dataset.number,
 
             name:
-                season.querySelector(".season-name").textContent.trim(),
+                season
+                    .querySelector(".season-name")
+                    .textContent
+                    .trim(),
 
             episodes:
                 episodeCount
@@ -1219,8 +1371,10 @@
         const item =
             document.createElement("div");
 
+
         item.className =
             "ranking-item";
+
 
         item.innerHTML = `
 
@@ -1238,6 +1392,7 @@
             </div>
 
         `;
+
 
         rankingList.appendChild(item);
 
