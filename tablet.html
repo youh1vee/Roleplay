@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ALL'UI — Void Core</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background:
+            radial-gradient(circle at center, #18232b 0%, #090d10 55%, #030405 100%);
+        color: #d9e7ed;
+        font-family: "Segoe UI", Arial, sans-serif;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    /* =========================
+       MAIN DEVICE
+    ========================= */
+
+    .tablet {
+        position: relative;
+        width: min(1200px, 94vw);
+        height: min(720px, 90vh);
+        margin: 5vh auto;
+        border: 1px solid rgba(150, 190, 205, 0.35);
+        background:
+            linear-gradient(
+                135deg,
+                rgba(28, 39, 45, 0.96),
+                rgba(7, 11, 14, 0.98)
+            );
+        box-shadow:
+            0 0 0 2px rgba(0,0,0,0.8),
+            0 0 45px rgba(110, 170, 190, 0.08),
+            inset 0 0 60px rgba(255,255,255,0.015);
+        overflow: hidden;
+    }
+
+    /* futuristic scanlines */
+
+    .tablet::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+
+        background:
+            repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 3px,
+                rgba(255,255,255,0.012) 4px
+            );
+
+        z-index: 20;
+    }
+
+    /* corner decorations */
+
+    .corner {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        border-color: rgba(160, 205, 220, 0.55);
+        z-index: 10;
+    }
+
+    .corner.tl {
+        top: 12px;
+        left: 12px;
+        border-top: 1px solid;
+        border-left: 1px solid;
+    }
+
+    .corner.tr {
+        top: 12px;
+        right: 12px;
+        border-top: 1px solid;
+        border-right: 1px solid;
+    }
+
+    .corner.bl {
+        bottom: 12px;
+        left: 12px;
+        border-bottom: 1px solid;
+        border-left: 1px solid;
+    }
+
+    .corner.br {
+        bottom: 12px;
+        right: 12px;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header {
+        height: 82px;
+        border-bottom: 1px solid rgba(150, 190, 205, 0.2);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 42px;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .brand-symbol {
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(190, 220, 230, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 14px;
+        letter-spacing: 1px;
+
+        transform: rotate(45deg);
+    }
+
+    .brand-symbol span {
+        transform: rotate(-45deg);
+    }
+
+    .brand h1 {
+        font-size: 22px;
+        font-weight: 500;
+        letter-spacing: 5px;
+    }
+
+    .brand p {
+        font-size: 9px;
+        letter-spacing: 3px;
+        opacity: 0.45;
+        margin-top: 4px;
+    }
+
+    .version {
+        text-align: right;
+        font-size: 10px;
+        letter-spacing: 2px;
+        opacity: 0.55;
+    }
+
+    .version strong {
+        display: block;
+        font-size: 13px;
+        letter-spacing: 3px;
+        color: #dbe9ed;
+        opacity: 0.85;
+        margin-top: 4px;
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content {
+        height: calc(100% - 82px - 48px);
+        display: grid;
+        grid-template-columns: 230px 1fr 230px;
+        gap: 20px;
+        padding: 24px 38px;
+    }
+
+    .side-panel {
+        border: 1px solid rgba(150, 190, 205, 0.13);
+        background: rgba(255,255,255,0.015);
+        padding: 18px;
+    }
+
+    .panel-title {
+        font-size: 9px;
+        letter-spacing: 3px;
+        opacity: 0.4;
+        margin-bottom: 18px;
+    }
+
+    .status-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        letter-spacing: 1px;
+        margin: 15px 0;
+        opacity: 0.7;
+    }
+
+    .online {
+        color: #c9dce2;
+    }
+
+    .signal {
+        display: flex;
+        gap: 3px;
+        align-items: end;
+    }
+
+    .signal span {
+        width: 4px;
+        background: #b9d0d8;
+    }
+
+    .signal span:nth-child(1) { height: 5px; }
+    .signal span:nth-child(2) { height: 9px; }
+    .signal span:nth-child(3) { height: 13px; }
+    .signal span:nth-child(4) { height: 17px; }
+
+    /* =========================
+       CENTER
+    ========================= */
+
+    .main-interface {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        border: 1px solid rgba(150, 190, 205, 0.16);
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(130, 175, 190, 0.035),
+                transparent 60%
+            );
+    }
+
+    .main-interface::after {
+        content: "";
+        position: absolute;
+        width: 65%;
+        height: 1px;
+        background: rgba(180, 215, 225, 0.08);
+        top: 50%;
+    }
+
+    .allui {
+        font-size: clamp(42px, 6vw, 75px);
+        letter-spacing: 12px;
+        font-weight: 300;
+        opacity: 0.9;
+    }
+
+    .subtitle {
+        margin-top: 12px;
+        font-size: 10px;
+        letter-spacing: 5px;
+        opacity: 0.38;
+    }
+
+    .device-status {
+        margin-top: 35px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        font-size: 9px;
+        letter-spacing: 3px;
+        opacity: 0.55;
+    }
+
+    .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #c5d9df;
+        box-shadow: 0 0 10px rgba(190,220,230,0.45);
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .buttons {
+        position: absolute;
+        bottom: 35px;
+
+        display: flex;
+        gap: 14px;
+
+        z-index: 5;
+    }
+
+    .ui-button {
+        width: 220px;
+        height: 58px;
+
+        background:
+            linear-gradient(
+                90deg,
+                rgba(255,255,255,0.025),
+                rgba(255,255,255,0.06)
+            );
+
+        border: 1px solid rgba(170, 205, 215, 0.28);
+
+        color: #dce9ed;
+
+        font-size: 10px;
+        letter-spacing: 2px;
+
+        cursor: default;
+
+        position: relative;
+
+        transition: 0.2s ease;
+    }
+
+    .ui-button::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3px;
+        height: 100%;
+
+        background: rgba(190, 215, 225, 0.55);
+        opacity: 0.6;
+    }
+
+    .ui-button:hover {
+        background: rgba(190, 215, 225, 0.08);
+        border-color: rgba(200, 225, 235, 0.45);
+    }
+
+    .button-main {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .button-sub {
+        display: block;
+        margin-top: 6px;
+        font-size: 8px;
+        letter-spacing: 1px;
+        opacity: 0.4;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+        height: 48px;
+
+        border-top: 1px solid rgba(150, 190, 205, 0.16);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 38px;
+
+        font-size: 8px;
+        letter-spacing: 2px;
+        opacity: 0.35;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+        body {
+            overflow: auto;
+        }
+
+        .tablet {
+            width: 94vw;
+            height: auto;
+            min-height: 92vh;
+            margin: 4vh auto;
+        }
+
+        .header {
+            padding: 0 24px;
+        }
+
+        .brand h1 {
+            font-size: 17px;
+            letter-spacing: 3px;
+        }
+
+        .content {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .side-panel {
+            display: none;
+        }
+
+        .main-interface {
+            min-height: 620px;
+        }
+
+        .allui {
+            font-size: 46px;
+            letter-spacing: 7px;
+        }
+
+        .buttons {
+            width: calc(100% - 30px);
+            flex-direction: column;
+            bottom: 25px;
+        }
+
+        .ui-button {
+            width: 100%;
+        }
+
+        .footer {
+            padding: 0 20px;
+        }
+
+        .version {
+            display: none;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="tablet">
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-symbol">
+                <span>VC</span>
+            </div>
+
+            <div>
+                <h1>ALL'UI</h1>
+                <p>COMMUNICATION INTERFACE</p>
+            </div>
+
+        </div>
+
+        <div class="version">
+            SYSTEM VERSION
+            <strong>V.7.3.2</strong>
+        </div>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="content">
+
+        <!-- LEFT PANEL -->
+
+        <aside class="side-panel">
+
+            <div class="panel-title">
+                SYSTEM STATUS
+            </div>
+
+            <div class="status-row">
+                <span>NETWORK</span>
+                <span class="online">ONLINE</span>
+            </div>
+
+            <div class="status-row">
+                <span>DATABASE</span>
+                <span class="online">SYNCED</span>
+            </div>
+
+            <div class="status-row">
+                <span>SECURITY</span>
+                <span>ACTIVE</span>
+            </div>
+
+            <div class="status-row">
+                <span>SIGNAL</span>
+
+                <div class="signal">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <!-- CENTER -->
+
+        <section class="main-interface">
+
+            <div class="allui">
+                ALL'UI
+            </div>
+
+            <div class="subtitle">
+                ADVANCED COMMUNICATION SYSTEM
+            </div>
+
+            <div class="device-status">
+                <div class="dot"></div>
+                DEVICE CONNECTED
+            </div>
+
+
+            <div class="buttons">
+
+                <!-- VISUAL BUTTON ONLY -->
+
+                <button class="ui-button">
+
+                    <span class="button-main">
+                        VIEW TRANSMISSIONS
+                    </span>
+
+                    <span class="button-sub">
+                        TOTAL: 4.2B
+                    </span>
+
+                </button>
+
+
+                <!-- VISUAL BUTTON ONLY -->
+
+                <button class="ui-button">
+
+                    <span class="button-main">
+                        VIEW TOPLIST
+                    </span>
+
+                    <span class="button-sub">
+                        WORK IN PROGRESS
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT PANEL -->
+
+        <aside class="side-panel">
+
+            <div class="panel-title">
+                DEVICE INFORMATION
+            </div>
+
+            <div class="status-row">
+                <span>DEVICE</span>
+                <span>VC-TABLET</span>
+            </div>
+
+            <div class="status-row">
+                <span>UI</span>
+                <span>ALL'UI</span>
+            </div>
+
+            <div class="status-row">
+                <span>VERSION</span>
+                <span>7.3.2</span>
+            </div>
+
+            <div class="status-row">
+                <span>ACCESS</span>
+                <span>AUTHORIZED</span>
+            </div>
+
+        </aside>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <span>VOID CORE NETWORK</span>
+
+        <span>COMMUNICATION TERMINAL // ALL'UI</span>
+
+    </footer>
+
+</div>
+
+</body>
+</html>
