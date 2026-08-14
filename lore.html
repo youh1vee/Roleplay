@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lore — VOID CORE</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0d0f11;
+            color: #e8e9eb;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            padding: 0 4.5vw;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 31px;
+            height: 31px;
+
+            border: 1px solid #34383d;
+            border-radius: 9px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #9da3aa;
+            font-size: 12px;
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+        }
+
+        .archive-link {
+            color: #606873;
+            text-decoration: none;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            transition: color 0.2s ease;
+        }
+
+        .archive-link:hover {
+            color: #cfd2d6;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding-top: 38px;
+            padding-bottom: 48px;
+        }
+
+        .eyebrow {
+            color: #6b737e;
+
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(54px, 8vw, 78px);
+            line-height: 0.95;
+
+            letter-spacing: 2px;
+            font-weight: 800;
+
+            color: #f0f0f1;
+        }
+
+        .subtitle {
+            margin-top: 17px;
+
+            max-width: 560px;
+
+            color: #666d76;
+
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* SECTION */
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 13px;
+        }
+
+        .section-heading h2 {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .section-heading span {
+            font-size: 9px;
+
+            color: #50565e;
+
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* LORE CARD */
+
+        .lore-card {
+            position: relative;
+
+            max-width: 820px;
+
+            border: 1px solid #2c3035;
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.025),
+                    rgba(255,255,255,0.005)
+                );
+
+            overflow: hidden;
+
+            transition:
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .lore-card:hover {
+            border-color: #444a52;
+            transform: translateY(-2px);
+        }
+
+        /* LARGE BACKGROUND NUMBER */
+
+        .card-number {
+            position: absolute;
+
+            right: -12px;
+            bottom: -55px;
+
+            font-size: 210px;
+            font-weight: 800;
+
+            line-height: 1;
+
+            color: rgba(255,255,255,0.025);
+
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* TOP ACCENT */
+
+        .lore-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 30%;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(150,155,160,0.45),
+                    transparent
+                );
+        }
+
+        /* CONTENT */
+
+        .lore-content {
+            position: relative;
+            z-index: 2;
+
+            padding: 32px 34px 35px;
+        }
+
+        .lore-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-bottom: 13px;
+        }
+
+        .entry {
+            color: #59616b;
+
+            font-size: 9px;
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+        .separator {
+            width: 3px;
+            height: 3px;
+
+            border-radius: 50%;
+
+            background: #454b52;
+        }
+
+        .category {
+            color: #4f565f;
+
+            font-size: 9px;
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+        .lore-title {
+            font-size: 30px;
+            font-weight: 500;
+
+            letter-spacing: -0.5px;
+
+            color: #f0f0f1;
+
+            margin-bottom: 25px;
+        }
+
+        /* INFO */
+
+        .lore-info {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            border-top: 1px solid #292d32;
+            border-bottom: 1px solid #292d32;
+
+            margin-bottom: 25px;
+        }
+
+        .info {
+            padding: 14px 0;
+        }
+
+        .info:first-child {
+            border-right: 1px solid #292d32;
+            padding-right: 20px;
+        }
+
+        .info:last-child {
+            padding-left: 20px;
+        }
+
+        .info-label {
+            color: #535b65;
+
+            font-size: 8px;
+            letter-spacing: 1.8px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            color: #c8cbd0;
+
+            font-size: 11px;
+        }
+
+        /* STORY */
+
+        .story-label {
+            color: #535b65;
+
+            font-size: 8px;
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .story {
+            max-width: 700px;
+
+            color: #858b93;
+
+            font-size: 12px;
+            line-height: 1.85;
+        }
+
+        .story strong {
+            color: #c7cacf;
+            font-weight: 500;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 55px;
+
+            padding: 18px 3px 28px;
+
+            border-top: 1px solid #202328;
+
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer span {
+            color: #454b53;
+
+            font-size: 9px;
+            letter-spacing: 1.4px;
+
+            text-transform: uppercase;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            body {
+                padding: 0 22px;
+            }
+
+            header {
+                height: 72px;
+            }
+
+            .hero {
+                padding-top: 35px;
+                padding-bottom: 40px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .lore-content {
+                padding: 25px 21px 27px;
+            }
+
+            .lore-title {
+                font-size: 26px;
+            }
+
+            .card-number {
+                font-size: 140px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+
+                gap: 10px;
+
+                flex-direction: column;
+            }
+
+            .lore-info {
+                grid-template-columns: 1fr;
+            }
+
+            .info:first-child {
+                border-right: none;
+                border-bottom: 1px solid #292d32;
+                padding-right: 0;
+            }
+
+            .info:last-child {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                RP
+            </div>
+
+            <div class="brand-name">
+                ROLEPLAY
+            </div>
+
+        </div>
+
+        <a href="index.html" class="archive-link">
+            Story Archive
+        </a>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="eyebrow">
+                Roleplay Universe
+            </div>
+
+            <h1>
+                LORE
+            </h1>
+
+            <p class="subtitle">
+                Historical records, major events and fragments of the story
+                that shaped the Roleplay universe.
+            </p>
+
+        </section>
+
+
+        <!-- LORE ARCHIVE -->
+
+        <section>
+
+            <div class="section-heading">
+
+                <h2>
+                    Lore Archive
+                </h2>
+
+                <span>
+                    001 Entry
+                </span>
+
+            </div>
+
+
+            <!-- LORE 001 -->
+
+            <article class="lore-card">
+
+                <div class="card-number">
+                    01
+                </div>
+
+
+                <div class="lore-content">
+
+                    <div class="lore-meta">
+
+                        <span class="entry">
+                            Lore 001
+                        </span>
+
+                        <span class="separator"></span>
+
+                        <span class="category">
+                            Origin
+                        </span>
+
+                    </div>
+
+
+                    <h2 class="lore-title">
+                        The Beginning
+                    </h2>
+
+
+                    <div class="lore-info">
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                Era
+                            </div>
+
+                            <div class="info-value">
+                                Pre-Genesis
+                            </div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                Subject
+                            </div>
+
+                            <div class="info-value">
+                                G-Toilet
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="story-label">
+                        Historical Record
+                    </div>
+
+
+                    <p class="story">
+
+                        Before the <strong>Skibidi Toilet Empire</strong>
+                        existed, G-Toilet was part of the
+                        <strong>Astro Empire</strong>.
+
+                        After betraying the empire, G-Toilet was expelled
+                        to Earth alongside other traitors.
+
+                        <br><br>
+
+                        Stripped of his former power and resources,
+                        G-Toilet was forced to start over from nothing —
+                        with <strong>zero upgrades and no empire</strong>.
+
+                        <br><br>
+
+                        From Earth, he began rebuilding his power and
+                        creating a new empire of his own:
+
+                        the <strong>Skibidi Toilet Empire</strong>.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <span>
+            Void Core
+        </span>
+
+        <span>
+            2026
+        </span>
+
+    </footer>
+
+</body>
+</html>
