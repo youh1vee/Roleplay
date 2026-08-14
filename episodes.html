@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Episodes — VOID CORE</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0d0f11;
+            color: #e8e9eb;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            padding: 0 4.5vw;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 31px;
+            height: 31px;
+
+            border: 1px solid #34383d;
+            border-radius: 9px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #9da3aa;
+            font-size: 12px;
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+        }
+
+        .archive-link {
+            color: #606873;
+            text-decoration: none;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            transition: color 0.2s ease;
+        }
+
+        .archive-link:hover {
+            color: #cfd2d6;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding-top: 38px;
+            padding-bottom: 48px;
+        }
+
+        .eyebrow {
+            color: #6b737e;
+
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(54px, 8vw, 78px);
+            line-height: 0.95;
+
+            letter-spacing: 2px;
+            font-weight: 800;
+
+            color: #f0f0f1;
+        }
+
+        .subtitle {
+            margin-top: 17px;
+
+            max-width: 580px;
+
+            color: #666d76;
+
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* SECTION */
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 13px;
+        }
+
+        .section-heading h2 {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .section-heading span {
+            font-size: 9px;
+            color: #50565e;
+
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* EPISODE GRID */
+
+        .episode-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        /* EPISODE CARD */
+
+        .episode-card {
+            position: relative;
+
+            border: 1px solid #2c3035;
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.025),
+                    rgba(255,255,255,0.005)
+                );
+
+            overflow: hidden;
+
+            transition:
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .episode-card:hover {
+            border-color: #444a52;
+            transform: translateY(-2px);
+        }
+
+        /* CURRENT EPISODE ACCENT */
+
+        .episode-card.current {
+            border-color: #393b40;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(255,255,255,0.045),
+                    transparent 40%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.025),
+                    rgba(255,255,255,0.005)
+                );
+        }
+
+        .episode-card.current::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 35%;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(170,175,180,0.6),
+                    transparent
+                );
+
+            z-index: 5;
+        }
+
+        /* THUMBNAIL */
+
+        .episode-thumbnail {
+            position: relative;
+
+            width: 100%;
+            height: 255px;
+
+            overflow: hidden;
+
+            background: #101215;
+
+            border-bottom: 1px solid #292d32;
+        }
+
+        .episode-thumbnail img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            filter: brightness(0.84);
+
+            transition:
+                transform 0.45s ease,
+                filter 0.45s ease;
+        }
+
+        .episode-card:hover .episode-thumbnail img {
+            transform: scale(1.025);
+            filter: brightness(1);
+        }
+
+        .episode-thumbnail::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(13,15,17,0.78),
+                    transparent 60%
+                );
+
+            pointer-events: none;
+        }
+
+        /* EPISODE NUMBER */
+
+        .episode-number {
+            position: absolute;
+
+            left: 22px;
+            bottom: 16px;
+
+            z-index: 3;
+
+            font-size: 54px;
+            line-height: 1;
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            color: rgba(255,255,255,0.88);
+
+            text-shadow:
+                0 2px 18px rgba(0,0,0,0.6);
+        }
+
+        .episode-number small {
+            font-size: 9px;
+
+            font-weight: 500;
+
+            letter-spacing: 2px;
+
+            color: #8b9198;
+
+            margin-right: 5px;
+        }
+
+        /* STATUS */
+
+        .episode-status {
+            position: absolute;
+
+            top: 17px;
+            right: 17px;
+
+            z-index: 4;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 7px 9px;
+
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+
+            background: rgba(10,12,14,0.55);
+
+            backdrop-filter: blur(8px);
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            color: #aeb3b9;
+        }
+
+        .status-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: #8a8f95;
+        }
+
+        /* CONTENT */
+
+        .episode-content {
+            padding: 25px 27px 28px;
+        }
+
+        .episode-label {
+            color: #59616b;
+
+            font-size: 9px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 8px;
+        }
+
+        .episode-title {
+            color: #f0f0f1;
+
+            font-size: 25px;
+
+            font-weight: 500;
+
+            line-height: 1.2;
+
+            letter-spacing: -0.4px;
+
+            margin-bottom: 20px;
+        }
+
+        /* INFO */
+
+        .episode-info {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            border-top: 1px solid #292d32;
+            border-bottom: 1px solid #292d32;
+
+            margin-bottom: 22px;
+        }
+
+        .info {
+            padding: 13px 0;
+        }
+
+        .info:first-child {
+            border-right: 1px solid #292d32;
+
+            padding-right: 18px;
+        }
+
+        .info:last-child {
+            padding-left: 18px;
+        }
+
+        .info-label {
+            color: #535b65;
+
+            font-size: 8px;
+
+            letter-spacing: 1.8px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #c8cbd0;
+
+            font-size: 11px;
+        }
+
+        /* DESCRIPTION */
+
+        .description-label {
+            color: #535b65;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #747b84;
+
+            font-size: 11px;
+
+            line-height: 1.75;
+
+            margin-bottom: 25px;
+        }
+
+        /* DIALOGUE */
+
+        .dialogue-label {
+            color: #535b65;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .dialogue {
+            border-left: 1px solid #343940;
+
+            padding-left: 15px;
+        }
+
+        .connecting {
+            color: #9da3aa;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            margin-bottom: 13px;
+        }
+
+        .line {
+            color: #777e87;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            margin-bottom: 5px;
+        }
+
+        .speaker {
+            color: #b8bdc3;
+
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 55px;
+
+            padding: 18px 3px 28px;
+
+            border-top: 1px solid #202328;
+
+            display: flex;
+
+            justify-content: space-between;
+        }
+
+        footer span {
+            color: #454b53;
+
+            font-size: 9px;
+
+            letter-spacing: 1.4px;
+
+            text-transform: uppercase;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+
+            .episode-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            body {
+                padding: 0 22px;
+            }
+
+            header {
+                height: 72px;
+            }
+
+            .hero {
+                padding-top: 35px;
+                padding-bottom: 40px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .episode-thumbnail {
+                height: 210px;
+            }
+
+            .episode-number {
+                font-size: 47px;
+            }
+
+            .episode-content {
+                padding: 22px 20px 25px;
+            }
+
+            .episode-title {
+                font-size: 23px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+
+                gap: 10px;
+
+                flex-direction: column;
+            }
+
+            .episode-info {
+                grid-template-columns: 1fr;
+            }
+
+            .info:first-child {
+                border-right: none;
+                border-bottom: 1px solid #292d32;
+
+                padding-right: 0;
+            }
+
+            .info:last-child {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                RP
+            </div>
+
+            <div class="brand-name">
+                ROLEPLAY
+            </div>
+
+        </div>
+
+        <a href="index.html" class="archive-link">
+            Story Archive
+        </a>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="eyebrow">
+                Roleplay Universe
+            </div>
+
+            <h1>
+                EPISODES
+            </h1>
+
+            <p class="subtitle">
+                The complete episode archive of the Roleplay universe,
+                documenting every chapter of the story.
+            </p>
+
+        </section>
+
+
+        <!-- EPISODE ARCHIVE -->
+
+        <section>
+
+            <div class="section-heading">
+
+                <h2>
+                    Episode Archive
+                </h2>
+
+                <span>
+                    Current — 079
+                </span>
+
+            </div>
+
+
+            <div class="episode-grid">
+
+
+                <!-- EPISODE 079 -->
+
+                <article class="episode-card current">
+
+
+                    <!-- THUMBNAIL -->
+
+                    <div class="episode-thumbnail">
+
+                        <img
+                            src="https://media.discordapp.net/attachments/1321552941009731727/1537890820911276073/cf38361e3528a878753a8e6d1d022f64.png?ex=6a80aff0&is=6a7f5e70&hm=9547fba4c53d3b793023f671f98290493f67097a8104d5ae85b2a078dcd09e07&=&format=webp&quality=lossless&width=512&height=288"
+                            alt="Episode 079 Reference"
+                        >
+
+
+                        <!-- STATUS -->
+
+                        <div class="episode-status">
+
+                            <span class="status-dot"></span>
+
+                            In Progress
+
+                        </div>
+
+
+                        <!-- NUMBER -->
+
+                        <div class="episode-number">
+
+                            <small>EP.</small>079
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+
+                    <div class="episode-content">
+
+
+                        <div class="episode-label">
+                            Season 06 — L0st Days
+                        </div>
+
+
+                        <h2 class="episode-title">
+                            In Misery, We Remain...
+                            These Are the Lost Days.
+                        </h2>
+
+
+                        <!-- INFORMATION -->
+
+                        <div class="episode-info">
+
+                            <div class="info">
+
+                                <div class="info-label">
+                                    Season
+                                </div>
+
+                                <div class="info-value">
+                                    Season 6 — L0st Days
+                                </div>
+
+                            </div>
+
+
+                            <div class="info">
+
+                                <div class="info-label">
+                                    Episode
+                                </div>
+
+                                <div class="info-value">
+                                    079
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="description-label">
+                            Description
+                        </div>
+
+                        <p class="description">
+                            The third chapter of L0st Days.
+                            The situation remains uncertain as the
+                            Speakerman and Chief Scientist Cameraman
+                            begin preparations for what comes next.
+                        </p>
+
+
+                        <!-- CURRENT DIALOGUE -->
+
+                        <div class="dialogue-label">
+                            Current Record
+                        </div>
+
+
+                        <div class="dialogue">
+
+                            <div class="connecting">
+                                <strong>Connecting...</strong>
+                            </div>
+
+                            <div class="line">
+                                <span class="speaker">
+                                    Speakerman:
+                                </span>
+
+                                "Will this work?"
+                            </div>
+
+                            <div class="line">
+                                <span class="speaker">
+                                    Chief Scientist Cameraman:
+                                </span>
+
+                                "Yes, just be patient."
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- FUTURE EPISODES CAN BE ADDED HERE -->
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <span>
+            Void Core
+        </span>
+
+        <span>
+            2026
+        </span>
+
+    </footer>
+
+</body>
+</html>
