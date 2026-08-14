@@ -42,6 +42,11 @@
             font: inherit;
         }
 
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
 
         /* =========================
            PAGE
@@ -120,8 +125,6 @@
             margin-bottom: 8px;
         }
 
-        /* VOID CORE */
-
         .void-core {
             font-family:
                 "FWC26",
@@ -199,7 +202,6 @@
 
         .search-icon {
             color: #686b70;
-
             font-size: 17px;
         }
 
@@ -302,7 +304,7 @@
 
 
         /* =========================
-           SEASON CARDS
+           SEASONS
            ========================= */
 
         .seasons {
@@ -311,6 +313,11 @@
 
             gap: 10px;
         }
+
+
+        /* =========================
+           SEASON CARD
+           ========================= */
 
         .season-card {
             position: relative;
@@ -346,6 +353,66 @@
                 background .25s ease;
         }
 
+
+        /* =========================
+           THUMBNAIL
+           ========================= */
+
+        .season-card::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image:
+                var(--thumbnail);
+
+            background-size: cover;
+
+            background-position: center;
+
+            opacity: .34;
+
+            z-index: 0;
+
+            pointer-events: none;
+
+            transform: scale(1);
+
+            transition:
+                opacity .45s ease,
+                transform .45s ease;
+        }
+
+        .season-card:hover::after {
+            opacity: .44;
+
+            transform: scale(1.045);
+        }
+
+
+        /* =========================
+           CARD OVERLAY
+           ========================= */
+
+        .season-card::after {
+            background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(10,11,13,.98) 0%,
+                    rgba(10,11,13,.90) 28%,
+                    rgba(10,11,13,.68) 58%,
+                    rgba(10,11,13,.78) 100%
+                ),
+                var(--thumbnail);
+        }
+
+
+        /* =========================
+           HOVER
+           ========================= */
+
         .season-card:hover {
             transform: translateY(-2px);
 
@@ -361,7 +428,9 @@
         }
 
 
-        /* subtle background number */
+        /* =========================
+           BACKGROUND NUMBER
+           ========================= */
 
         .season-card::before {
             content: attr(data-number);
@@ -378,6 +447,8 @@
             color: rgba(255,255,255,.018);
 
             pointer-events: none;
+
+            z-index: 1;
         }
 
 
@@ -398,13 +469,17 @@
 
             border-radius: 12px;
 
-            background: #111214;
+            background: rgba(17,18,20,.86);
 
             color: #8c8f94;
 
             font-size: 13px;
 
             letter-spacing: 1px;
+
+            position: relative;
+
+            z-index: 2;
         }
 
 
@@ -414,6 +489,10 @@
 
         .season-content {
             padding: 22px 10px;
+
+            position: relative;
+
+            z-index: 2;
         }
 
         .season-name {
@@ -429,7 +508,7 @@
         .season-description {
             max-width: 600px;
 
-            color: #696c71;
+            color: #b0b2b6;
 
             font-size: 11px;
 
@@ -457,9 +536,9 @@
 
             border: 1px solid #2c2e32;
 
-            background: #151619;
+            background: rgba(21,22,25,.82);
 
-            color: #777a7f;
+            color: #888b91;
 
             font-size: 9px;
 
@@ -477,10 +556,14 @@
             padding-right: 22px;
 
             text-align: right;
+
+            position: relative;
+
+            z-index: 2;
         }
 
         .chapter-label {
-            color: #55585d;
+            color: #696c71;
 
             font-size: 9px;
 
@@ -490,7 +573,7 @@
         }
 
         .chapter-number {
-            color: #dedfe1;
+            color: #eeeeee;
 
             font-size: 15px;
 
@@ -550,6 +633,7 @@
 
         .ranking-list {
             display: flex;
+
             flex-direction: column;
 
             gap: 7px;
@@ -620,11 +704,56 @@
 
 
         /* =========================
+           RETURN BUTTON
+           ========================= */
+
+        .return-core {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 24px;
+
+            padding: 10px 13px;
+
+            border: 1px solid #292b2f;
+
+            border-radius: 9px;
+
+            background: #151619;
+
+            color: #70737a;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            transition:
+                background .2s ease,
+                border-color .2s ease,
+                color .2s ease;
+        }
+
+        .return-core:hover {
+            background: #1a1b1e;
+
+            border-color: #3a3c40;
+
+            color: #dddddd;
+        }
+
+
+        /* =========================
            FOOTER
            ========================= */
 
         .footer {
             display: flex;
+
             justify-content: space-between;
 
             margin-top: 28px;
@@ -650,7 +779,8 @@
         @media (max-width: 700px) {
 
             .page {
-                width: min(100% - 18px, 600px);
+                width:
+                    min(100% - 18px, 600px);
 
                 padding-top: 18px;
             }
@@ -737,11 +867,16 @@
                 display: none;
             }
 
+            .return-core {
+                margin-top: 20px;
+            }
+
             .footer {
                 flex-direction: column;
 
                 gap: 8px;
             }
+
         }
 
     </style>
@@ -753,19 +888,25 @@
 <div class="page">
 
 
-    <!-- HEADER -->
+    <!-- =========================
+         HEADER
+         ========================= -->
 
     <header class="header">
 
         <div class="brand">
 
-            <div class="brand-icon">
-                RP
-            </div>
+            <a href="index.html" class="brand">
 
-            <div class="brand-name">
-                ROLEPLAY
-            </div>
+                <div class="brand-icon">
+                    RP
+                </div>
+
+                <div class="brand-name">
+                    ROLEPLAY
+                </div>
+
+            </a>
 
         </div>
 
@@ -777,7 +918,9 @@
 
 
 
-    <!-- HERO -->
+    <!-- =========================
+         HERO
+         ========================= -->
 
     <section class="hero">
 
@@ -801,7 +944,9 @@
 
 
 
-    <!-- SEARCH -->
+    <!-- =========================
+         SEARCH
+         ========================= -->
 
     <div class="search-box">
 
@@ -820,11 +965,13 @@
 
 
 
-    <!-- FILTERS -->
+    <!-- =========================
+         FILTERS
+         ========================= -->
 
     <div class="toolbar">
 
-        <button class="filter">
+        <button class="filter" type="button">
 
             <span>
                 View
@@ -837,7 +984,7 @@
         </button>
 
 
-        <button class="filter">
+        <button class="filter" type="button">
 
             <span>
                 Order
@@ -853,7 +1000,9 @@
 
 
 
-    <!-- SECTION HEADER -->
+    <!-- =========================
+         SECTION HEADER
+         ========================= -->
 
     <div class="section-header">
 
@@ -869,22 +1018,28 @@
 
 
 
-    <!-- SEASONS -->
+    <!-- =========================
+         SEASONS
+         ========================= -->
 
     <section class="seasons" id="seasons">
 
 
-        <!-- 01 -->
+        <!-- =========================
+             01 — GENESIS
+             ========================= -->
 
         <article
             class="season-card"
             data-number="01"
             data-search="genesis season 1 origin"
+            style="--thumbnail: none;"
         >
 
             <div class="season-number">
                 01
             </div>
+
 
             <div class="season-content">
 
@@ -906,6 +1061,7 @@
 
             </div>
 
+
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -922,17 +1078,21 @@
 
 
 
-        <!-- 02 -->
+        <!-- =========================
+             02 — DARK DAYS
+             ========================= -->
 
         <article
             class="season-card"
             data-number="02"
             data-search="dark days season 2 erstwhile"
+            style="--thumbnail: none;"
         >
 
             <div class="season-number">
                 02
             </div>
+
 
             <div class="season-content">
 
@@ -954,6 +1114,7 @@
 
             </div>
 
+
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -970,18 +1131,21 @@
 
 
 
-        <!-- 03 -->
+        <!-- =========================
+             03 — TITANFALL
+             ========================= -->
 
         <article
-    class="season-card"
-    data-number="03"
-    data-search="titanfall season 3 titans erswhite"
-    style="--thumbnail: url('https://media.discordapp.net/attachments/1321552941009731727/1537602906285670440/c8f58549a0fde7d956c20e035f9e82dd.png?ex=6a7fa3cc&is=6a7e524c&hm=805e6555605a70ca3596071d0c6b5eb653e7fc0433c7bd929d80965d6850291d&=&format=webp&quality=lossless&width=1024&height=575');"
->
+            class="season-card"
+            data-number="03"
+            data-search="titanfall season 3 titans erstwhile"
+            style="--thumbnail: url('https://media.discordapp.net/attachments/1321552941009731727/1537602906285670440/c8f58549a0fde7d956c20e035f9e82dd.png?ex=6a7fa3cc&is=6a7e524c&hm=805e6555605a70ca3596071d0c6b5eb653e7fc0433c7bd929d80965d6850291d&=&format=webp&quality=lossless&width=1024&height=575');"
+        >
 
             <div class="season-number">
                 03
             </div>
+
 
             <div class="season-content">
 
@@ -1003,6 +1167,7 @@
 
             </div>
 
+
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1019,17 +1184,21 @@
 
 
 
-        <!-- 04 -->
+        <!-- =========================
+             04 — ALPHA HILLS
+             ========================= -->
 
         <article
             class="season-card"
             data-number="04"
             data-search="alpha hills season 4 erstwhile"
+            style="--thumbnail: none;"
         >
 
             <div class="season-number">
                 04
             </div>
+
 
             <div class="season-content">
 
@@ -1051,6 +1220,7 @@
 
             </div>
 
+
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1067,17 +1237,21 @@
 
 
 
-        <!-- 05 -->
+        <!-- =========================
+             05 — ASTRAL DAWN
+             ========================= -->
 
         <article
             class="season-card"
             data-number="05"
             data-search="astral dawn season 5 astro actual"
+            style="--thumbnail: none;"
         >
 
             <div class="season-number">
                 05
             </div>
+
 
             <div class="season-content">
 
@@ -1099,6 +1273,7 @@
 
             </div>
 
+
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1115,17 +1290,21 @@
 
 
 
-        <!-- 06 -->
+        <!-- =========================
+             06
+             ========================= -->
 
         <article
             class="season-card"
             data-number="06"
             data-search="you can't see this season 6 unknown"
+            style="--thumbnail: none;"
         >
 
             <div class="season-number">
                 06
             </div>
+
 
             <div class="season-content">
 
@@ -1147,6 +1326,7 @@
 
             </div>
 
+
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1163,17 +1343,21 @@
 
 
 
-        <!-- 07 -->
+        <!-- =========================
+             07
+             ========================= -->
 
         <article
             class="season-card"
             data-number="07"
             data-search="you can't see this season 7 unknown"
+            style="--thumbnail: none;"
         >
 
             <div class="season-number">
                 07
             </div>
+
 
             <div class="season-content">
 
@@ -1195,6 +1379,7 @@
 
             </div>
 
+
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1214,7 +1399,9 @@
 
 
 
-    <!-- EPISODE RANKING -->
+    <!-- =========================
+         EPISODE RANKING
+         ========================= -->
 
     <section class="ranking">
 
@@ -1239,12 +1426,27 @@
 
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         RETURN TO CORE
+         ========================= -->
+
+    <a
+        href="index.html"
+        class="return-core"
+    >
+        ← Return to Core
+    </a>
+
+
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
 
     <footer class="footer">
 
         <span>
-            ROLEPLAY ARCHIVE
+            VOID CORE
         </span>
 
         <span>
@@ -1258,9 +1460,11 @@
 
 
 
-<!-- SEARCH FUNCTION -->
-
 <script>
+
+    /* =========================
+       SEARCH
+       ========================= */
 
     const search =
         document.getElementById("search");
@@ -1272,12 +1476,17 @@
     search.addEventListener("input", function () {
 
         const value =
-            search.value.toLowerCase().trim();
+            search.value
+                .toLowerCase()
+                .trim();
+
 
         seasons.forEach(season => {
 
             const text =
-                season.dataset.search;
+                season.dataset.search
+                    .toLowerCase();
+
 
             if (text.includes(value)) {
 
@@ -1302,6 +1511,7 @@
     const rankingList =
         document.getElementById("ranking-list");
 
+
     const rankingData = [];
 
 
@@ -1324,29 +1534,23 @@
 
 
         const start =
-            parseInt(numbers[0]);
+            parseInt(numbers[0], 10);
+
 
         const end =
-            parseInt(numbers[1]);
+            parseInt(numbers[1], 10);
 
 
         if (
-            isNaN(start) ||
-            isNaN(end) ||
+            Number.isNaN(start) ||
+            Number.isNaN(end) ||
             end < start
         ) {
             return;
         }
 
 
-        const episodeCount =
-            end - start + 1;
-
-
         rankingData.push({
-
-            number:
-                season.dataset.number,
 
             name:
                 season
@@ -1355,52 +1559,54 @@
                     .trim(),
 
             episodes:
-                episodeCount
+                end - start + 1
 
         });
 
     });
 
 
-    rankingData.sort((a, b) =>
-        b.episodes - a.episodes
+    rankingData.sort(
+        (a, b) =>
+            b.episodes - a.episodes
     );
 
 
-    rankingData.forEach((season, index) => {
+    rankingData.forEach(
+        (season, index) => {
 
-        const item =
-            document.createElement("div");
-
-
-        item.className =
-            "ranking-item";
+            const item =
+                document.createElement("div");
 
 
-        item.innerHTML = `
-
-            <div class="ranking-position">
-                ${String(index + 1).padStart(2, "0")}
-            </div>
-
-            <div class="ranking-name">
-                ${season.name}
-            </div>
-
-            <div class="ranking-count">
-                ${season.episodes}
-                <span>EP</span>
-            </div>
-
-        `;
+            item.className =
+                "ranking-item";
 
 
-        rankingList.appendChild(item);
+            item.innerHTML = `
 
-    });
+                <div class="ranking-position">
+                    ${String(index + 1).padStart(2, "0")}
+                </div>
+
+                <div class="ranking-name">
+                    ${season.name}
+                </div>
+
+                <div class="ranking-count">
+                    ${season.episodes}
+                    <span>EP</span>
+                </div>
+
+            `;
+
+
+            rankingList.appendChild(item);
+
+        }
+    );
 
 </script>
-
 
 </body>
 </html>
