@@ -51,6 +51,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             padding: 8px 4px 24px;
         }
 
@@ -424,6 +425,108 @@
 
 
         /* =========================
+           EPISODE RANKING
+        ========================= */
+
+        .ranking {
+            margin-top: 38px;
+
+            padding: 20px;
+
+            border: 1px solid #292b2f;
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    #151619 0%,
+                    #111214 60%,
+                    #0d0e10 100%
+                );
+        }
+
+        .ranking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+
+            margin-bottom: 15px;
+        }
+
+        .ranking-title {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .ranking-subtitle {
+            color: #55585d;
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .ranking-item {
+            display: grid;
+            grid-template-columns: 34px 1fr auto;
+
+            align-items: center;
+
+            min-height: 43px;
+
+            padding: 0 12px;
+
+            border: 1px solid #24262a;
+            border-radius: 9px;
+
+            background: #111214;
+
+            transition:
+                background .2s ease,
+                border-color .2s ease;
+        }
+
+        .ranking-item:hover {
+            background: #17181b;
+            border-color: #35373b;
+        }
+
+        .ranking-position {
+            color: #55585d;
+
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .ranking-name {
+            color: #d8d9db;
+
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .ranking-count {
+            color: #8b8e93;
+
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        .ranking-count span {
+            color: #55585d;
+            font-size: 9px;
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
            FOOTER
         ========================= */
 
@@ -506,6 +609,20 @@
                 font-size: 100px;
                 right: 5px;
                 bottom: -20px;
+            }
+
+            .ranking {
+                padding: 15px;
+                margin-top: 30px;
+            }
+
+            .ranking-item {
+                grid-template-columns: 30px 1fr auto;
+                padding: 0 10px;
+            }
+
+            .ranking-subtitle {
+                display: none;
             }
 
             .footer {
@@ -971,6 +1088,31 @@
 
 
 
+    <!-- EPISODE RANKING -->
+
+    <section class="ranking">
+
+        <div class="ranking-header">
+
+            <div class="ranking-title">
+                Most Episodes
+            </div>
+
+            <div class="ranking-subtitle">
+                Ranked by episode count
+            </div>
+
+        </div>
+
+        <div
+            class="ranking-list"
+            id="ranking-list"
+        ></div>
+
+    </section>
+
+
+
     <!-- FOOTER -->
 
     <footer class="footer">
@@ -1016,6 +1158,88 @@
             }
 
         });
+
+    });
+
+
+
+    /* =========================
+       EPISODE RANKING
+       ========================= */
+
+    const rankingList = document.getElementById("ranking-list");
+
+    const rankingData = [];
+
+    seasons.forEach(season => {
+
+        const chapterText =
+            season.querySelector(".chapter-number").textContent.trim();
+
+        const numbers =
+            chapterText.match(/\d+/g);
+
+        if (!numbers || numbers.length < 2) {
+            return;
+        }
+
+        const start = parseInt(numbers[0]);
+        const end = parseInt(numbers[1]);
+
+        if (isNaN(start) || isNaN(end) || end < start) {
+            return;
+        }
+
+        const episodeCount =
+            end - start + 1;
+
+        rankingData.push({
+
+            number:
+                season.dataset.number,
+
+            name:
+                season.querySelector(".season-name").textContent.trim(),
+
+            episodes:
+                episodeCount
+
+        });
+
+    });
+
+
+    rankingData.sort((a, b) =>
+        b.episodes - a.episodes
+    );
+
+
+    rankingData.forEach((season, index) => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "ranking-item";
+
+        item.innerHTML = `
+
+            <div class="ranking-position">
+                ${String(index + 1).padStart(2, "0")}
+            </div>
+
+            <div class="ranking-name">
+                ${season.name}
+            </div>
+
+            <div class="ranking-count">
+                ${season.episodes}
+                <span>EP</span>
+            </div>
+
+        `;
+
+        rankingList.appendChild(item);
 
     });
 
