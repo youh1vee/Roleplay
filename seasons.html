@@ -8,10 +8,6 @@
 
     <style>
 
-        /* =========================
-           RESET
-           ========================= */
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -114,17 +110,8 @@
             padding: 35px 6px 28px;
         }
 
-        .hero-label {
-            color: #73767c;
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
         .void-core {
             font-family:
-                "FWC26",
                 "Arial Black",
                 Arial,
                 Helvetica,
@@ -140,6 +127,14 @@
             margin-bottom: 10px;
 
             text-transform: uppercase;
+        }
+
+        .hero-label {
+            color: #73767c;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
         .hero h1 {
@@ -811,9 +806,7 @@
 <div class="page">
 
 
-    <!-- =========================
-         HEADER
-         ========================= -->
+    <!-- HEADER -->
 
     <header class="header">
 
@@ -841,9 +834,7 @@
 
 
 
-    <!-- =========================
-         HERO
-         ========================= -->
+    <!-- HERO -->
 
     <section class="hero">
 
@@ -867,9 +858,7 @@
 
 
 
-    <!-- =========================
-         SEARCH
-         ========================= -->
+    <!-- SEARCH -->
 
     <div class="search-box">
 
@@ -888,9 +877,7 @@
 
 
 
-    <!-- =========================
-         FILTERS
-         ========================= -->
+    <!-- FILTERS -->
 
     <div class="toolbar">
 
@@ -923,9 +910,7 @@
 
 
 
-    <!-- =========================
-         SECTION HEADER
-         ========================= -->
+    <!-- SECTION HEADER -->
 
     <div class="section-header">
 
@@ -941,9 +926,7 @@
 
 
 
-    <!-- =========================
-         SEASONS
-         ========================= -->
+    <!-- SEASONS -->
 
     <section class="seasons" id="seasons">
 
@@ -954,12 +937,13 @@
             class="season-card"
             data-number="01"
             data-search="genesis season 1 origin"
-            style="--thumbnail: none;"
+            style="--thumbnail: url('https://images-ext-1.discordapp.net/external/BRQ1GvgObBmUkP77Xzrr7lU3NLiQ8Y_XM4QUDvTbBAU/https/i.pinimg.com/1200x/4a/b9/cf/4ab9cfb2491a866f3c15fb6ab74e92c1.jpg?format=webp&width=1024&height=461');"
         >
 
             <div class="season-number">
                 01
             </div>
+
 
             <div class="season-content">
 
@@ -980,6 +964,7 @@
                 </div>
 
             </div>
+
 
             <div class="chapters">
 
@@ -1003,12 +988,13 @@
             class="season-card"
             data-number="02"
             data-search="dark days season 2 erstwhile"
-            style="--thumbnail: none;"
+            style="--thumbnail: url('https://media.discordapp.net/attachments/1321552941009731727/1537673753679364176/33ea309f0dd44831bfa79042244fb1bd.png?ex=6a7fe5c7&is=6a7e9447&hm=9476c6d6dc8f4dd4293c5b150b9569a026c547fee90ff9f31237df606d8e310b&=&format=webp&quality=lossless&width=512&height=288');"
         >
 
             <div class="season-number">
                 02
             </div>
+
 
             <div class="season-content">
 
@@ -1029,6 +1015,7 @@
                 </div>
 
             </div>
+
 
             <div class="chapters">
 
@@ -1059,6 +1046,7 @@
                 03
             </div>
 
+
             <div class="season-content">
 
                 <h2 class="season-name">
@@ -1078,6 +1066,7 @@
                 </div>
 
             </div>
+
 
             <div class="chapters">
 
@@ -1108,6 +1097,7 @@
                 04
             </div>
 
+
             <div class="season-content">
 
                 <h2 class="season-name">
@@ -1127,6 +1117,7 @@
                 </div>
 
             </div>
+
 
             <div class="chapters">
 
@@ -1149,13 +1140,14 @@
         <article
             class="season-card"
             data-number="05"
-            data-search="astral dawn season 5 astro actual"
+            data-search="astral dawn season 5 actual"
             style="--thumbnail: url('https://media.discordapp.net/attachments/1321552941009731727/1537668780975456266/6d1aa44d816cc9039b53041ec913587b.png?ex=6a7fe125&is=6a7e8fa5&hm=e359a65867cfd9667969629cfc504a24ae8842167fa1ee9f0142def7a6fadbbb&=&format=webp&quality=lossless&width=512&height=288');"
         >
 
             <div class="season-number">
                 05
             </div>
+
 
             <div class="season-content">
 
@@ -1176,6 +1168,7 @@
                 </div>
 
             </div>
+
 
             <div class="chapters">
 
@@ -1206,6 +1199,7 @@
                 06
             </div>
 
+
             <div class="season-content">
 
                 <h2 class="season-name">
@@ -1225,6 +1219,7 @@
                 </div>
 
             </div>
+
 
             <div class="chapters">
 
@@ -1255,6 +1250,7 @@
                 07
             </div>
 
+
             <div class="season-content">
 
                 <h2 class="season-name">
@@ -1274,6 +1270,7 @@
                 </div>
 
             </div>
+
 
             <div class="chapters">
 
@@ -1312,6 +1309,7 @@
 
         </div>
 
+
         <div
             class="ranking-list"
             id="ranking-list"
@@ -1322,7 +1320,7 @@
 
 
     <!-- =========================
-         RETURN TO CORE
+         RETURN
          ========================= -->
 
     <a
@@ -1406,7 +1404,6 @@
     const rankingList =
         document.getElementById("ranking-list");
 
-
     const rankingData = [];
 
 
@@ -1430,7 +1427,6 @@
 
         const start =
             parseInt(numbers[0], 10);
-
 
         const end =
             parseInt(numbers[1], 10);
