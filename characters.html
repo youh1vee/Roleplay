@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Characters — VOID CORE</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0d0f11;
+            color: #e8e9eb;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            padding: 0 4.5vw;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 31px;
+            height: 31px;
+            border: 1px solid #34383d;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9da3aa;
+            font-size: 12px;
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+        }
+
+        .archive-link {
+            color: #606873;
+            text-decoration: none;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+
+        .archive-link:hover {
+            color: #cfd2d6;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding-top: 38px;
+            padding-bottom: 48px;
+        }
+
+        .eyebrow {
+            color: #6b737e;
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(54px, 8vw, 78px);
+            line-height: 0.95;
+            letter-spacing: 2px;
+            font-weight: 800;
+            color: #f0f0f1;
+        }
+
+        .subtitle {
+            margin-top: 17px;
+            color: #666d76;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* SECTION */
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 13px;
+        }
+
+        .section-heading h2 {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .section-heading span {
+            font-size: 9px;
+            color: #50565e;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* CHARACTER CARD */
+
+        .character-card {
+            position: relative;
+            max-width: 720px;
+            min-height: 420px;
+
+            border: 1px solid #2c3035;
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.025),
+                    rgba(255,255,255,0.005)
+                );
+
+            overflow: hidden;
+
+            transition:
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .character-card:hover {
+            border-color: #444a52;
+            transform: translateY(-2px);
+        }
+
+        /* BACKGROUND NUMBER */
+
+        .card-number {
+            position: absolute;
+            right: -8px;
+            bottom: -38px;
+
+            font-size: 180px;
+            font-weight: 800;
+            line-height: 1;
+
+            color: rgba(255,255,255,0.025);
+
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* IMAGE */
+
+        .character-image {
+            position: relative;
+            height: 235px;
+            overflow: hidden;
+
+            border-bottom: 1px solid #292d32;
+            background: #101215;
+        }
+
+        .character-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            display: block;
+
+            filter: brightness(0.88);
+
+            transition:
+                transform 0.45s ease,
+                filter 0.45s ease;
+        }
+
+        .character-card:hover .character-image img {
+            transform: scale(1.025);
+            filter: brightness(1);
+        }
+
+        .character-image::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(13,15,17,0.7),
+                    transparent 55%
+                );
+
+            pointer-events: none;
+        }
+
+        /* CONTENT */
+
+        .character-content {
+            position: relative;
+            z-index: 2;
+            padding: 25px 27px 28px;
+        }
+
+        .character-label {
+            color: #59616b;
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .character-name {
+            font-size: 30px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            color: #f0f0f1;
+            margin-bottom: 17px;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 10px;
+
+            border: 1px solid #343940;
+            border-radius: 6px;
+
+            font-size: 9px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+
+            color: #aeb3b9;
+            margin-bottom: 22px;
+        }
+
+        .status-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #777d84;
+        }
+
+        /* INFORMATION */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            border-top: 1px solid #292d32;
+            border-bottom: 1px solid #292d32;
+
+            margin-bottom: 22px;
+        }
+
+        .info {
+            padding: 13px 0;
+        }
+
+        .info:nth-child(odd) {
+            border-right: 1px solid #292d32;
+            padding-right: 18px;
+        }
+
+        .info:nth-child(even) {
+            padding-left: 18px;
+        }
+
+        .info-label {
+            color: #535b65;
+            font-size: 8px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #c8cbd0;
+            font-size: 11px;
+        }
+
+        /* DESCRIPTION */
+
+        .description-label {
+            color: #535b65;
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            max-width: 620px;
+            color: #747b84;
+            font-size: 11px;
+            line-height: 1.75;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 55px;
+            padding: 18px 3px 28px;
+
+            border-top: 1px solid #202328;
+
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer span {
+            color: #454b53;
+            font-size: 9px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            body {
+                padding: 0 22px;
+            }
+
+            header {
+                height: 72px;
+            }
+
+            .hero {
+                padding-top: 35px;
+                padding-bottom: 40px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .character-card {
+                min-height: auto;
+            }
+
+            .character-image {
+                height: 200px;
+            }
+
+            .character-content {
+                padding: 22px 20px 24px;
+            }
+
+            .character-name {
+                font-size: 26px;
+            }
+
+            .card-number {
+                font-size: 130px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="brand">
+            <div class="brand-icon">RP</div>
+            <div class="brand-name">ROLEPLAY</div>
+        </div>
+
+        <a href="index.html" class="archive-link">
+            Story Archive
+        </a>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="eyebrow">
+                Roleplay Universe
+            </div>
+
+            <h1>
+                CHARACTERS
+            </h1>
+
+            <p class="subtitle">
+                Profiles of the individuals and entities that inhabit the Roleplay universe.
+            </p>
+
+        </section>
+
+
+        <!-- CHARACTER ARCHIVE -->
+
+        <section>
+
+            <div class="section-heading">
+
+                <h2>
+                    Character Archive
+                </h2>
+
+                <span>
+                    001 — TITAN CAMERAMAN
+                </span>
+
+            </div>
+
+
+            <!-- TITAN CAMERAMAN -->
+
+            <article class="character-card">
+
+                <div class="card-number">
+                    01
+                </div>
+
+
+                <div class="character-image">
+
+                    <img
+                        src="https://media.discordapp.net/attachments/1321552941009731727/1537879007423500308/9bd9785c39b3097e129cadefb33fd9d6.png?ex=6a80a4ef&is=6a7f536f&hm=c737a56e674776ca86e41bb71e43e14dfec3b9a9c6d4f08a5ccaaa0b177ff6eb&=&format=webp&quality=lossless&width=512&height=288"
+                        alt="Titan Cameraman"
+                    >
+
+                </div>
+
+
+                <div class="character-content">
+
+                    <div class="character-label">
+                        Character 001
+                    </div>
+
+                    <h2 class="character-name">
+                        Titan Cameraman
+                    </h2>
+
+
+                    <div class="status">
+
+                        <span class="status-dot"></span>
+
+                        Missing — Damaged
+
+                    </div>
+
+
+                    <div class="info-grid">
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                Faction
+                            </div>
+
+                            <div class="info-value">
+                                Cameraman
+                            </div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                Type
+                            </div>
+
+                            <div class="info-value">
+                                Titan
+                            </div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                First Appearance
+                            </div>
+
+                            <div class="info-value">
+                                Genesis
+                            </div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                Current Version
+                            </div>
+
+                            <div class="info-value">
+                                V.2.1.1
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="description-label">
+                        Description
+                    </div>
+
+                    <p class="description">
+                        The first Titan to appear in the story.
+                        Titan Cameraman is one of the most powerful members
+                        of the Cameraman faction, built to confront the most
+                        dangerous threats on the battlefield. After sustaining
+                        severe damage during his battles, he eventually
+                        disappeared, leaving his current location unknown.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <span>
+            Void Core
+        </span>
+
+        <span>
+            2026
+        </span>
+
+    </footer>
+
+</body>
+</html>
