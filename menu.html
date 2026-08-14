@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VOID CORE — Archive</title>
+
+    <style>
+
+        /* =========================
+           RESET
+           ========================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at top,
+                    #17191d 0%,
+                    #0c0d0f 45%,
+                    #08090a 100%
+                );
+
+            color: #f2f2f2;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           PAGE
+           ========================= */
+
+        .page {
+            width: min(1100px, calc(100% - 28px));
+            margin: auto;
+
+            padding: 28px 0 50px;
+        }
+
+
+        /* =========================
+           HEADER
+           ========================= */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 8px 4px 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid #34363a;
+            border-radius: 10px;
+
+            background: #151619;
+
+            font-size: 14px;
+            color: #bdbfc3;
+        }
+
+        .brand-name {
+            font-size: 14px;
+
+            font-weight: 600;
+
+            letter-spacing: 2px;
+        }
+
+        .archive {
+            color: #686b70;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           HERO
+           ========================= */
+
+        .hero {
+            padding: 55px 6px 35px;
+        }
+
+        .hero-label {
+            color: #73767c;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 9px;
+        }
+
+        .void-core {
+            font-family:
+                "FWC26",
+                "Arial Black",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size:
+                clamp(42px, 8vw, 78px);
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            line-height: .95;
+
+            color: #eeeeee;
+
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            margin-top: 17px;
+
+            max-width: 500px;
+
+            color: #696c71;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           MENU
+           ========================= */
+
+        .menu-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: end;
+
+            margin: 12px 2px 12px;
+        }
+
+        .menu-title {
+            font-size: 13px;
+
+            font-weight: 600;
+
+            letter-spacing: 1px;
+        }
+
+        .menu-subtitle {
+            color: #55585d;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================
+           MENU GRID
+           ========================= */
+
+        .menu {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+        }
+
+
+        /* =========================
+           MENU CARD
+           ========================= */
+
+        .menu-card {
+            position: relative;
+
+            min-height: 155px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            overflow: hidden;
+
+            padding: 22px;
+
+            border: 1px solid #292b2f;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    #18191c 0%,
+                    #111214 55%,
+                    #0d0e10 100%
+                );
+
+            cursor: pointer;
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                background .25s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-3px);
+
+            border-color: #44474c;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    #1d1e21 0%,
+                    #141518 55%,
+                    #101113 100%
+                );
+        }
+
+
+        /* =========================
+           BIG BACKGROUND NUMBER
+           ========================= */
+
+        .menu-card::before {
+            content: attr(data-number);
+
+            position: absolute;
+
+            right: 15px;
+            bottom: -38px;
+
+            font-size: 145px;
+
+            font-weight: 700;
+
+            color: rgba(255,255,255,.018);
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           CARD TOP
+           ========================= */
+
+        .menu-card-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .menu-number {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid #34363a;
+
+            border-radius: 10px;
+
+            background: #111214;
+
+            color: #8c8f94;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+        }
+
+        .menu-arrow {
+            color: #55585d;
+
+            font-size: 18px;
+
+            transition:
+                transform .25s ease,
+                color .25s ease;
+        }
+
+        .menu-card:hover .menu-arrow {
+            transform: translateX(4px);
+
+            color: #bdbfc3;
+        }
+
+
+        /* =========================
+           CARD TEXT
+           ========================= */
+
+        .menu-card-content {
+            position: relative;
+
+            z-index: 1;
+        }
+
+        .menu-card h2 {
+            font-size:
+                clamp(21px, 3vw, 28px);
+
+            font-weight: 500;
+
+            letter-spacing: .3px;
+
+            margin-bottom: 7px;
+        }
+
+        .menu-card p {
+            max-width: 420px;
+
+            color: #696c71;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           LARGE CARD
+           ========================= */
+
+        .menu-card.large {
+            grid-column: span 2;
+
+            min-height: 190px;
+        }
+
+
+        /* =========================
+           STATUS
+           ========================= */
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 13px;
+
+            color: #55585d;
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: #777a80;
+        }
+
+
+        /* =========================
+           FOOTER
+           ========================= */
+
+        .footer {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 35px;
+
+            padding: 18px 4px;
+
+            border-top: 1px solid #1d1f22;
+
+            color: #484b50;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+                width:
+                    min(100% - 18px, 600px);
+
+                padding-top: 18px;
+            }
+
+            .archive {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 42px;
+            }
+
+            .void-core {
+                font-size: 46px;
+            }
+
+            .menu {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-card.large {
+                grid-column: span 1;
+            }
+
+            .menu-card {
+                min-height: 145px;
+            }
+
+            .footer {
+                flex-direction: column;
+
+                gap: 8px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- =========================
+         HEADER
+         ========================= -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                RP
+            </div>
+
+            <div class="brand-name">
+                ROLEPLAY
+            </div>
+
+        </div>
+
+        <div class="archive">
+            STORY ARCHIVE
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+         ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-label">
+            Roleplay Universe
+        </div>
+
+        <div class="void-core">
+            VOID CORE
+        </div>
+
+        <p>
+            The central archive for the universe,
+            its history, characters and stories.
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         MENU HEADER
+         ========================= -->
+
+    <div class="menu-header">
+
+        <div class="menu-title">
+            Archive
+        </div>
+
+        <div class="menu-subtitle">
+            Select a section
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         MENU
+         ========================= -->
+
+    <section class="menu">
+
+
+        <!-- SEASONS -->
+
+        <a
+            href="index.html"
+            class="menu-card large"
+            data-number="01"
+        >
+
+            <div class="menu-card-top">
+
+                <div class="menu-number">
+                    01
+                </div>
+
+                <div class="menu-arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <div class="menu-card-content">
+
+                <h2>
+                    Seasons
+                </h2>
+
+                <p>
+                    Explore the eras that shaped the
+                    story and follow the evolution of
+                    the Roleplay universe.
+                </p>
+
+                <div class="status">
+
+                    <span class="status-dot"></span>
+
+                    Available
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- EPISODES -->
+
+        <a
+            href="episodes.html"
+            class="menu-card"
+            data-number="02"
+        >
+
+            <div class="menu-card-top">
+
+                <div class="menu-number">
+                    02
+                </div>
+
+                <div class="menu-arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <div class="menu-card-content">
+
+                <h2>
+                    Episodes
+                </h2>
+
+                <p>
+                    Browse the complete collection
+                    of chapters and events.
+                </p>
+
+                <div class="status">
+
+                    <span class="status-dot"></span>
+
+                    Coming soon
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- CHARACTERS -->
+
+        <a
+            href="characters.html"
+            class="menu-card"
+            data-number="03"
+        >
+
+            <div class="menu-card-top">
+
+                <div class="menu-number">
+                    03
+                </div>
+
+                <div class="menu-arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <div class="menu-card-content">
+
+                <h2>
+                    Characters
+                </h2>
+
+                <p>
+                    Discover the characters that
+                    inhabit the universe.
+                </p>
+
+                <div class="status">
+
+                    <span class="status-dot"></span>
+
+                    Coming soon
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- LORE -->
+
+        <a
+            href="lore.html"
+            class="menu-card"
+            data-number="04"
+        >
+
+            <div class="menu-card-top">
+
+                <div class="menu-number">
+                    04
+                </div>
+
+                <div class="menu-arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <div class="menu-card-content">
+
+                <h2>
+                    Lore
+                </h2>
+
+                <p>
+                    The history, events and hidden
+                    details behind the universe.
+                </p>
+
+                <div class="status">
+
+                    <span class="status-dot"></span>
+
+                    Coming soon
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ARCHIVE -->
+
+        <a
+            href="archive.html"
+            class="menu-card"
+            data-number="05"
+        >
+
+            <div class="menu-card-top">
+
+                <div class="menu-number">
+                    05
+                </div>
+
+                <div class="menu-arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <div class="menu-card-content">
+
+                <h2>
+                    Archive
+                </h2>
+
+                <p>
+                    Previous versions, classified
+                    material and archived content.
+                </p>
+
+                <div class="status">
+
+                    <span class="status-dot"></span>
+
+                    Coming soon
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+
+    <footer class="footer">
+
+        <span>
+            VOID CORE
+        </span>
+
+        <span>
+            2026
+        </span>
+
+    </footer>
+
+
+</div>
+
+</body>
+</html>
