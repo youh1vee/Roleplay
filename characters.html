@@ -21,6 +21,8 @@
             padding: 0 4.5vw;
         }
 
+        /* HEADER */
+
         header {
             height: 82px;
             display: flex;
@@ -39,9 +41,11 @@
             height: 31px;
             border: 1px solid #34383d;
             border-radius: 9px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             color: #9da3aa;
             font-size: 12px;
         }
@@ -130,6 +134,7 @@
 
         .character-card {
             position: relative;
+
             border: 1px solid #2c3035;
             border-radius: 15px;
 
@@ -152,9 +157,9 @@
             transform: translateY(-2px);
         }
 
-        /* RED OWNERSHIP ACCENT */
+        /* RED ACCENT — PATHETIC */
 
-        .character-card.owner-pathetic {
+        .owner-pathetic {
             border-color: #3b2528;
 
             background:
@@ -170,11 +175,11 @@
                 );
         }
 
-        .character-card.owner-pathetic:hover {
+        .owner-pathetic:hover {
             border-color: #633238;
         }
 
-        .character-card.owner-pathetic::before {
+        .owner-pathetic::before {
             content: "";
 
             position: absolute;
@@ -189,6 +194,46 @@
                     90deg,
                     transparent,
                     rgba(145, 35, 43, 0.8)
+                );
+        }
+
+        /* ORANGE ACCENT — GURKAS / INFECTED */
+
+        .owner-gurkas {
+            border-color: #493522;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(180, 91, 20, 0.20),
+                    transparent 42%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.025),
+                    rgba(255,255,255,0.005)
+                );
+        }
+
+        .owner-gurkas:hover {
+            border-color: #735333;
+        }
+
+        .owner-gurkas::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            width: 45%;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(205, 103, 25, 0.85)
                 );
         }
 
@@ -211,6 +256,10 @@
 
         .owner-pathetic .card-number {
             color: rgba(150, 30, 38, 0.045);
+        }
+
+        .owner-gurkas .card-number {
+            color: rgba(200, 95, 20, 0.045);
         }
 
         /* IMAGE */
@@ -268,7 +317,21 @@
                 ),
                 radial-gradient(
                     circle at 100% 0%,
-                    rgba(120, 20, 28, 0.12),
+                    rgba(120,20,28,0.12),
+                    transparent 55%
+                );
+        }
+
+        .owner-gurkas .character-image::after {
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(13,15,17,0.75),
+                    transparent 55%
+                ),
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(180,85,15,0.13),
                     transparent 55%
                 );
         }
@@ -328,7 +391,11 @@
             background: #9a3038;
         }
 
-        /* INFO */
+        .owner-gurkas .status-dot {
+            background: #d16c1c;
+        }
+
+        /* INFORMATION */
 
         .info-grid {
             display: grid;
@@ -370,6 +437,10 @@
             color: #a94a51;
         }
 
+        .owner-gurkas .owner-value {
+            color: #c87829;
+        }
+
         /* DESCRIPTION */
 
         .description-label {
@@ -405,9 +476,10 @@
             text-transform: uppercase;
         }
 
-        /* MOBILE */
+        /* RESPONSIVE */
 
         @media (max-width: 850px) {
+
             .archive-grid {
                 grid-template-columns: 1fr;
             }
@@ -459,6 +531,8 @@
 
 <body>
 
+    <!-- HEADER -->
+
     <header>
 
         <div class="brand">
@@ -472,6 +546,8 @@
 
     </header>
 
+
+    <!-- HERO -->
 
     <main>
 
@@ -492,6 +568,8 @@
         </section>
 
 
+        <!-- CHARACTER ARCHIVE -->
+
         <section class="archive-grid">
 
             <div class="section-heading">
@@ -501,13 +579,13 @@
                 </h2>
 
                 <span>
-                    002 Entries
+                    003 Entries
                 </span>
 
             </div>
 
 
-            <!-- TITAN CAMERAMAN -->
+            <!-- CHARACTER 001 — TITAN CAMERAMAN -->
 
             <article class="character-card">
 
@@ -535,8 +613,11 @@
                     </h2>
 
                     <div class="status">
+
                         <span class="status-dot"></span>
+
                         Missing — Damaged
+
                     </div>
 
                     <div class="info-grid">
@@ -586,7 +667,7 @@
             </article>
 
 
-            <!-- TITAN SPEAKERMAN -->
+            <!-- CHARACTER 002 — TITAN SPEAKERMAN -->
 
             <article class="character-card owner-pathetic">
 
@@ -667,10 +748,93 @@
 
             </article>
 
+
+            <!-- CHARACTER 003 — TITAN TV MAN -->
+
+            <article class="character-card owner-gurkas">
+
+                <div class="card-number">
+                    03
+                </div>
+
+                <div class="character-image">
+
+                    <img
+                        src="https://media.discordapp.net/attachments/1321552941009731727/1537885888015630367/12215ab9f7cfcbd95c37291b043be75d.png?ex=6a80ab58&is=6a7f59d8&hm=ee8ba8cc444cdfafa9d01bb16a15967105c5ee5f3d069cb4dec3aded2f6598bb&=&format=webp&quality=lossless&width=512&height=313"
+                        alt="Titan TV Man"
+                    >
+
+                </div>
+
+                <div class="character-content">
+
+                    <div class="character-label">
+                        Character 003
+                    </div>
+
+                    <h2 class="character-name">
+                        Titan TV Man
+                    </h2>
+
+                    <div class="status">
+
+                        <span class="status-dot"></span>
+
+                        WOD
+
+                    </div>
+
+                    <div class="info-grid">
+
+                        <div class="info">
+                            <div class="info-label">Faction</div>
+                            <div class="info-value">TV Man</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">Type</div>
+                            <div class="info-value">Titan</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">First Appearance</div>
+                            <div class="info-value">Dark Days</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">Current Version</div>
+                            <div class="info-value">V2.0.0 WOD</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">Owner</div>
+                            <div class="info-value owner-value">Gurkas</div>
+                        </div>
+
+                    </div>
+
+                    <div class="description-label">
+                        Description
+                    </div>
+
+                    <p class="description">
+                        The third Titan to appear in the story.
+                        Titan TV Man is the primary Titan of the TV Man
+                        faction, possessing immense power and a wide range
+                        of advanced abilities. His current state is marked
+                        by his infection and his status as WOD.
+                    </p>
+
+                </div>
+
+            </article>
+
         </section>
 
     </main>
 
+
+    <!-- FOOTER -->
 
     <footer>
 
