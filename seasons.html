@@ -116,12 +116,9 @@
 
         .hero-label {
             color: #73767c;
-
             font-size: 11px;
             letter-spacing: 3px;
-
             text-transform: uppercase;
-
             margin-bottom: 8px;
         }
 
@@ -134,11 +131,8 @@
                 sans-serif;
 
             font-size: clamp(18px, 3vw, 27px);
-
             font-weight: 900;
-
             letter-spacing: 2px;
-
             line-height: 1;
 
             color: #eeeeee;
@@ -150,19 +144,14 @@
 
         .hero h1 {
             font-size: clamp(36px, 7vw, 64px);
-
             font-weight: 500;
-
             letter-spacing: -2px;
-
             line-height: 1;
         }
 
         .hero p {
             margin-top: 13px;
-
             color: #777a80;
-
             font-size: 13px;
         }
 
@@ -174,7 +163,6 @@
         .search-box {
             display: flex;
             align-items: center;
-
             gap: 12px;
 
             height: 48px;
@@ -182,9 +170,7 @@
             padding: 0 17px;
 
             background: #17181b;
-
             border: 1px solid #292b2f;
-
             border-radius: 13px;
 
             margin-bottom: 10px;
@@ -196,7 +182,6 @@
 
         .search-box:focus-within {
             border-color: #484b50;
-
             background: #1a1b1e;
         }
 
@@ -214,7 +199,6 @@
             background: transparent;
 
             color: #eeeeee;
-
             font-size: 13px;
         }
 
@@ -229,9 +213,7 @@
 
         .toolbar {
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
             gap: 10px;
 
             margin-bottom: 22px;
@@ -247,7 +229,6 @@
             padding: 0 15px;
 
             border: 1px solid #292b2f;
-
             border-radius: 11px;
 
             background: #151619;
@@ -261,15 +242,12 @@
 
         .filter:hover {
             background: #1b1c1f;
-
             border-color: #3a3c40;
-
             color: #dddddd;
         }
 
         .filter strong {
             color: #dddddd;
-
             font-weight: 500;
         }
 
@@ -288,17 +266,13 @@
 
         .section-title {
             font-size: 13px;
-
             font-weight: 600;
-
             letter-spacing: 1px;
         }
 
         .section-count {
             color: #62656a;
-
             font-size: 10px;
-
             letter-spacing: 1px;
         }
 
@@ -310,7 +284,6 @@
         .seasons {
             display: flex;
             flex-direction: column;
-
             gap: 10px;
         }
 
@@ -325,16 +298,12 @@
             min-height: 132px;
 
             display: grid;
-
-            grid-template-columns:
-                76px 1fr auto;
-
+            grid-template-columns: 76px 1fr auto;
             align-items: center;
 
             overflow: hidden;
 
             border: 1px solid #292b2f;
-
             border-radius: 15px;
 
             background:
@@ -362,14 +331,19 @@
             content: "";
 
             position: absolute;
-
             inset: 0;
 
             background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(10,11,13,.98) 0%,
+                    rgba(10,11,13,.90) 28%,
+                    rgba(10,11,13,.68) 58%,
+                    rgba(10,11,13,.78) 100%
+                ),
                 var(--thumbnail);
 
             background-size: cover;
-
             background-position: center;
 
             opacity: .34;
@@ -387,25 +361,7 @@
 
         .season-card:hover::after {
             opacity: .44;
-
             transform: scale(1.045);
-        }
-
-
-        /* =========================
-           CARD OVERLAY
-           ========================= */
-
-        .season-card::after {
-            background-image:
-                linear-gradient(
-                    90deg,
-                    rgba(10,11,13,.98) 0%,
-                    rgba(10,11,13,.90) 28%,
-                    rgba(10,11,13,.68) 58%,
-                    rgba(10,11,13,.78) 100%
-                ),
-                var(--thumbnail);
         }
 
 
@@ -441,7 +397,6 @@
             bottom: -34px;
 
             font-size: 150px;
-
             font-weight: 700;
 
             color: rgba(255,255,255,.018);
@@ -466,7 +421,6 @@
             place-items: center;
 
             border: 1px solid #34363a;
-
             border-radius: 12px;
 
             background: rgba(17,18,20,.86);
@@ -474,11 +428,9 @@
             color: #8c8f94;
 
             font-size: 13px;
-
             letter-spacing: 1px;
 
             position: relative;
-
             z-index: 2;
         }
 
@@ -491,13 +443,11 @@
             padding: 22px 10px;
 
             position: relative;
-
             z-index: 2;
         }
 
         .season-name {
             font-size: clamp(19px, 3vw, 25px);
-
             font-weight: 500;
 
             letter-spacing: .5px;
@@ -511,7 +461,6 @@
             color: #b0b2b6;
 
             font-size: 11px;
-
             line-height: 1.5;
         }
 
@@ -541,7 +490,6 @@
             color: #888b91;
 
             font-size: 9px;
-
             letter-spacing: .5px;
         }
 
@@ -558,7 +506,6 @@
             text-align: right;
 
             position: relative;
-
             z-index: 2;
         }
 
@@ -566,7 +513,6 @@
             color: #696c71;
 
             font-size: 9px;
-
             letter-spacing: 2px;
 
             margin-bottom: 6px;
@@ -576,7 +522,6 @@
             color: #eeeeee;
 
             font-size: 15px;
-
             font-weight: 500;
 
             letter-spacing: 1px;
@@ -593,7 +538,6 @@
             padding: 20px;
 
             border: 1px solid #292b2f;
-
             border-radius: 15px;
 
             background:
@@ -615,9 +559,7 @@
 
         .ranking-title {
             font-size: 13px;
-
             font-weight: 600;
-
             letter-spacing: 1px;
         }
 
@@ -625,7 +567,6 @@
             color: #55585d;
 
             font-size: 9px;
-
             letter-spacing: 1.5px;
 
             text-transform: uppercase;
@@ -633,7 +574,6 @@
 
         .ranking-list {
             display: flex;
-
             flex-direction: column;
 
             gap: 7px;
@@ -652,7 +592,6 @@
             padding: 0 12px;
 
             border: 1px solid #24262a;
-
             border-radius: 9px;
 
             background: #111214;
@@ -664,7 +603,6 @@
 
         .ranking-item:hover {
             background: #17181b;
-
             border-color: #35373b;
         }
 
@@ -672,7 +610,6 @@
             color: #55585d;
 
             font-size: 10px;
-
             font-weight: 600;
 
             letter-spacing: 1px;
@@ -682,7 +619,6 @@
             color: #d8d9db;
 
             font-size: 12px;
-
             font-weight: 500;
         }
 
@@ -690,7 +626,6 @@
             color: #8b8e93;
 
             font-size: 11px;
-
             letter-spacing: 1px;
         }
 
@@ -698,7 +633,6 @@
             color: #55585d;
 
             font-size: 9px;
-
             letter-spacing: 1px;
         }
 
@@ -719,7 +653,6 @@
             padding: 10px 13px;
 
             border: 1px solid #292b2f;
-
             border-radius: 9px;
 
             background: #151619;
@@ -727,7 +660,6 @@
             color: #70737a;
 
             font-size: 9px;
-
             letter-spacing: 1.5px;
 
             text-transform: uppercase;
@@ -753,11 +685,9 @@
 
         .footer {
             display: flex;
-
             justify-content: space-between;
 
             margin-top: 28px;
-
             padding: 18px 4px;
 
             border-top: 1px solid #1d1f22;
@@ -765,7 +695,6 @@
             color: #484b50;
 
             font-size: 9px;
-
             letter-spacing: 2px;
 
             text-transform: uppercase;
@@ -779,9 +708,7 @@
         @media (max-width: 700px) {
 
             .page {
-                width:
-                    min(100% - 18px, 600px);
-
+                width: min(100% - 18px, 600px);
                 padding-top: 18px;
             }
 
@@ -795,7 +722,6 @@
 
             .void-core {
                 font-size: 20px;
-
                 letter-spacing: 1.5px;
             }
 
@@ -835,7 +761,6 @@
 
             .chapter-label {
                 display: inline;
-
                 margin-right: 7px;
             }
 
@@ -852,7 +777,6 @@
 
             .ranking {
                 padding: 15px;
-
                 margin-top: 30px;
             }
 
@@ -873,7 +797,6 @@
 
             .footer {
                 flex-direction: column;
-
                 gap: 8px;
             }
 
@@ -1025,9 +948,7 @@
     <section class="seasons" id="seasons">
 
 
-        <!-- =========================
-             01 — GENESIS
-             ========================= -->
+        <!-- 01 — GENESIS -->
 
         <article
             class="season-card"
@@ -1039,7 +960,6 @@
             <div class="season-number">
                 01
             </div>
-
 
             <div class="season-content">
 
@@ -1061,7 +981,6 @@
 
             </div>
 
-
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1078,9 +997,7 @@
 
 
 
-        <!-- =========================
-             02 — DARK DAYS
-             ========================= -->
+        <!-- 02 — DARK DAYS -->
 
         <article
             class="season-card"
@@ -1092,7 +1009,6 @@
             <div class="season-number">
                 02
             </div>
-
 
             <div class="season-content">
 
@@ -1114,7 +1030,6 @@
 
             </div>
 
-
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1131,9 +1046,7 @@
 
 
 
-        <!-- =========================
-             03 — TITANFALL
-             ========================= -->
+        <!-- 03 — TITANFALL -->
 
         <article
             class="season-card"
@@ -1145,7 +1058,6 @@
             <div class="season-number">
                 03
             </div>
-
 
             <div class="season-content">
 
@@ -1167,7 +1079,6 @@
 
             </div>
 
-
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1184,21 +1095,18 @@
 
 
 
-        <!-- =========================
-             04 — ALPHA HILLS
-             ========================= -->
+        <!-- 04 — ALPHA HILLS -->
 
         <article
             class="season-card"
             data-number="04"
             data-search="alpha hills season 4 erstwhile"
-            style="--thumbnail: none;"
+            style="--thumbnail: url('https://media.discordapp.net/attachments/1321552941009731727/1537601024800596019/a1f682b4f98e52f7b5279949ee2d7339.png?ex=6a7fa20b&is=6a7e508b&hm=17ce3186d4fed6348d71291e0770692a7a8bf41a4da37284c71eab65dcf71d2a&=&format=webp&quality=lossless&width=512&height=288');"
         >
 
             <div class="season-number">
                 04
             </div>
-
 
             <div class="season-content">
 
@@ -1220,7 +1128,6 @@
 
             </div>
 
-
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1237,21 +1144,18 @@
 
 
 
-        <!-- =========================
-             05 — ASTRAL DAWN
-             ========================= -->
+        <!-- 05 — ASTRAL DAWN -->
 
         <article
             class="season-card"
             data-number="05"
             data-search="astral dawn season 5 astro actual"
-            style="--thumbnail: none;"
+            style="--thumbnail: url('https://media.discordapp.net/attachments/1321552941009731727/1537668780975456266/6d1aa44d816cc9039b53041ec913587b.png?ex=6a7fe125&is=6a7e8fa5&hm=e359a65867cfd9667969629cfc504a24ae8842167fa1ee9f0142def7a6fadbbb&=&format=webp&quality=lossless&width=512&height=288');"
         >
 
             <div class="season-number">
                 05
             </div>
-
 
             <div class="season-content">
 
@@ -1273,7 +1177,6 @@
 
             </div>
 
-
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1290,21 +1193,18 @@
 
 
 
-        <!-- =========================
-             06
-             ========================= -->
+        <!-- 06 — CLASSIFIED -->
 
         <article
             class="season-card"
             data-number="06"
             data-search="you can't see this season 6 unknown"
-            style="--thumbnail: none;"
+            style="--thumbnail: url('https://media.discordapp.net/attachments/1321552941009731727/1537668558245466122/5bc2eb6bccc1bf07c773f85b2a347c23.png?ex=6a7fe0f0&is=6a7e8f70&hm=9259523867e861c562f1bfc37b3cc462fab9a699502504ac10fb77b48d79a03a&=&format=webp&quality=lossless&width=512&height=288');"
         >
 
             <div class="season-number">
                 06
             </div>
-
 
             <div class="season-content">
 
@@ -1326,7 +1226,6 @@
 
             </div>
 
-
             <div class="chapters">
 
                 <div class="chapter-label">
@@ -1343,9 +1242,7 @@
 
 
 
-        <!-- =========================
-             07
-             ========================= -->
+        <!-- 07 — CLASSIFIED -->
 
         <article
             class="season-card"
@@ -1357,7 +1254,6 @@
             <div class="season-number">
                 07
             </div>
-
 
             <div class="season-content">
 
@@ -1378,7 +1274,6 @@
                 </div>
 
             </div>
-
 
             <div class="chapters">
 
