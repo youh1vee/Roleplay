@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Void Core — Season 07</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0b0d0f;
+            color: #d9dde1;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            padding: 22px;
+        }
+
+        .archive-container {
+            width: 100%;
+            max-width: 866px;
+            margin: 0 auto;
+        }
+
+        .archive-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #d9dde1;
+            margin-bottom: 10px;
+        }
+
+        .episode-card {
+            width: 100%;
+            border: 1px solid #363b40;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #101315;
+        }
+
+        /* =========================
+           IMAGE SLIDESHOW
+        ========================= */
+
+        .image-area {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            background: #080a0c;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            opacity: 0;
+
+            transition:
+                opacity 1.5s ease-in-out,
+                transform 6s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        /* Dark cinematic overlay */
+
+        .image-area::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(5, 7, 9, 0.10),
+                    rgba(5, 7, 9, 0.20) 45%,
+                    rgba(5, 7, 9, 0.75)
+                );
+
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            position: absolute;
+            z-index: 5;
+
+            top: 16px;
+            right: 16px;
+
+            padding: 7px 11px;
+
+            border: 1px solid rgba(120, 128, 136, 0.35);
+            border-radius: 6px;
+
+            background: rgba(10, 12, 14, 0.65);
+
+            color: #8c949b;
+
+            font-size: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            backdrop-filter: blur(5px);
+        }
+
+        /* =========================
+           SEASON NUMBER
+        ========================= */
+
+        .season-number {
+            position: absolute;
+            z-index: 5;
+
+            left: 24px;
+            bottom: 18px;
+
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .season-number small {
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: #7c858d;
+        }
+
+        .season-number strong {
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -2px;
+            color: #e3e6e9;
+        }
+
+        /* =========================
+           INFORMATION
+        ========================= */
+
+        .information {
+            padding: 25px;
+            border-top: 1px solid #30353a;
+        }
+
+        .season-label {
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: #56616b;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 400;
+            color: #e0e3e6;
+            margin-bottom: 18px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #2d3237;
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           DETAILS
+        ========================= */
+
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            border-bottom: 1px solid #2d3237;
+
+            margin-bottom: 20px;
+        }
+
+        .detail {
+            padding: 0 18px 15px 0;
+        }
+
+        .detail + .detail {
+            border-left: 1px solid #2d3237;
+            padding-left: 18px;
+        }
+
+        .detail-label {
+            font-size: 8px;
+            letter-spacing: 3px;
+            color: #4f5a64;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .detail-value {
+            font-size: 11px;
+            color: #aab1b7;
+        }
+
+        /* =========================
+           DESCRIPTION
+        ========================= */
+
+        .description-label {
+            font-size: 8px;
+            letter-spacing: 3px;
+            color: #4f5a64;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 12px;
+            line-height: 1.7;
+            color: #89929a;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 14px;
+            }
+
+            .image-area {
+                height: 300px;
+            }
+
+            .season-number {
+                left: 18px;
+                bottom: 15px;
+            }
+
+            .season-number strong {
+                font-size: 40px;
+            }
+
+            .information {
+                padding: 20px;
+            }
+
+            .title {
+                font-size: 19px;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .detail + .detail {
+                border-left: none;
+                border-top: 1px solid #2d3237;
+
+                padding-left: 0;
+                padding-top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="archive-container">
+
+        <div class="archive-title">
+            Season Archive
+        </div>
+
+        <article class="episode-card">
+
+            <!-- =========================
+                 IMAGE SLIDESHOW
+            ========================== -->
+
+            <div class="image-area">
+
+                <img
+                    class="slide active"
+                    src="https://media.discordapp.net/attachments/1321552941009731727/1537953286911557732/82a943d22a2cfcc7652383b2607439e3.png?ex=6a80ea1d&is=6a7f989d&hm=b56cd6d238196fb2d577285a9008d6afd9f9f0ac09a8dc8a76aefd05ad8c2a5e&=&format=webp&quality=lossless&width=768&height=1024"
+                    alt="Season 07 image 1"
+                >
+
+                <img
+                    class="slide"
+                    src="https://media.discordapp.net/attachments/1321552941009731727/1537953319832784916/HPJ1cLwbUAA1X1s.png?ex=6a80ea25&is=6a7f98a5&hm=0832563943a9e80bd56124ca383b93e03ec788328cf7124b2667419a2fd3872d&=&format=webp&quality=lossless&width=712&height=1024"
+                    alt="Season 07 image 2"
+                >
+
+                <img
+                    class="slide"
+                    src="https://media.discordapp.net/attachments/1321552941009731727/1537953799862362192/HPZK3cyasAA3W6x.png?ex=6a80ea97&is=6a7f9917&hm=1c8f698c419c64550881433a0e069da8d0e9afbe143127b478cb1300c6a037f5&=&format=webp&quality=lossless&width=1024&height=576"
+                    alt="Season 07 image 3"
+                >
+
+                <img
+                    class="slide"
+                    src="https://media.discordapp.net/attachments/1321552941009731727/1537953913016422410/HPZMCPNW8AA0hXd.png?ex=6a80eab2&is=6a7f9932&hm=802935a68c27770ef62053bd9e3e0bdb3b2d98e10f20bf09df3ae9e8f87c722a&=&format=webp&quality=lossless&width=1536&height=864"
+                    alt="Season 07 image 4"
+                >
+
+                <div class="status">
+                    Classified
+                </div>
+
+                <div class="season-number">
+                    <small>SEASON</small>
+                    <strong>07</strong>
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 INFORMATION
+            ========================== -->
+
+            <div class="information">
+
+                <div class="season-label">
+                    Season 07 — Classified
+                </div>
+
+                <div class="title">
+                    [REDACTED]
+                </div>
+
+                <div class="divider"></div>
+
+
+                <div class="details">
+
+                    <div class="detail">
+
+                        <div class="detail-label">
+                            Season
+                        </div>
+
+                        <div class="detail-value">
+                            Season 07
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <div class="detail-label">
+                            Status
+                        </div>
+
+                        <div class="detail-value">
+                            Restricted
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="description-label">
+                    Description
+                </div>
+
+                <div class="description">
+                    A Copy… or Beyond Sound?
+                </div>
+
+            </div>
+
+        </article>
+
+    </main>
+
+
+    <!-- =========================
+         SLIDESHOW SCRIPT
+    ========================== -->
+
+    <script>
+
+        const slides = document.querySelectorAll(".slide");
+
+        let currentSlide = 0;
+
+        setInterval(() => {
+
+            slides[currentSlide].classList.remove("active");
+
+            currentSlide++;
+
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            }
+
+            slides[currentSlide].classList.add("active");
+
+        }, 5000);
+
+    </script>
+
+</body>
+</html>
