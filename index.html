@@ -79,6 +79,14 @@
             gap: 12px;
         }
 
+        /*
+           ALL'UI EASTER EGG
+
+           The RP icon looks completely normal.
+           Click it 7 times quickly to access the
+           hidden communication tablet.
+        */
+
         .brand-icon {
             width: 34px;
             height: 34px;
@@ -93,6 +101,12 @@
 
             font-size: 14px;
             color: #bdbfc3;
+
+            cursor: default;
+
+            user-select: none;
+
+            -webkit-tap-highlight-color: transparent;
         }
 
         .brand-name {
@@ -501,7 +515,17 @@
 
         <div class="brand">
 
-            <div class="brand-icon">
+            <!--
+                HIDDEN ALL'UI EASTER EGG
+
+                Click "RP" 7 times quickly.
+            -->
+
+            <div
+                class="brand-icon"
+                id="secretTablet"
+                aria-hidden="true"
+            >
                 RP
             </div>
 
@@ -819,6 +843,51 @@
 
 
 </div>
+
+
+<!-- =========================
+     ALL'UI EASTER EGG SYSTEM
+     ========================= -->
+
+<script>
+
+    const secretTablet =
+        document.getElementById("secretTablet");
+
+    let clickCount = 0;
+    let clickTimer = null;
+
+    secretTablet.addEventListener("click", () => {
+
+        clickCount++;
+
+        /*
+            The player has 2 seconds to
+            complete the sequence.
+        */
+
+        clearTimeout(clickTimer);
+
+        clickTimer = setTimeout(() => {
+
+            clickCount = 0;
+
+        }, 2000);
+
+
+        /*
+            7 clicks = ALL'UI TABLET
+        */
+
+        if (clickCount === 7) {
+
+            window.location.href = "tablet.html";
+
+        }
+
+    });
+
+</script>
 
 </body>
 </html>
