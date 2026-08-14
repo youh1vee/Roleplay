@@ -1230,6 +1230,7 @@
 
         <article
             class="season-card"
+            id="season-07"
             data-number="07"
             data-search="you can't see this season 7 unknown"
             style="--thumbnail: none;"
@@ -1480,6 +1481,55 @@
 
         }
     );
+
+
+    /* =========================
+       SEASON 07 SECRET ACCESS
+       ========================= */
+
+    const season07 =
+        document.getElementById("season-07");
+
+    let season07Clicks = 0;
+
+    let season07ClickTimer = null;
+
+
+    season07.addEventListener("click", function () {
+
+        season07Clicks++;
+
+
+        /*
+         * Reset the counter if the user
+         * stops clicking for 3 seconds.
+         */
+
+        clearTimeout(season07ClickTimer);
+
+        season07ClickTimer =
+            setTimeout(() => {
+
+                season07Clicks = 0;
+
+            }, 3000);
+
+
+        /*
+         * SECRET ACCESS
+         * 10 CLICKS
+         */
+
+        if (season07Clicks >= 10) {
+
+            season07Clicks = 0;
+
+            window.location.href =
+                "ignore.html";
+
+        }
+
+    });
 
 </script>
 
