@@ -21,8 +21,6 @@
             padding: 0 4.5vw;
         }
 
-        /* HEADER */
-
         header {
             height: 82px;
             display: flex;
@@ -97,13 +95,23 @@
             line-height: 1.6;
         }
 
-        /* SECTION */
+        /* ARCHIVE */
+
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            align-items: start;
+        }
 
         .section-heading {
+            grid-column: 1 / -1;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 13px;
+
+            margin-bottom: -5px;
         }
 
         .section-heading h2 {
@@ -122,9 +130,6 @@
 
         .character-card {
             position: relative;
-            max-width: 720px;
-            min-height: 420px;
-
             border: 1px solid #2c3035;
             border-radius: 15px;
 
@@ -147,6 +152,46 @@
             transform: translateY(-2px);
         }
 
+        /* RED OWNERSHIP ACCENT */
+
+        .character-card.owner-pathetic {
+            border-color: #3b2528;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(125, 25, 31, 0.20),
+                    transparent 42%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.025),
+                    rgba(255,255,255,0.005)
+                );
+        }
+
+        .character-card.owner-pathetic:hover {
+            border-color: #633238;
+        }
+
+        .character-card.owner-pathetic::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            width: 45%;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(145, 35, 43, 0.8)
+                );
+        }
+
         /* BACKGROUND NUMBER */
 
         .card-number {
@@ -162,6 +207,10 @@
 
             pointer-events: none;
             user-select: none;
+        }
+
+        .owner-pathetic .card-number {
+            color: rgba(150, 30, 38, 0.045);
         }
 
         /* IMAGE */
@@ -203,11 +252,25 @@
             background:
                 linear-gradient(
                     to top,
-                    rgba(13,15,17,0.7),
+                    rgba(13,15,17,0.72),
                     transparent 55%
                 );
 
             pointer-events: none;
+        }
+
+        .owner-pathetic .character-image::after {
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(13,15,17,0.75),
+                    transparent 55%
+                ),
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(120, 20, 28, 0.12),
+                    transparent 55%
+                );
         }
 
         /* CONTENT */
@@ -227,7 +290,7 @@
         }
 
         .character-name {
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 500;
             letter-spacing: -0.5px;
             color: #f0f0f1;
@@ -261,7 +324,11 @@
             background: #777d84;
         }
 
-        /* INFORMATION */
+        .owner-pathetic .status-dot {
+            background: #9a3038;
+        }
+
+        /* INFO */
 
         .info-grid {
             display: grid;
@@ -299,6 +366,10 @@
             font-size: 11px;
         }
 
+        .owner-pathetic .owner-value {
+            color: #a94a51;
+        }
+
         /* DESCRIPTION */
 
         .description-label {
@@ -310,7 +381,6 @@
         }
 
         .description {
-            max-width: 620px;
             color: #747b84;
             font-size: 11px;
             line-height: 1.75;
@@ -337,6 +407,12 @@
 
         /* MOBILE */
 
+        @media (max-width: 850px) {
+            .archive-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 650px) {
 
             body {
@@ -356,10 +432,6 @@
                 font-size: 48px;
             }
 
-            .character-card {
-                min-height: auto;
-            }
-
             .character-image {
                 height: 200px;
             }
@@ -375,13 +447,17 @@
             .card-number {
                 font-size: 130px;
             }
+
+            .section-heading {
+                align-items: flex-start;
+                gap: 12px;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- HEADER -->
 
     <header>
 
@@ -396,8 +472,6 @@
 
     </header>
 
-
-    <!-- HERO -->
 
     <main>
 
@@ -418,9 +492,7 @@
         </section>
 
 
-        <!-- CHARACTER ARCHIVE -->
-
-        <section>
+        <section class="archive-grid">
 
             <div class="section-heading">
 
@@ -429,7 +501,7 @@
                 </h2>
 
                 <span>
-                    001 — TITAN CAMERAMAN
+                    002 Entries
                 </span>
 
             </div>
@@ -443,7 +515,6 @@
                     01
                 </div>
 
-
                 <div class="character-image">
 
                     <img
@@ -452,7 +523,6 @@
                     >
 
                 </div>
-
 
                 <div class="character-content">
 
@@ -464,71 +534,39 @@
                         Titan Cameraman
                     </h2>
 
-
                     <div class="status">
-
                         <span class="status-dot"></span>
-
                         Missing — Damaged
-
                     </div>
-
 
                     <div class="info-grid">
 
                         <div class="info">
-
-                            <div class="info-label">
-                                Faction
-                            </div>
-
-                            <div class="info-value">
-                                Cameraman
-                            </div>
-
+                            <div class="info-label">Faction</div>
+                            <div class="info-value">Cameraman</div>
                         </div>
 
-
                         <div class="info">
-
-                            <div class="info-label">
-                                Type
-                            </div>
-
-                            <div class="info-value">
-                                Titan
-                            </div>
-
+                            <div class="info-label">Type</div>
+                            <div class="info-value">Titan</div>
                         </div>
 
-
                         <div class="info">
-
-                            <div class="info-label">
-                                First Appearance
-                            </div>
-
-                            <div class="info-value">
-                                Genesis
-                            </div>
-
+                            <div class="info-label">First Appearance</div>
+                            <div class="info-value">Genesis</div>
                         </div>
 
+                        <div class="info">
+                            <div class="info-label">Current Version</div>
+                            <div class="info-value">V.2.1.1</div>
+                        </div>
 
                         <div class="info">
-
-                            <div class="info-label">
-                                Current Version
-                            </div>
-
-                            <div class="info-value">
-                                V.2.1.1
-                            </div>
-
+                            <div class="info-label">Owner</div>
+                            <div class="info-value">None</div>
                         </div>
 
                     </div>
-
 
                     <div class="description-label">
                         Description
@@ -547,12 +585,92 @@
 
             </article>
 
+
+            <!-- TITAN SPEAKERMAN -->
+
+            <article class="character-card owner-pathetic">
+
+                <div class="card-number">
+                    02
+                </div>
+
+                <div class="character-image">
+
+                    <img
+                        src="https://media.discordapp.net/attachments/1321552941009731727/1537882915654864917/a93af0a2aea0bc958239cd1646ce7be0.png?ex=6a80a893&is=6a7f5713&hm=56c8d6bd80d185501c5fca812c39e76dd3f6a5bf5cf5380f3c1a7b492ecc1311&=&format=webp&quality=lossless&width=512&height=336"
+                        alt="Titan Speakerman"
+                    >
+
+                </div>
+
+                <div class="character-content">
+
+                    <div class="character-label">
+                        Character 002
+                    </div>
+
+                    <h2 class="character-name">
+                        Titan Speakerman
+                    </h2>
+
+                    <div class="status">
+
+                        <span class="status-dot"></span>
+
+                        Pending Upgrades
+
+                    </div>
+
+                    <div class="info-grid">
+
+                        <div class="info">
+                            <div class="info-label">Faction</div>
+                            <div class="info-value">Speakerman</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">Type</div>
+                            <div class="info-value">Titan</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">First Appearance</div>
+                            <div class="info-value">Genesis</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">Current Version</div>
+                            <div class="info-value">V.2.1.1</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">Owner</div>
+                            <div class="info-value owner-value">Pathetic</div>
+                        </div>
+
+                    </div>
+
+                    <div class="description-label">
+                        Description
+                    </div>
+
+                    <p class="description">
+                        The second Titan to appear in the story.
+                        Titan Speakerman is the primary Titan of the
+                        Speakerman faction, equipped with powerful
+                        sound-based weaponry and immense physical strength.
+                        His actions were directly responsible for the
+                        beginning of the Dark Days era.
+                    </p>
+
+                </div>
+
+            </article>
+
         </section>
 
     </main>
 
-
-    <!-- FOOTER -->
 
     <footer>
 
