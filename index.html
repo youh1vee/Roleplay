@@ -498,11 +498,114 @@
 
         }
 
+
+        /* =========================
+           VOID CORE — ENTRY ANIMATION
+           ========================= */
+
+        body {
+            opacity: 0;
+            animation: voidPageIn .9s cubic-bezier(.22, .61, .36, 1) forwards;
+        }
+
+        .page {
+            animation: voidContentIn 1s cubic-bezier(.22, .61, .36, 1) .08s both;
+        }
+
+        @keyframes voidPageIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes voidContentIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+                filter: blur(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        /* =========================
+           VOID CORE — AFK SPARKS
+           ========================= */
+
+        #afkParticles {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 1.8s ease;
+        }
+
+        #afkParticles.active {
+            opacity: 1;
+        }
+
+        .afk-spark {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow:
+                0 0 4px #ffffff,
+                0 0 9px rgba(255,255,255,.9),
+                0 0 16px rgba(255,255,255,.45);
+            animation: afkSparkFloat var(--duration) ease-out forwards;
+            will-change: transform, opacity;
+        }
+
+        @keyframes afkSparkFloat {
+            0% {
+                opacity: 0;
+                transform:
+                    translate3d(0, 8px, 0)
+                    scale(.35)
+                    rotate(0deg);
+            }
+            15% {
+                opacity: .9;
+            }
+            65% {
+                opacity: .65;
+            }
+            100% {
+                opacity: 0;
+                transform:
+                    translate3d(var(--drift-x), -65px, 0)
+                    scale(.05)
+                    rotate(90deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body,
+            .page {
+                animation: none;
+                opacity: 1;
+                filter: none;
+                transform: none;
+            }
+
+            #afkParticles {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 
 
 <body>
+
+<div id="afkParticles" aria-hidden="true"></div>
 
 <div class="page">
 
@@ -886,6 +989,95 @@
         }
 
     });
+
+
+    /* =========================
+       VOID CORE — AFK PARTICLES
+       ========================= */
+
+    const afkParticles = document.getElementById("afkParticles");
+
+    let afkTimer = null;
+    let afkActive = false;
+
+    // Time without interaction before the sparks appear.
+    const AFK_DELAY = 12000;
+
+    function resetAFK() {
+        clearTimeout(afkTimer);
+
+        if (afkActive) {
+            afkActive = false;
+            afkParticles.classList.remove("active");
+
+            setTimeout(() => {
+                if (!afkActive) {
+                    afkParticles.innerHTML = "";
+                }
+            }, 1900);
+        }
+
+        afkTimer = setTimeout(startAFK, AFK_DELAY);
+    }
+
+    function createSpark() {
+        if (!afkActive) return;
+
+        const spark = document.createElement("span");
+        spark.className = "afk-spark";
+
+        spark.style.left = `${Math.random() * 100}vw`;
+        spark.style.top = `${35 + Math.random() * 60}vh`;
+        spark.style.setProperty(
+            "--drift-x",
+            `${(Math.random() - 0.5) * 45}px`
+        );
+        spark.style.setProperty(
+            "--duration",
+            `${1.8 + Math.random() * 2.2}s`
+        );
+
+        // Slightly vary the size while keeping the neon-white look.
+        const size = 1 + Math.random() * 2.2;
+        spark.style.width = `${size}px`;
+        spark.style.height = `${size}px`;
+
+        afkParticles.appendChild(spark);
+
+        setTimeout(() => spark.remove(), 4500);
+    }
+
+    function startAFK() {
+        afkActive = true;
+        afkParticles.classList.add("active");
+
+        // Gentle bursts instead of a constant particle storm.
+        const burst = () => {
+            if (!afkActive) return;
+
+            const amount = 2 + Math.floor(Math.random() * 3);
+
+            for (let i = 0; i < amount; i++) {
+                setTimeout(createSpark, i * 120);
+            }
+
+            setTimeout(burst, 450 + Math.random() * 700);
+        };
+
+        burst();
+    }
+
+    [
+        "mousemove",
+        "mousedown",
+        "keydown",
+        "touchstart",
+        "wheel"
+    ].forEach(event => {
+        window.addEventListener(event, resetAFK, { passive: true });
+    });
+
+    resetAFK();
 
 </script>
 
