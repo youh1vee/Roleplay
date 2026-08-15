@@ -21,6 +21,10 @@
             padding: 0 4.5vw;
         }
 
+        body.modal-open {
+            overflow: hidden;
+        }
+
         /* HEADER */
 
         header {
@@ -147,14 +151,22 @@
 
             overflow: hidden;
 
+            cursor: pointer;
+
             transition:
                 border-color 0.25s ease,
-                transform 0.25s ease;
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
         }
 
         .character-card:hover {
             border-color: #444a52;
             transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.22);
+        }
+
+        .character-card:active {
+            transform: translateY(0);
         }
 
         /* RED ACCENT — PATHETIC */
@@ -457,6 +469,309 @@
             line-height: 1.75;
         }
 
+        /* CHARACTER MODAL */
+
+        .character-modal {
+            position: fixed;
+            inset: 0;
+
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            background: rgba(4, 5, 6, 0.78);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.35s ease,
+                visibility 0.35s ease;
+        }
+
+        .character-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .character-modal-box {
+            position: relative;
+
+            width: min(900px, 100%);
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border: 1px solid #34383d;
+            border-radius: 18px;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(255,255,255,0.045),
+                    transparent 35%
+                ),
+                #101215;
+
+            box-shadow:
+                0 30px 90px rgba(0,0,0,0.65);
+
+            transform: translateY(22px) scale(0.97);
+            opacity: 0;
+
+            transition:
+                transform 0.4s cubic-bezier(.2,.8,.2,1),
+                opacity 0.3s ease;
+        }
+
+        .character-modal.active .character-modal-box {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+
+            top: 17px;
+            right: 17px;
+
+            z-index: 10;
+
+            width: 34px;
+            height: 34px;
+
+            border: 1px solid #3a3f45;
+            border-radius: 50%;
+
+            background: rgba(10,11,13,0.75);
+
+            color: #aeb3b9;
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: #1c2024;
+            color: #fff;
+            border-color: #565d65;
+        }
+
+        .modal-top {
+            display: grid;
+            grid-template-columns: 42% 58%;
+
+            border-bottom: 1px solid #292d32;
+        }
+
+        .modal-main-image {
+            height: 330px;
+            background: #0d0f11;
+            overflow: hidden;
+        }
+
+        .modal-main-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            display: block;
+
+            filter: brightness(0.9);
+
+            transition: opacity 0.35s ease;
+        }
+
+        .modal-main-image img.fade {
+            opacity: 0;
+        }
+
+        .modal-header-info {
+            padding: 38px 40px;
+        }
+
+        .modal-id {
+            color: #555d66;
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+
+        .modal-title {
+            color: #f0f0f1;
+            font-size: clamp(30px, 5vw, 48px);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 18px;
+        }
+
+        .modal-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 10px;
+
+            border: 1px solid #3b4148;
+            border-radius: 6px;
+
+            color: #b8bdc3;
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .modal-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #a4aab1;
+        }
+
+        .modal-body {
+            padding: 30px 40px 38px;
+        }
+
+        .modal-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            border-top: 1px solid #292d32;
+            border-bottom: 1px solid #292d32;
+
+            margin-bottom: 28px;
+        }
+
+        .modal-info {
+            padding: 16px 0;
+        }
+
+        .modal-info + .modal-info {
+            border-left: 1px solid #292d32;
+            padding-left: 18px;
+        }
+
+        .modal-info-label {
+            color: #535b65;
+            font-size: 8px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .modal-info-value {
+            color: #d0d3d7;
+            font-size: 11px;
+        }
+
+        .modal-section {
+            margin-bottom: 26px;
+        }
+
+        .modal-section-title {
+            color: #5e6670;
+            font-size: 8px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+
+        .modal-text {
+            color: #858c95;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* ABILITIES */
+
+        .abilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .ability {
+            padding: 8px 10px;
+
+            border: 1px solid #30353b;
+            border-radius: 6px;
+
+            color: #b9bec4;
+            background: rgba(255,255,255,0.018);
+
+            font-size: 9px;
+            letter-spacing: 0.8px;
+        }
+
+        /* GALLERY */
+
+        .gallery {
+            margin-top: 30px;
+        }
+
+        .gallery-frame {
+            position: relative;
+
+            height: 320px;
+
+            overflow: hidden;
+
+            border: 1px solid #292e34;
+            border-radius: 12px;
+
+            background: #0b0d0f;
+        }
+
+        .gallery-frame img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            display: block;
+
+            opacity: 1;
+
+            transition:
+                opacity 0.7s ease,
+                transform 0.7s ease;
+        }
+
+        .gallery-frame img.gallery-fade {
+            opacity: 0;
+            transform: scale(1.015);
+        }
+
+        .gallery-counter {
+            position: absolute;
+
+            right: 13px;
+            bottom: 12px;
+
+            padding: 6px 9px;
+
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 5px;
+
+            background: rgba(5,6,7,0.68);
+
+            color: #9ca2a9;
+            font-size: 8px;
+            letter-spacing: 1.5px;
+        }
+
         /* FOOTER */
 
         footer {
@@ -482,6 +797,18 @@
 
             .archive-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .modal-top {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-main-image {
+                height: 260px;
+            }
+
+            .modal-info-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -524,6 +851,39 @@
                 align-items: flex-start;
                 gap: 12px;
                 flex-direction: column;
+            }
+
+            .character-modal {
+                padding: 12px;
+            }
+
+            .character-modal-box {
+                max-height: 94vh;
+                border-radius: 14px;
+            }
+
+            .modal-header-info {
+                padding: 27px 22px 30px;
+            }
+
+            .modal-body {
+                padding: 24px 22px 28px;
+            }
+
+            .modal-main-image {
+                height: 220px;
+            }
+
+            .modal-info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .modal-info {
+                padding: 13px 0;
+            }
+
+            .gallery-frame {
+                height: 210px;
             }
         }
     </style>
@@ -587,7 +947,7 @@
 
             <!-- CHARACTER 001 — TITAN CAMERAMAN -->
 
-            <article class="character-card">
+            <article class="character-card" onclick="openCharacterModal()">
 
                 <div class="card-number">
                     01
@@ -834,6 +1194,163 @@
     </main>
 
 
+    <!-- CHARACTER MODAL -->
+
+    <div class="character-modal" id="characterModal">
+
+        <div class="character-modal-box" onclick="event.stopPropagation()">
+
+            <button class="modal-close" onclick="closeCharacterModal()" aria-label="Close">
+                ×
+            </button>
+
+
+            <div class="modal-top">
+
+                <div class="modal-main-image">
+
+                    <img
+                        id="modalMainImage"
+                        src="https://media.discordapp.net/attachments/1321552941009731727/1538211209655099462/d527d96232b5472c4ebbd2a7ed221049.png?ex=6a81da52&is=6a8088d2&hm=93d8960bf4980446c882413ef347544db73860c4997146cfc8a9711087bbabcd&=&format=webp&quality=lossless&width=512&height=512"
+                        alt="Titan Cameraman"
+                    >
+
+                </div>
+
+
+                <div class="modal-header-info">
+
+                    <div class="modal-id">
+                        ID 131185 · CHARACTER 001
+                    </div>
+
+                    <h2 class="modal-title">
+                        Titan Cameraman
+                    </h2>
+
+                    <div class="modal-status">
+
+                        <span class="modal-status-dot"></span>
+
+                        Missing
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="modal-info-grid">
+
+                    <div class="modal-info">
+                        <div class="modal-info-label">Owner</div>
+                        <div class="modal-info-value">None</div>
+                    </div>
+
+                    <div class="modal-info">
+                        <div class="modal-info-label">Version</div>
+                        <div class="modal-info-value">2.1.1</div>
+                    </div>
+
+                    <div class="modal-info">
+                        <div class="modal-info-label">First Appearance</div>
+                        <div class="modal-info-value">Genesis</div>
+                    </div>
+
+                    <div class="modal-info">
+                        <div class="modal-info-label">Faction</div>
+                        <div class="modal-info-value">Camera</div>
+                    </div>
+
+                    <div class="modal-info">
+                        <div class="modal-info-label">Type</div>
+                        <div class="modal-info-value">Titan</div>
+                    </div>
+
+                    <div class="modal-info">
+                        <div class="modal-info-label">Status</div>
+                        <div class="modal-info-value">Missing</div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-section">
+
+                    <div class="modal-section-title">
+                        Lore
+                    </div>
+
+                    <p class="modal-text">
+                        A Cameraman.
+                    </p>
+
+                </div>
+
+
+                <div class="modal-section">
+
+                    <div class="modal-section-title">
+                        Abilities
+                    </div>
+
+                    <div class="abilities">
+
+                        <span class="ability">Core Flame</span>
+                        <span class="ability">Blaster</span>
+                        <span class="ability">Titan Strength</span>
+                        <span class="ability">Heavy Armor</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-section">
+
+                    <div class="modal-section-title">
+                        History
+                    </div>
+
+                    <p class="modal-text">
+                        It has just disappeared.
+                    </p>
+
+                </div>
+
+
+                <div class="modal-section gallery">
+
+                    <div class="modal-section-title">
+                        Gallery
+                    </div>
+
+                    <div class="gallery-frame">
+
+                        <img
+                            id="galleryImage"
+                            src="https://media.discordapp.net/attachments/1321552941009731727/1538213768373346355/718ea958ca83b441339a41b48833f00c.png?ex=6a81dcb5&is=6a808b35&hm=72b6033e7e08b757dd1fd6e0b1fee718d2011072209359c6e83809c5ef13d7a8&=&format=webp&quality=lossless&width=512&height=512"
+                            alt="Titan Cameraman Gallery"
+                        >
+
+                        <div class="gallery-counter" id="galleryCounter">
+                            01 / 04
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
     <!-- FOOTER -->
 
     <footer>
@@ -847,6 +1364,140 @@
         </span>
 
     </footer>
+
+
+    <script>
+
+        /* CHARACTER MODAL */
+
+        const characterModal = document.getElementById("characterModal");
+
+        function openCharacterModal() {
+
+            characterModal.classList.add("active");
+
+            document.body.classList.add("modal-open");
+
+            startGallery();
+        }
+
+
+        function closeCharacterModal() {
+
+            characterModal.classList.remove("active");
+
+            document.body.classList.remove("modal-open");
+
+            stopGallery();
+        }
+
+
+        characterModal.addEventListener("click", function () {
+
+            closeCharacterModal();
+
+        });
+
+
+        document.addEventListener("keydown", function (event) {
+
+            if (event.key === "Escape") {
+
+                closeCharacterModal();
+
+            }
+
+        });
+
+
+        /* GALLERY */
+
+        const galleryImages = [
+
+            "https://media.discordapp.net/attachments/1321552941009731727/1538213768373346355/718ea958ca83b441339a41b48833f00c.png?ex=6a81dcb5&is=6a808b35&hm=72b6033e7e08b757dd1fd6e0b1fee718d2011072209359c6e83809c5ef13d7a8&=&format=webp&quality=lossless&width=512&height=512",
+
+            "https://media.discordapp.net/attachments/1321552941009731727/1538214050528231444/e90ea0443ac6766469fe8a9f8272f7fe.png?ex=6a81dcf8&is=6a808b78&hm=9c3132d3bfd13c02542a8803a449c999da2d7a04e85d6b4d7b982fee268ae116&=&format=webp&quality=lossless&width=512&height=286",
+
+            "https://media.discordapp.net/attachments/1321552941009731727/1538214397913210950/98d22d5742a4b7f7aae2a3e79737f733.png?ex=6a81dd4b&is=6a808bcb&hm=3b7b49e97b65f7930b38b22128824f4f18727092f8199860983225d361e4c362&=&format=webp&quality=lossless&width=1024&height=576",
+
+            "https://media.discordapp.net/attachments/1321552941009731727/1538214473125601352/d96caf34ce9ab654a5ad5b204b171c53.png?ex=6a81dd5d&is=6a808bdd&hm=efb62989c9356bfa320eeda30f649df5224e1cbd2652efd703bb0e8b5b57f82c&=&format=webp&quality=lossless&width=512&height=292"
+
+        ];
+
+
+        let galleryIndex = 0;
+
+        let galleryInterval = null;
+
+
+        const galleryImage = document.getElementById("galleryImage");
+
+        const galleryCounter = document.getElementById("galleryCounter");
+
+
+        function showGalleryImage(index) {
+
+            galleryImage.classList.add("gallery-fade");
+
+
+            setTimeout(function () {
+
+                galleryImage.src = galleryImages[index];
+
+                galleryCounter.textContent =
+                    String(index + 1).padStart(2, "0") + " / 04";
+
+                galleryImage.onload = function () {
+
+                    galleryImage.classList.remove("gallery-fade");
+
+                };
+
+            }, 350);
+
+        }
+
+
+        function startGallery() {
+
+            stopGallery();
+
+            galleryIndex = 0;
+
+            galleryImage.src = galleryImages[0];
+
+            galleryCounter.textContent = "01 / 04";
+
+            galleryInterval = setInterval(function () {
+
+                galleryIndex++;
+
+                if (galleryIndex >= galleryImages.length) {
+
+                    galleryIndex = 0;
+
+                }
+
+                showGalleryImage(galleryIndex);
+
+            }, 5000);
+
+        }
+
+
+        function stopGallery() {
+
+            if (galleryInterval) {
+
+                clearInterval(galleryInterval);
+
+                galleryInterval = null;
+
+            }
+
+        }
+
+    </script>
 
 </body>
 </html>
