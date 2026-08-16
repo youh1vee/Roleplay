@@ -7,6 +7,7 @@
     <title>Episodes — VOID CORE</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -21,10 +22,14 @@
             padding: 0 4.5vw;
         }
 
-        /* HEADER */
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
 
         header {
             height: 82px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -65,14 +70,17 @@
             letter-spacing: 2px;
             text-transform: uppercase;
 
-            transition: color 0.2s ease;
+            transition: color .2s ease;
         }
 
         .archive-link:hover {
             color: #cfd2d6;
         }
 
-        /* HERO */
+
+        /* =========================================================
+           HERO
+        ========================================================= */
 
         .hero {
             padding-top: 38px;
@@ -91,9 +99,11 @@
 
         h1 {
             font-size: clamp(54px, 8vw, 78px);
-            line-height: 0.95;
+
+            line-height: .95;
 
             letter-spacing: 2px;
+
             font-weight: 800;
 
             color: #f0f0f1;
@@ -107,10 +117,14 @@
             color: #666d76;
 
             font-size: 13px;
+
             line-height: 1.6;
         }
 
-        /* SECTION */
+
+        /* =========================================================
+           SECTION
+        ========================================================= */
 
         .section-heading {
             display: flex;
@@ -127,13 +141,18 @@
 
         .section-heading span {
             font-size: 9px;
+
             color: #50565e;
 
             letter-spacing: 2px;
+
             text-transform: uppercase;
         }
 
-        /* EPISODE GRID */
+
+        /* =========================================================
+           EPISODE GRID
+        ========================================================= */
 
         .episode-grid {
             display: grid;
@@ -146,35 +165,37 @@
             align-items: start;
         }
 
-        /* EPISODE CARD */
+
+        /* =========================================================
+           EPISODE CARD
+        ========================================================= */
 
         .episode-card {
             position: relative;
 
             border: 1px solid #2c3035;
+
             border-radius: 15px;
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(255,255,255,0.025),
-                    rgba(255,255,255,0.005)
+                    rgba(255,255,255,.025),
+                    rgba(255,255,255,.005)
                 );
 
             overflow: hidden;
 
             transition:
-                border-color 0.25s ease,
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
+                border-color .25s ease,
+                transform .25s ease;
         }
 
         .episode-card:hover {
             border-color: #444a52;
+
             transform: translateY(-2px);
         }
-
-        /* CURRENT EPISODE ACCENT */
 
         .episode-card.current {
             border-color: #393b40;
@@ -182,13 +203,13 @@
             background:
                 radial-gradient(
                     circle at 100% 0%,
-                    rgba(255,255,255,0.045),
+                    rgba(255,255,255,.045),
                     transparent 40%
                 ),
                 linear-gradient(
                     145deg,
-                    rgba(255,255,255,0.025),
-                    rgba(255,255,255,0.005)
+                    rgba(255,255,255,.025),
+                    rgba(255,255,255,.005)
                 );
         }
 
@@ -206,36 +227,40 @@
             background:
                 linear-gradient(
                     90deg,
-                    rgba(170,175,180,0.6),
+                    rgba(170,175,180,.6),
                     transparent
                 );
 
             z-index: 5;
         }
 
-        /* ANNOUNCEMENT CARD */
+
+        /* =========================================================
+           ANNOUNCEMENT CARD
+        ========================================================= */
 
         .announcement-card {
-            border-color: #332b38;
+            border-color: #342a35;
 
             background:
                 radial-gradient(
                     circle at 100% 0%,
-                    rgba(150, 35, 110, 0.08),
+                    rgba(155,35,110,.09),
                     transparent 42%
                 ),
                 linear-gradient(
                     145deg,
-                    rgba(255,255,255,0.025),
-                    rgba(255,255,255,0.005)
+                    rgba(255,255,255,.025),
+                    rgba(255,255,255,.005)
                 );
         }
 
         .announcement-card:hover {
-            border-color: #4a3748;
+            border-color: #503849;
 
             box-shadow:
-                0 12px 40px rgba(120, 25, 100, 0.08);
+                0 15px 45px
+                rgba(120,25,100,.08);
         }
 
         .announcement-card::before {
@@ -246,21 +271,25 @@
             top: 0;
             left: 0;
 
-            width: 45%;
+            width: 48%;
             height: 2px;
 
             background:
                 linear-gradient(
                     90deg,
                     #ff3030,
-                    #8a24ff,
+                    #d52f70,
+                    #8b2be2,
                     transparent
                 );
 
             z-index: 5;
         }
 
-        /* THUMBNAIL */
+
+        /* =========================================================
+           THUMBNAIL
+        ========================================================= */
 
         .episode-thumbnail {
             position: relative;
@@ -283,15 +312,16 @@
 
             object-fit: cover;
 
-            filter: brightness(0.84);
+            filter: brightness(.84);
 
             transition:
-                transform 0.45s ease,
-                filter 0.45s ease;
+                transform .45s ease,
+                filter .45s ease;
         }
 
         .episode-card:hover .episode-thumbnail img {
             transform: scale(1.025);
+
             filter: brightness(1);
         }
 
@@ -299,19 +329,23 @@
             content: "";
 
             position: absolute;
+
             inset: 0;
 
             background:
                 linear-gradient(
                     to top,
-                    rgba(13,15,17,0.78),
+                    rgba(13,15,17,.78),
                     transparent 60%
                 );
 
             pointer-events: none;
         }
 
-        /* EPISODE NUMBER */
+
+        /* =========================================================
+           EPISODE NUMBER
+        ========================================================= */
 
         .episode-number {
             position: absolute;
@@ -322,16 +356,19 @@
             z-index: 3;
 
             font-size: 54px;
+
             line-height: 1;
 
             font-weight: 800;
 
             letter-spacing: -2px;
 
-            color: rgba(255,255,255,0.88);
+            color:
+                rgba(255,255,255,.88);
 
             text-shadow:
-                0 2px 18px rgba(0,0,0,0.6);
+                0 2px 18px
+                rgba(0,0,0,.6);
         }
 
         .episode-number small {
@@ -346,13 +383,10 @@
             margin-right: 5px;
         }
 
-        /* ANNOUNCEMENT NUMBER */
 
-        .announcement-card .episode-number small {
-            color: #c45c91;
-        }
-
-        /* STATUS */
+        /* =========================================================
+           STATUS
+        ========================================================= */
 
         .episode-status {
             position: absolute;
@@ -364,14 +398,19 @@
 
             display: flex;
             align-items: center;
+
             gap: 7px;
 
             padding: 7px 9px;
 
-            border: 1px solid rgba(255,255,255,0.12);
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
             border-radius: 6px;
 
-            background: rgba(10,12,14,0.55);
+            background:
+                rgba(10,12,14,.55);
 
             backdrop-filter: blur(8px);
 
@@ -393,16 +432,18 @@
             background: #8a8f95;
         }
 
-        /* ANNOUNCEMENT STATUS */
-
         .announcement-card .status-dot {
             background: #d52d68;
 
             box-shadow:
-                0 0 8px rgba(213,45,104,0.55);
+                0 0 9px
+                rgba(213,45,104,.55);
         }
 
-        /* CONTENT */
+
+        /* =========================================================
+           CONTENT
+        ========================================================= */
 
         .episode-content {
             padding: 25px 27px 28px;
@@ -429,20 +470,18 @@
 
             line-height: 1.2;
 
-            letter-spacing: -0.4px;
+            letter-spacing: -.4px;
 
             margin-bottom: 20px;
         }
-
-        /* ANNOUNCEMENT TITLE */
 
         .announcement-card .episode-title {
             background:
                 linear-gradient(
                     90deg,
-                    #ff3434 0%,
-                    #d62f68 42%,
-                    #8a2be2 100%
+                    #ff3434,
+                    #d72e6c,
+                    #8b2be2
                 );
 
             -webkit-background-clip: text;
@@ -450,17 +489,19 @@
 
             -webkit-text-fill-color: transparent;
 
-            color: transparent;
-
-            font-weight: 600;
+            font-weight: 650;
         }
 
-        /* INFO */
+
+        /* =========================================================
+           INFO
+        ========================================================= */
 
         .episode-info {
             display: grid;
 
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns:
+                repeat(2, 1fr);
 
             border-top: 1px solid #292d32;
             border-bottom: 1px solid #292d32;
@@ -500,7 +541,10 @@
             font-size: 11px;
         }
 
-        /* DESCRIPTION */
+
+        /* =========================================================
+           DESCRIPTION
+        ========================================================= */
 
         .description-label {
             color: #535b65;
@@ -524,7 +568,10 @@
             margin-bottom: 25px;
         }
 
-        /* DIALOGUE */
+
+        /* =========================================================
+           DIALOGUE
+        ========================================================= */
 
         .dialogue-label {
             color: #535b65;
@@ -570,7 +617,10 @@
             font-weight: 600;
         }
 
-        /* ANNOUNCEMENT REPORT */
+
+        /* =========================================================
+           ANNOUNCEMENT REPORT
+        ========================================================= */
 
         .announcement-report {
             color: #747b84;
@@ -588,7 +638,658 @@
             margin-bottom: 0;
         }
 
-        /* FOOTER */
+
+        /* =========================================================
+           CREDIT
+        ========================================================= */
+
+        .announcement-credit {
+            margin-top: 24px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #292d32;
+
+            color: #535b65;
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+        .profile-mention {
+            border: none;
+
+            background: none;
+
+            padding: 0;
+
+            font-family: inherit;
+
+            cursor: pointer;
+
+            font-size: inherit;
+
+            letter-spacing: inherit;
+
+            text-transform: inherit;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #d7d9dc,
+                    #777c83
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            transition:
+                opacity .2s ease,
+                filter .2s ease;
+        }
+
+        .profile-mention:hover {
+            opacity: .8;
+
+            filter:
+                drop-shadow(
+                    0 0 7px
+                    rgba(255,255,255,.2)
+                );
+        }
+
+
+        /* =========================================================
+           PROFILE OVERLAY
+        ========================================================= */
+
+        .profile-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 99999;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,245,225,.06),
+                    transparent 32%
+                ),
+                rgba(3,4,5,.82);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .profile-overlay.active {
+            display: flex;
+        }
+
+
+        /* =========================================================
+           PROFILE WIDGET
+        ========================================================= */
+
+        .profile-widget {
+            position: relative;
+
+            width: min(410px, 100%);
+
+            overflow: visible;
+
+            border:
+                1px solid
+                rgba(255,255,255,.18);
+
+            border-radius: 20px;
+
+            background:
+                radial-gradient(
+                    circle at 15% 100%,
+                    rgba(255,231,198,.08),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(255,255,255,.09),
+                    transparent 40%
+                ),
+                linear-gradient(
+                    145deg,
+                    #1b1c1d,
+                    #111213 45%,
+                    #080909
+                );
+
+            box-shadow:
+                0 30px 100px
+                rgba(0,0,0,.75),
+
+                0 0 50px
+                rgba(255,241,215,.07),
+
+                inset 0 1px 0
+                rgba(255,255,255,.1);
+
+            animation:
+                profileAppear
+                .28s cubic-bezier(.2,.8,.2,1);
+        }
+
+
+        /* =========================================================
+           PROFILE BANNER AREA
+
+           IMPORTANT:
+           This container does NOT hide overflow.
+        ========================================================= */
+
+        .profile-banner-area {
+            position: relative;
+
+            width: 100%;
+
+            height: 150px;
+
+            overflow: visible;
+
+            border-radius:
+                19px 19px 0 0;
+        }
+
+
+        /* =========================================================
+           BANNER CLIP
+
+           ONLY THE IMAGE IS CLIPPED.
+        ========================================================= */
+
+        .profile-banner-clip {
+            position: absolute;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            border-radius:
+                19px 19px 0 0;
+
+            background: #101112;
+
+            z-index: 1;
+        }
+
+
+        /* =========================================================
+           BANNER
+        ========================================================= */
+
+        .profile-banner {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            filter:
+                brightness(.72)
+                contrast(1.08)
+                saturate(.82);
+
+            transform: scale(1.015);
+        }
+
+
+        /* =========================================================
+           BANNER DARK
+        ========================================================= */
+
+        .profile-banner-dark {
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,0,0,.5),
+                    transparent 45%,
+                    rgba(246,230,202,.11)
+                );
+        }
+
+
+        /* =========================================================
+           BANNER FADE
+        ========================================================= */
+
+        .profile-banner-fade {
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 75%;
+
+            background:
+                linear-gradient(
+                    to top,
+                    #080909,
+                    rgba(8,9,9,.45),
+                    transparent
+                );
+        }
+
+
+        /* =========================================================
+           BANNER SHINE
+        ========================================================= */
+
+        .profile-banner-shine {
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    transparent 35%,
+                    rgba(255,255,255,.09) 48%,
+                    transparent 60%
+                );
+        }
+
+
+        /* =========================================================
+           CLOSE BUTTON
+        ========================================================= */
+
+        .profile-close {
+            position: absolute;
+
+            top: 14px;
+            right: 14px;
+
+            z-index: 100;
+
+            width: 30px;
+            height: 30px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.16);
+
+            border-radius: 9px;
+
+            background:
+                rgba(8,9,10,.55);
+
+            backdrop-filter: blur(8px);
+
+            color: #c4c5c5;
+
+            font-size: 17px;
+
+            line-height: 1;
+
+            cursor: pointer;
+
+            transition:
+                color .2s ease,
+                background .2s ease,
+                border-color .2s ease;
+        }
+
+        .profile-close:hover {
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.09);
+
+            border-color:
+                rgba(255,255,255,.35);
+        }
+
+
+        /* =========================================================
+           AVATAR
+
+           THIS MUST BE ABOVE PROFILE CONTENT.
+        ========================================================= */
+
+        .profile-avatar {
+            position: absolute;
+
+            left: 25px;
+
+            bottom: -46px;
+
+            z-index: 9999;
+
+            width: 92px;
+            height: 92px;
+
+            padding: 4px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffffff,
+                    #ddd8d0 38%,
+                    #777777 72%,
+                    #f4e5cd
+                );
+
+            box-shadow:
+                0 0 0 4px #080909,
+
+                0 0 18px
+                rgba(255,241,217,.35),
+
+                0 0 38px
+                rgba(255,255,255,.1);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border:
+                2px solid
+                #111213;
+        }
+
+        .profile-avatar::after {
+            content: "";
+
+            position: absolute;
+
+            inset: -4px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,.45);
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================================
+           PROFILE CONTENT
+
+           LOWER Z-INDEX THAN AVATAR.
+        ========================================================= */
+
+        .profile-content {
+            position: relative;
+
+            z-index: 5;
+
+            padding:
+                61px 25px 26px;
+
+            border-radius:
+                0 0 19px 19px;
+        }
+
+
+        /* =========================================================
+           PROFILE NAME
+        ========================================================= */
+
+        .profile-name {
+            font-size: 23px;
+
+            font-weight: 800;
+
+            letter-spacing: -.5px;
+
+            margin-bottom: 6px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #fff,
+                    #f5f1ea 32%,
+                    #d4d0ca 65%,
+                    #858585
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        /* =========================================================
+           PROFILE ROLE
+        ========================================================= */
+
+        .profile-role {
+            display: inline-block;
+
+            font-size: 10px;
+
+            letter-spacing: 2.5px;
+
+            text-transform: uppercase;
+
+            font-weight: 800;
+
+            margin-bottom: 19px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7ad0b4,
+                    #c0f2df,
+                    #7ad0b4
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            filter:
+                drop-shadow(
+                    0 0 7px
+                    rgba(122,208,180,.18)
+                );
+        }
+
+
+        /* =========================================================
+           DESCRIPTION
+        ========================================================= */
+
+        .profile-description {
+            color: #a4a4a2;
+
+            font-size: 11px;
+
+            line-height: 1.75;
+
+            margin-bottom: 23px;
+
+            padding-bottom: 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.08);
+        }
+
+
+        /* =========================================================
+           PROFILE INFO
+        ========================================================= */
+
+        .profile-info {
+            overflow: hidden;
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.045),
+                    rgba(255,255,255,.012)
+                );
+
+            box-shadow:
+                inset 0 1px 0
+                rgba(255,255,255,.045);
+        }
+
+        .profile-row {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 14px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.065);
+        }
+
+        .profile-row:last-child {
+            border-bottom: none;
+        }
+
+        .profile-label {
+            color: #707276;
+
+            font-size: 8px;
+
+            letter-spacing: 1.8px;
+
+            text-transform: uppercase;
+        }
+
+        .profile-value {
+            color: #dddcd8;
+
+            font-size: 10px;
+
+            text-align: right;
+
+            font-weight: 600;
+        }
+
+        .profile-house {
+            background:
+                linear-gradient(
+                    90deg,
+                    #fff,
+                    #e9dfd1,
+                    #9b958d
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-id {
+            color: #929393;
+
+            font-family: monospace;
+
+            font-size: 9px;
+
+            font-weight: 400;
+        }
+
+        .profile-bottom-glow {
+            height: 2px;
+
+            margin-top: 18px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.5),
+                    rgba(232,211,180,.45),
+                    rgba(255,255,255,.5),
+                    transparent
+                );
+
+            opacity: .65;
+        }
+
+
+        /* =========================================================
+           PROFILE ANIMATION
+        ========================================================= */
+
+        @keyframes profileAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(15px)
+                    scale(.95);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
 
         footer {
             margin-top: 55px;
@@ -612,13 +1313,17 @@
             text-transform: uppercase;
         }
 
-        /* RESPONSIVE */
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
 
         @media (max-width: 850px) {
 
             .episode-grid {
                 grid-template-columns: 1fr;
             }
+
         }
 
         @media (max-width: 650px) {
@@ -670,7 +1375,9 @@
 
             .info:first-child {
                 border-right: none;
-                border-bottom: 1px solid #292d32;
+
+                border-bottom:
+                    1px solid #292d32;
 
                 padding-right: 0;
             }
@@ -678,13 +1385,39 @@
             .info:last-child {
                 padding-left: 0;
             }
+
+            .profile-widget {
+                width: min(380px, 100%);
+            }
+
+            .profile-banner-area {
+                height: 140px;
+            }
+
+            .profile-row {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 5px;
+            }
+
+            .profile-value {
+                text-align: left;
+            }
+
         }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- HEADER -->
+
+    <!-- =========================================================
+         HEADER
+    ========================================================= -->
 
     <header>
 
@@ -700,14 +1433,19 @@
 
         </div>
 
-        <a href="index.html" class="archive-link">
+        <a
+            href="index.html"
+            class="archive-link"
+        >
             Story Archive
         </a>
 
     </header>
 
 
-    <!-- HERO -->
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
 
     <main>
 
@@ -729,7 +1467,9 @@
         </section>
 
 
-        <!-- EPISODE ARCHIVE -->
+        <!-- =====================================================
+             EPISODE ARCHIVE
+        ===================================================== -->
 
         <section>
 
@@ -749,12 +1489,11 @@
             <div class="episode-grid">
 
 
-                <!-- EPISODE 079 -->
+                <!-- =================================================
+                     EPISODE 079
+                ================================================= -->
 
                 <article class="episode-card current">
-
-
-                    <!-- THUMBNAIL -->
 
                     <div class="episode-thumbnail">
 
@@ -762,8 +1501,6 @@
                             src="https://media.discordapp.net/attachments/1321552941009731727/1537890820911276073/cf38361e3528a878753a8e6d1d022f64.png?ex=6a80aff0&is=6a7f5e70&hm=9547fba4c53d3b793023f671f98290493f67097a8104d5ae85b2a078dcd09e07&=&format=webp&quality=lossless&width=512&height=288"
                             alt="Episode 079 Reference"
                         >
-
-                        <!-- STATUS -->
 
                         <div class="episode-status">
 
@@ -773,8 +1510,6 @@
 
                         </div>
 
-                        <!-- NUMBER -->
-
                         <div class="episode-number">
 
                             <small>EP.</small>079
@@ -783,8 +1518,6 @@
 
                     </div>
 
-
-                    <!-- CONTENT -->
 
                     <div class="episode-content">
 
@@ -796,9 +1529,6 @@
                             In Misery, We Remain...
                             These Are the Lost Days.
                         </h2>
-
-
-                        <!-- INFORMATION -->
 
                         <div class="episode-info">
 
@@ -828,9 +1558,6 @@
 
                         </div>
 
-
-                        <!-- DESCRIPTION -->
-
                         <div class="description-label">
                             Description
                         </div>
@@ -841,9 +1568,6 @@
                             Speakerman and Chief Scientist Cameraman
                             begin preparations for what comes next.
                         </p>
-
-
-                        <!-- CURRENT DIALOGUE -->
 
                         <div class="dialogue-label">
                             Current Record
@@ -878,12 +1602,11 @@
                 </article>
 
 
-                <!-- NEW ANNOUNCEMENT -->
+                <!-- =================================================
+                     NEW ANNOUNCEMENT
+                ================================================= -->
 
                 <article class="episode-card announcement-card">
-
-
-                    <!-- THUMBNAIL -->
 
                     <div class="episode-thumbnail">
 
@@ -892,8 +1615,6 @@
                             alt="New Announcement"
                         >
 
-                        <!-- STATUS -->
-
                         <div class="episode-status">
 
                             <span class="status-dot"></span>
@@ -901,8 +1622,6 @@
                             New
 
                         </div>
-
-                        <!-- NUMBER -->
 
                         <div class="episode-number">
 
@@ -913,8 +1632,6 @@
                     </div>
 
 
-                    <!-- CONTENT -->
-
                     <div class="episode-content">
 
                         <div class="episode-label">
@@ -924,9 +1641,6 @@
                         <h2 class="episode-title">
                             Report — Ch. 79
                         </h2>
-
-
-                        <!-- REPORT -->
 
                         <div class="description-label">
                             Report
@@ -968,13 +1682,23 @@
 
                         </div>
 
+
+                        <div class="announcement-credit">
+
+                            Made by
+
+                            <button
+                                class="profile-mention"
+                                onclick="openProfile()"
+                            >
+                                @GreyLight
+                            </button>
+
+                        </div>
+
                     </div>
 
                 </article>
-
-
-                <!-- FUTURE EPISODES CAN BE ADDED HERE -->
-
 
             </div>
 
@@ -983,7 +1707,9 @@
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
 
     <footer>
 
@@ -996,6 +1722,203 @@
         </span>
 
     </footer>
+
+
+    <!-- =========================================================
+         GREYLIGHT PROFILE
+    ========================================================= -->
+
+    <div
+        class="profile-overlay"
+        id="profileOverlay"
+        onclick="closeProfile(event)"
+    >
+
+        <div
+            class="profile-widget"
+            onclick="event.stopPropagation()"
+        >
+
+
+            <!-- =================================================
+                 BANNER
+            ================================================= -->
+
+            <div class="profile-banner-area">
+
+
+                <!--
+                    ONLY THIS PART CLIPS THE BANNER.
+                    THE AVATAR IS OUTSIDE IT.
+                -->
+
+                <div class="profile-banner-clip">
+
+                    <img
+                        class="profile-banner"
+                        src="https://i.pinimg.com/1200x/95/d2/f1/95d2f1ce3b949d136ede18f99c074752.jpg"
+                        alt="GreyLight Banner"
+                    >
+
+                    <div class="profile-banner-dark"></div>
+
+                    <div class="profile-banner-fade"></div>
+
+                    <div class="profile-banner-shine"></div>
+
+                </div>
+
+
+                <!-- CLOSE -->
+
+                <button
+                    class="profile-close"
+                    onclick="closeProfile()"
+                    aria-label="Close profile"
+                >
+                    ×
+                </button>
+
+
+                <!-- AVATAR -->
+
+                <div class="profile-avatar">
+
+                    <img
+                        src="https://cdn.discordapp.com/avatars/1163239438235738132/4a28ba6e98f7d0dd0d33969662884726.webp?size=1024"
+                        alt="@GreyLight Avatar"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROFILE CONTENT
+            ================================================= -->
+
+            <div class="profile-content">
+
+                <div class="profile-name">
+                    @GreyLight
+                </div>
+
+                <div class="profile-role">
+                    Lord
+                </div>
+
+                <div class="profile-description">
+                    Mapache vive feliz con ella
+                </div>
+
+
+                <div class="profile-info">
+
+
+                    <div class="profile-row">
+
+                        <span class="profile-label">
+                            User ID
+                        </span>
+
+                        <span class="profile-value profile-id">
+                            1163239438235738132
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-row">
+
+                        <span class="profile-label">
+                            House
+                        </span>
+
+                        <span class="profile-value profile-house">
+                            Astral
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="profile-bottom-glow"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+        function openProfile() {
+
+            const overlay =
+                document.getElementById(
+                    "profileOverlay"
+                );
+
+            overlay.classList.add("active");
+
+            document.body.style.overflow =
+                "hidden";
+        }
+
+
+        function closeProfile(event) {
+
+            const overlay =
+                document.getElementById(
+                    "profileOverlay"
+                );
+
+            if (
+                event &&
+                event.target !== overlay
+            ) {
+                return;
+            }
+
+            overlay.classList.remove("active");
+
+            document.body.style.overflow =
+                "";
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    const overlay =
+                        document.getElementById(
+                            "profileOverlay"
+                        );
+
+                    overlay.classList.remove(
+                        "active"
+                    );
+
+                    document.body.style.overflow =
+                        "";
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>
