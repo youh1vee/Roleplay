@@ -903,6 +903,129 @@
             transform: scale(1.25);
         }
 
+
+        /* YELLOW ACCENT — G-TOILET 5.0 WIDGET */
+
+        .owner-james-modal {
+            border-color: #6b5715;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(255, 205, 20, 0.14),
+                    transparent 42%
+                ),
+                #101215;
+        }
+
+        .owner-james-modal::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 205, 20, 0.98),
+                rgba(255, 229, 84, 0.72)
+            );
+            box-shadow: 0 0 18px rgba(255, 205, 20, 0.28);
+        }
+
+        .owner-james-modal .modal-image {
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(255, 205, 20, 0.12),
+                    transparent 55%
+                ),
+                #0d0f11;
+        }
+
+        .owner-james-modal .modal-image img {
+            filter: brightness(0.88);
+        }
+
+        .owner-james-modal .modal-image img:hover {
+            filter: brightness(1);
+        }
+
+        .james-modal-status {
+            border-color: #6b5715;
+            color: #d8bd4d;
+            background: rgba(255, 205, 20, 0.035);
+        }
+
+        .james-modal-dot {
+            background: #ffd21c !important;
+            box-shadow: 0 0 9px rgba(255, 210, 28, 0.65);
+        }
+
+        /* Gallery image fitting:
+           fills the frame instead of leaving black letterbox borders. */
+        .gallery-frame {
+            overflow: hidden;
+        }
+
+        .gallery-frame .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.035);
+        }
+
+        .gallery-frame .gallery-image.active {
+            animation: galleryZoomIn 0.42s ease both;
+        }
+
+        @keyframes galleryZoomIn {
+            from {
+                transform: scale(1.075);
+            }
+            to {
+                transform: scale(1.035);
+            }
+        }
+
+        /* G-Toilet images get a little extra crop because several source
+           images are not the same aspect ratio as the gallery frame. */
+        .gtoilet-gallery-frame .gallery-image {
+            transform: scale(1.07);
+            opacity: 0;
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .gtoilet-gallery-frame .gallery-image.active {
+            opacity: 1;
+        }
+
+        .gtoilet-gallery-frame .gallery-image.active {
+            animation: gtoiletGalleryZoom 0.42s ease both;
+        }
+
+        @keyframes gtoiletGalleryZoom {
+            from {
+                transform: scale(1.11);
+            }
+            to {
+                transform: scale(1.07);
+            }
+        }
+
+        .owner-james-modal .gallery-frame {
+            border-color: #4d421d;
+        }
+
+        .owner-james-modal .gallery-dot.active {
+            background: #ffd21c;
+            box-shadow: 0 0 8px rgba(255, 210, 28, 0.35);
+        }
+
         /* =========================================================
            RESPONSIVE
         ========================================================= */
@@ -1836,6 +1959,227 @@
     </dialog>
 
 
+
+    <!-- =============================================================
+         G-TOILET 5.0 MODAL
+    ============================================================= -->
+
+    <dialog class="character-modal" id="gtoiletModal">
+
+        <div class="modal-box owner-james-modal">
+
+            <div class="modal-top">
+
+                <span class="modal-id">
+                    Character ID — 004
+                </span>
+
+                <button
+                    class="close-modal"
+                    onclick="closeCharacter('gtoiletModal')"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-main">
+
+                <div class="modal-image">
+
+                    <img
+                        src="https://i.pinimg.com/1200x/8e/54/9e/8e549eb5cef957afa3aa7c02dd5627dd.jpg"
+                        alt="G-Toilet 5.0"
+                    >
+
+                </div>
+
+
+                <div class="modal-information">
+
+                    <div class="modal-eyebrow">
+                        Character 004
+                    </div>
+
+                    <h2 class="modal-name">
+                        G-Toilet 5.0
+                    </h2>
+
+                    <div class="modal-status james-modal-status">
+
+                        <span class="modal-status-dot james-modal-dot"></span>
+
+                        Active
+
+                    </div>
+
+
+                    <div class="modal-info-grid">
+
+                        <div class="modal-info">
+                            <div class="modal-info-label">Owner</div>
+                            <div class="modal-info-value">James</div>
+                        </div>
+
+                        <div class="modal-info">
+                            <div class="modal-info-label">Version</div>
+                            <div class="modal-info-value">5.0.0</div>
+                        </div>
+
+                        <div class="modal-info">
+                            <div class="modal-info-label">First Appearance</div>
+                            <div class="modal-info-value">Pre-Genesis</div>
+                        </div>
+
+                        <div class="modal-info">
+                            <div class="modal-info-label">Faction</div>
+                            <div class="modal-info-value">Skibidi</div>
+                        </div>
+
+                        <div class="modal-info">
+                            <div class="modal-info-label">Type</div>
+                            <div class="modal-info-value">Boss</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-section">
+
+                        <div class="modal-section-title">
+                            Lore
+                        </div>
+
+                        <p class="modal-section-text">
+                            G-Toilet 5.0 is the latest and most powerful evolution
+                            of the Skibidi Toilet leader. His current form represents
+                            a major advancement in the Skibidi faction's technology
+                            and combat capabilities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="modal-section">
+
+                        <div class="modal-section-title">
+                            Abilities
+                        </div>
+
+                        <p class="modal-section-text">
+                            Advanced energy weapons, immense durability, overwhelming
+                            firepower, powerful propulsion systems, and high-level
+                            combat capabilities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="modal-section">
+
+                        <div class="modal-section-title">
+                            History
+                        </div>
+
+                        <p class="modal-section-text">
+                            Following the evolution of the Skibidi faction, G-Toilet
+                            reached Version 5.0, becoming one of its most dangerous
+                            and technologically advanced entities.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- GALLERY -->
+
+            <div class="gallery-section">
+
+                <div class="gallery-header">
+
+                    <span class="gallery-title">
+                        Gallery
+                    </span>
+
+                    <span
+                        class="gallery-counter"
+                        id="gtoiletCounter"
+                    >
+                        01 / 04
+                    </span>
+
+                </div>
+
+
+                <div class="gallery-frame gtoilet-gallery-frame">
+
+                    <img
+                        class="gallery-image active"
+                        src="https://i.pinimg.com/1200x/8e/54/9e/8e549eb5cef957afa3aa7c02dd5627dd.jpg"
+                        alt="G-Toilet 5.0 Gallery 1"
+                    >
+
+                    <img
+                        class="gallery-image"
+                        src="https://i.pinimg.com/1200x/73/54/ff/7354fffc8be6a002cf6aaae536b4a435.jpg"
+                        alt="G-Toilet 5.0 Gallery 2"
+                    >
+
+                    <img
+                        class="gallery-image"
+                        src="https://i.pinimg.com/736x/6c/92/3d/6c923d9051d3a47ff094e2cc8bc7c5e6.jpg"
+                        alt="G-Toilet 5.0 Gallery 3"
+                    >
+
+                    <img
+                        class="gallery-image"
+                        src="https://i.pinimg.com/736x/7a/b3/9d/7ab39d9885b06d7453a6bb516d69cee5.jpg"
+                        alt="G-Toilet 5.0 Gallery 4"
+                    >
+
+                </div>
+
+
+                <div class="gallery-dots">
+
+                    <button
+                        class="gallery-dot active"
+                        onclick="setGallerySlide('gtoilet', 0)"
+                        aria-label="Gallery image 1"
+                    ></button>
+
+                    <button
+                        class="gallery-dot"
+                        onclick="setGallerySlide('gtoilet', 1)"
+                        aria-label="Gallery image 2"
+                    ></button>
+
+                    <button
+                        class="gallery-dot"
+                        onclick="setGallerySlide('gtoilet', 2)"
+                        aria-label="Gallery image 3"
+                    ></button>
+
+                    <button
+                        class="gallery-dot"
+                        onclick="setGallerySlide('gtoilet', 3)"
+                        aria-label="Gallery image 4"
+                    ></button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </dialog>
+
+
     <!-- =============================================================
          JAVASCRIPT
     ============================================================= -->
@@ -1931,37 +2275,27 @@
 
         function startGallery(character) {
 
-            const data = galleries[character];
+            const data = characterData[character];
+
+            if (!data) return;
 
             stopGallery(character);
 
             data.interval = setInterval(() => {
 
-                const modal = document.getElementById(data.modal);
+                const images = document.querySelectorAll(
+                    `#${data.modal} .gallery-image`
+                );
 
-                if (!modal || !modal.open) {
+                if (!images.length) return;
 
-                    stopGallery(character);
+                const current = Array.from(images).findIndex(
+                    image => image.classList.contains("active")
+                );
 
-                    return;
-
-                }
-
-                const images =
-                    modal.querySelectorAll(".gallery-image");
-
-                let current = 0;
-
-                images.forEach((image, index) => {
-
-                    if (image.classList.contains("active")) {
-                        current = index;
-                    }
-
-                });
-
-                const next =
-                    (current + 1) % images.length;
+                const next = current === -1
+                    ? 0
+                    : (current + 1) % images.length;
 
                 setGallerySlide(character, next);
 
