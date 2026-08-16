@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARV7X — VOID CORE</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+    --bg: #090a0d;
+    --panel: #101115;
+    --panel-hover: #141519;
+    --border: #292b30;
+
+    --text: #eeeeef;
+    --muted: #73757c;
+    --subtle: #4d5057;
+
+    --red: #ff3b3b;
+    --red-dark: rgba(255, 59, 59, .08);
+    --red-border: rgba(255, 59, 59, .25);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(255,255,255,.035),
+            transparent 35%
+        ),
+        var(--bg);
+
+    color: var(--text);
+
+    font-family: Inter, Arial, sans-serif;
+
+    padding: 0 40px;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.nav {
+    max-width: 1050px;
+    height: 68px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    color: var(--text);
+    text-decoration: none;
+}
+
+.brand-box {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    color: #9b9da4;
+
+    font-size: 10px;
+}
+
+.brand-name {
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.nav-status {
+    color: #55575e;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 8px;
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main {
+    width: min(1050px, 100%);
+
+    margin: auto;
+
+    padding: 50px 0 80px;
+
+    animation: pageEnter .7s ease both;
+}
+
+
+/* =========================================
+   RESTRICTED HEADER
+========================================= */
+
+.restricted {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 7px 10px;
+
+    border: 1px solid var(--red-border);
+
+    border-radius: 7px;
+
+    background: var(--red-dark);
+
+    color: #ff6666;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 8px;
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.restricted-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--red);
+
+    box-shadow:
+        0 0 10px rgba(255,59,59,.7);
+
+    animation: pulse 2s infinite;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.eyebrow {
+    margin-top: 20px;
+
+    color: #62646b;
+
+    font-size: 9px;
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+h1 {
+    margin-top: 9px;
+
+    font-size: clamp(48px, 8vw, 76px);
+
+    line-height: .95;
+
+    letter-spacing: -4px;
+
+    font-weight: 800;
+}
+
+.subtitle {
+    margin-top: 15px;
+
+    color: #666870;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================
+   CHARACTER CARD
+========================================= */
+
+.character-card {
+
+    margin-top: 42px;
+
+    display: grid;
+
+    grid-template-columns: 340px 1fr;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.025),
+            rgba(255,255,255,.008)
+        );
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.character-image {
+
+    min-height: 470px;
+
+    position: relative;
+
+    background: #08090c;
+
+    border-right: 1px solid var(--border);
+
+    overflow: hidden;
+}
+
+.character-image img {
+
+    width: 100%;
+    height: 100%;
+
+    min-height: 470px;
+
+    object-fit: cover;
+
+    display: block;
+
+    filter:
+        grayscale(.15)
+        contrast(1.05);
+
+    transition:
+        transform .6s ease,
+        filter .6s ease;
+}
+
+.character-card:hover .character-image img {
+
+    transform: scale(1.025);
+
+    filter:
+        grayscale(0)
+        contrast(1.08);
+}
+
+
+/* IMAGE OVERLAY */
+
+.image-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(5,6,8,.9),
+            transparent 45%
+        );
+
+    pointer-events: none;
+}
+
+.image-label {
+
+    position: absolute;
+
+    left: 18px;
+    bottom: 17px;
+
+    color: rgba(255,255,255,.42);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================
+   CHARACTER INFORMATION
+========================================= */
+
+.character-info {
+
+    padding: 30px;
+}
+
+.info-header {
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.name-label {
+
+    color: #56585f;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+.character-name {
+
+    margin-top: 7px;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
+
+.special-label {
+
+    padding: 6px 8px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 6px;
+
+    color: #8b8d94;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   DATA GRID
+========================================= */
+
+.data-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    margin-top: 24px;
+
+    border-top: 1px solid rgba(255,255,255,.04);
+
+    border-left: 1px solid rgba(255,255,255,.04);
+}
+
+.data {
+
+    min-height: 73px;
+
+    padding: 14px 15px;
+
+    border-right: 1px solid rgba(255,255,255,.04);
+    border-bottom: 1px solid rgba(255,255,255,.04);
+}
+
+.data-label {
+
+    color: #55575e;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.data-value {
+
+    margin-top: 8px;
+
+    color: #d0d1d4;
+
+    font-size: 11px;
+
+    font-family: "JetBrains Mono", monospace;
+}
+
+.unknown {
+
+    color: #686a72;
+}
+
+.owner {
+
+    color: #bfc1c6;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.description {
+
+    margin-top: 24px;
+
+    padding: 17px;
+
+    border: 1px solid rgba(255,255,255,.05);
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,.015);
+}
+
+.description-label {
+
+    color: #55575e;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.description-text {
+
+    margin-top: 9px;
+
+    color: #9a9ca3;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   UNKNOWN DATA
+========================================= */
+
+.section {
+
+    margin-top: 36px;
+}
+
+.section-title {
+
+    margin-bottom: 12px;
+
+    color: #5d6067;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+.data-panel {
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: #101115;
+
+    overflow: hidden;
+}
+
+.panel-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 16px 18px;
+
+    border-bottom: 1px solid rgba(255,255,255,.045);
+}
+
+.panel-row:last-child {
+    border-bottom: none;
+}
+
+.panel-name {
+
+    color: #85878e;
+
+    font-size: 10px;
+}
+
+.panel-value {
+
+    color: #55575e;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 9px;
+}
+
+
+/* =========================================
+   GALLERY 404
+========================================= */
+
+.gallery {
+
+    margin-top: 36px;
+}
+
+.gallery-error {
+
+    min-height: 230px;
+
+    border: 1px solid var(--red-border);
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,59,59,.035),
+            rgba(255,59,59,.008)
+        );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.gallery-error::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 4px,
+            rgba(255,59,59,.018) 5px
+        );
+
+    pointer-events: none;
+}
+
+.error-code {
+
+    color: var(--red);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 43px;
+
+    font-weight: 600;
+
+    letter-spacing: -2px;
+
+    text-shadow:
+        0 0 25px rgba(255,59,59,.18);
+}
+
+.error-message {
+
+    margin-top: 9px;
+
+    color: #8e5555;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.error-sub {
+
+    margin-top: 15px;
+
+    color: #4e4244;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+
+    width: min(1050px, 100%);
+
+    margin: auto;
+
+    border-top: 1px solid #202126;
+
+    padding: 18px 2px 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #44464c;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes pageEnter {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes pulse {
+
+    0%, 100% {
+        opacity: .5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 760px) {
+
+    body {
+        padding: 0 18px;
+    }
+
+    .main {
+        padding-top: 38px;
+    }
+
+    .character-card {
+        grid-template-columns: 1fr;
+    }
+
+    .character-image {
+        min-height: 400px;
+
+        border-right: none;
+
+        border-bottom: 1px solid var(--border);
+    }
+
+    .character-image img {
+        min-height: 400px;
+    }
+
+    .character-info {
+        padding: 22px;
+    }
+
+    .data-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        letter-spacing: -2.5px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<nav class="nav">
+
+    <a href="characters.html" class="brand">
+
+        <div class="brand-box">
+            VC
+        </div>
+
+        <div class="brand-name">
+            VOID CORE
+        </div>
+
+    </a>
+
+
+    <div class="nav-status">
+        Character Archive
+    </div>
+
+</nav>
+
+
+
+<main class="main">
+
+
+    <!-- =====================================
+         RESTRICTED
+    ====================================== -->
+
+    <div class="restricted">
+
+        <span class="restricted-dot"></span>
+
+        Restricted Character Record
+
+    </div>
+
+
+    <div class="eyebrow">
+        Special Archive // ARV7X
+    </div>
+
+
+    <h1>
+        Arvyx.
+    </h1>
+
+
+    <div class="subtitle">
+        RECORD STATUS // UNKNOWN
+    </div>
+
+
+
+    <!-- =====================================
+         CHARACTER CARD
+    ====================================== -->
+
+    <section class="character-card">
+
+
+        <!-- IMAGE -->
+
+        <div class="character-image">
+
+            <img
+                src="https://media.discordapp.net/attachments/1332738582963556514/1535752167372095609/Arvyx_Logo.png?ex=6a82cb69&is=6a8179e9&hm=274a7aea685a998c37f0eb5ffb660d1b7332bb56d11bc382d75d9157c9f969f9&=&format=webp&quality=lossless&width=683&height=1024"
+                alt="Arvyx"
+            >
+
+            <div class="image-overlay"></div>
+
+            <div class="image-label">
+                ARV7X // VISUAL RECORD
+            </div>
+
+        </div>
+
+
+
+        <!-- INFORMATION -->
+
+        <div class="character-info">
+
+
+            <div class="info-header">
+
+                <div>
+
+                    <div class="name-label">
+                        Character Name
+                    </div>
+
+                    <div class="character-name">
+                        Arvyx.
+                    </div>
+
+                </div>
+
+
+                <div class="special-label">
+                    SPECIAL CHARACTER
+                </div>
+
+            </div>
+
+
+
+            <!-- DATA -->
+
+            <div class="data-grid">
+
+
+                <div class="data">
+
+                    <div class="data-label">
+                        Status
+                    </div>
+
+                    <div class="data-value unknown">
+                        Unknown
+                    </div>
+
+                </div>
+
+
+                <div class="data">
+
+                    <div class="data-label">
+                        Character ID
+                    </div>
+
+                    <div class="data-value">
+                        ARV7X
+                    </div>
+
+                </div>
+
+
+                <div class="data">
+
+                    <div class="data-label">
+                        Version
+                    </div>
+
+                    <div class="data-value unknown">
+                        ?
+                    </div>
+
+                </div>
+
+
+                <div class="data">
+
+                    <div class="data-label">
+                        Owner
+                    </div>
+
+                    <div class="data-value owner">
+                        Cesar
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="description">
+
+                <div class="description-label">
+                    Description
+                </div>
+
+                <div class="description-text">
+                    "?Unknown.."
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         ABILITIES
+    ====================================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Abilities
+        </div>
+
+
+        <div class="data-panel">
+
+            <div class="panel-row">
+
+                <div class="panel-name">
+                    Known Abilities
+                </div>
+
+                <div class="panel-value">
+                    ...
+                </div>
+
+            </div>
+
+
+            <div class="panel-row">
+
+                <div class="panel-name">
+                    Classification
+                </div>
+
+                <div class="panel-value">
+                    UNKNOWN
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         LORE
+    ====================================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Lore
+        </div>
+
+
+        <div class="data-panel">
+
+            <div class="panel-row">
+
+                <div class="panel-name">
+                    Recorded Lore
+                </div>
+
+                <div class="panel-value">
+                    ...
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         HISTORY
+    ====================================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+            History
+        </div>
+
+
+        <div class="data-panel">
+
+            <div class="panel-row">
+
+                <div class="panel-name">
+                    Historical Record
+                </div>
+
+                <div class="panel-value">
+                    .
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         GALLERY
+    ====================================== -->
+
+    <section class="gallery">
+
+        <div class="section-title">
+            Gallery
+        </div>
+
+
+        <div class="gallery-error">
+
+            <div class="error-code">
+                404
+            </div>
+
+            <div class="error-message">
+                Gallery Not Found
+            </div>
+
+            <div class="error-sub">
+                ARV7X // IMAGE DATA UNAVAILABLE
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer class="footer">
+
+    <span>
+        VOID CORE // SPECIAL ARCHIVE
+    </span>
+
+    <span>
+        ARV7X
+    </span>
+
+</footer>
+
+
+</body>
+</html>
