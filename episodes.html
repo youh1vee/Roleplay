@@ -142,6 +142,8 @@
                 repeat(2, minmax(0, 1fr));
 
             gap: 18px;
+
+            align-items: start;
         }
 
         /* EPISODE CARD */
@@ -163,7 +165,8 @@
 
             transition:
                 border-color 0.25s ease,
-                transform 0.25s ease;
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
         }
 
         .episode-card:hover {
@@ -204,6 +207,53 @@
                 linear-gradient(
                     90deg,
                     rgba(170,175,180,0.6),
+                    transparent
+                );
+
+            z-index: 5;
+        }
+
+        /* ANNOUNCEMENT CARD */
+
+        .announcement-card {
+            border-color: #332b38;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(150, 35, 110, 0.08),
+                    transparent 42%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.025),
+                    rgba(255,255,255,0.005)
+                );
+        }
+
+        .announcement-card:hover {
+            border-color: #4a3748;
+
+            box-shadow:
+                0 12px 40px rgba(120, 25, 100, 0.08);
+        }
+
+        .announcement-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 45%;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff3030,
+                    #8a24ff,
                     transparent
                 );
 
@@ -296,6 +346,12 @@
             margin-right: 5px;
         }
 
+        /* ANNOUNCEMENT NUMBER */
+
+        .announcement-card .episode-number small {
+            color: #c45c91;
+        }
+
         /* STATUS */
 
         .episode-status {
@@ -337,6 +393,15 @@
             background: #8a8f95;
         }
 
+        /* ANNOUNCEMENT STATUS */
+
+        .announcement-card .status-dot {
+            background: #d52d68;
+
+            box-shadow:
+                0 0 8px rgba(213,45,104,0.55);
+        }
+
         /* CONTENT */
 
         .episode-content {
@@ -367,6 +432,27 @@
             letter-spacing: -0.4px;
 
             margin-bottom: 20px;
+        }
+
+        /* ANNOUNCEMENT TITLE */
+
+        .announcement-card .episode-title {
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff3434 0%,
+                    #d62f68 42%,
+                    #8a2be2 100%
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            color: transparent;
+
+            font-weight: 600;
         }
 
         /* INFO */
@@ -482,6 +568,24 @@
             color: #b8bdc3;
 
             font-weight: 600;
+        }
+
+        /* ANNOUNCEMENT REPORT */
+
+        .announcement-report {
+            color: #747b84;
+
+            font-size: 11px;
+
+            line-height: 1.75;
+        }
+
+        .announcement-report p {
+            margin-bottom: 14px;
+        }
+
+        .announcement-report p:last-child {
+            margin-bottom: 0;
         }
 
         /* FOOTER */
@@ -659,7 +763,6 @@
                             alt="Episode 079 Reference"
                         >
 
-
                         <!-- STATUS -->
 
                         <div class="episode-status">
@@ -669,7 +772,6 @@
                             In Progress
 
                         </div>
-
 
                         <!-- NUMBER -->
 
@@ -686,11 +788,9 @@
 
                     <div class="episode-content">
 
-
                         <div class="episode-label">
                             Season 06 — L0st Days
                         </div>
-
 
                         <h2 class="episode-title">
                             In Misery, We Remain...
@@ -713,7 +813,6 @@
                                 </div>
 
                             </div>
-
 
                             <div class="info">
 
@@ -750,7 +849,6 @@
                             Current Record
                         </div>
 
-
                         <div class="dialogue">
 
                             <div class="connecting">
@@ -772,6 +870,101 @@
 
                                 "Yes, just be patient."
                             </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- NEW ANNOUNCEMENT -->
+
+                <article class="episode-card announcement-card">
+
+
+                    <!-- THUMBNAIL -->
+
+                    <div class="episode-thumbnail">
+
+                        <img
+                            src="https://i.pinimg.com/736x/33/ea/30/33ea309f0dd44831bfa79042244fb1bd.jpg"
+                            alt="New Announcement"
+                        >
+
+                        <!-- STATUS -->
+
+                        <div class="episode-status">
+
+                            <span class="status-dot"></span>
+
+                            New
+
+                        </div>
+
+                        <!-- NUMBER -->
+
+                        <div class="episode-number">
+
+                            <small>INFO</small>079
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+
+                    <div class="episode-content">
+
+                        <div class="episode-label">
+                            New Announcement
+                        </div>
+
+                        <h2 class="episode-title">
+                            Report — Ch. 79
+                        </h2>
+
+
+                        <!-- REPORT -->
+
+                        <div class="description-label">
+                            Report
+                        </div>
+
+                        <div class="announcement-report">
+
+                            <p>
+                                Shiro was sent to the Cam Base with the
+                                mission of investigating and supervising
+                                the progress made by the Cam scientists
+                                regarding Titan Speakerman.
+                            </p>
+
+                            <p>
+                                Upon arriving, Shiro found the Titan
+                                undergoing various upgrades and
+                                modifications. However, during the
+                                inspection, Titan Speakerman reacted
+                                unexpectedly and grabbed Shiro, beginning
+                                to release a massive amount of energy that
+                                eventually caused him to overload.
+                            </p>
+
+                            <p>
+                                The situation quickly spiraled out of
+                                control. Shortly after, Uran arrived at
+                                the base and intervened, managing to free
+                                Shiro from the Titan's grip and stop the
+                                overload.
+                            </p>
+
+                            <p>
+                                The incident raised questions about Titan
+                                Speakerman's new upgrades and whether the
+                                Cam scientists truly have complete control
+                                over his newly acquired capabilities.
+                            </p>
 
                         </div>
 
