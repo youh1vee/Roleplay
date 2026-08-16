@@ -1,1760 +1,2558 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Characters — VOID CORE</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: #0d0f11;
-            color: #e8e9eb;
-            font-family: Arial, Helvetica, sans-serif;
-            min-height: 100vh;
-            padding: 0 4.5vw;
-        }
-
-        body.modal-open {
-            overflow: hidden;
-        }
-
-        /* HEADER */
-
-        header {
-            height: 82px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .brand-icon {
-            width: 31px;
-            height: 31px;
-            border: 1px solid #34383d;
-            border-radius: 9px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            color: #9da3aa;
-            font-size: 12px;
-        }
-
-        .brand-name {
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1.2px;
-        }
-
-        .archive-link {
-            color: #606873;
-            text-decoration: none;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: color 0.2s ease;
-        }
-
-        .archive-link:hover {
-            color: #cfd2d6;
-        }
-
-        /* HERO */
-
-        .hero {
-            padding-top: 38px;
-            padding-bottom: 48px;
-        }
-
-        .eyebrow {
-            color: #6b737e;
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        h1 {
-            font-size: clamp(54px, 8vw, 78px);
-            line-height: 0.95;
-            letter-spacing: 2px;
-            font-weight: 800;
-            color: #f0f0f1;
-        }
-
-        .subtitle {
-            margin-top: 17px;
-            color: #666d76;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        /* ARCHIVE */
-
-        .archive-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-            align-items: start;
-        }
-
-        .section-heading {
-            grid-column: 1 / -1;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            margin-bottom: -5px;
-        }
-
-        .section-heading h2 {
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .section-heading span {
-            font-size: 9px;
-            color: #50565e;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* CHARACTER CARD */
-
-        .character-card {
-            position: relative;
-
-            border: 1px solid #2c3035;
-            border-radius: 15px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.025),
-                    rgba(255,255,255,0.005)
-                );
-
-            overflow: hidden;
-
-            cursor: pointer;
-
-            transition:
-                border-color 0.25s ease,
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .character-card:hover {
-            border-color: #444a52;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.22);
-        }
-
-        .character-card:active {
-            transform: translateY(-1px) scale(0.998);
-        }
-
-        /* RED ACCENT — PATHETIC */
-
-        .owner-pathetic {
-            border-color: #3b2528;
-
-            background:
-                radial-gradient(
-                    circle at 100% 0%,
-                    rgba(125, 25, 31, 0.20),
-                    transparent 42%
-                ),
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.025),
-                    rgba(255,255,255,0.005)
-                );
-        }
-
-        .owner-pathetic:hover {
-            border-color: #633238;
-        }
-
-        .owner-pathetic::before {
-            content: "";
-
-            position: absolute;
-            top: 0;
-            right: 0;
-
-            width: 45%;
-            height: 2px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(145, 35, 43, 0.8)
-                );
-        }
-
-        /* ORANGE ACCENT — GURKAS / INFECTED */
-
-        .owner-gurkas {
-            border-color: #493522;
-
-            background:
-                radial-gradient(
-                    circle at 100% 0%,
-                    rgba(180, 91, 20, 0.20),
-                    transparent 42%
-                ),
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.025),
-                    rgba(255,255,255,0.005)
-                );
-        }
-
-        .owner-gurkas:hover {
-            border-color: #735333;
-        }
-
-        .owner-gurkas::before {
-            content: "";
-
-            position: absolute;
-            top: 0;
-            right: 0;
-
-            width: 45%;
-            height: 2px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(205, 103, 25, 0.85)
-                );
-        }
-
-        /* YELLOW ACCENT — JAMES / G-TOILET 5.0 */
-
-        .owner-james {
-            border-color: #6b5715;
-            background:
-                radial-gradient(circle at 100% 0%, rgba(255, 205, 20, 0.30), transparent 48%),
-                radial-gradient(circle at 72% 8%, rgba(255, 225, 65, 0.10), transparent 35%),
-                linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.005));
-        }
-
-        .owner-james:hover {
-            border-color: #b99a28;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.22), 0 0 28px rgba(255, 205, 20, 0.08);
-        }
-
-        .owner-james::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 62%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, rgba(255, 205, 20, 0.98), rgba(255, 229, 84, 0.72));
-            box-shadow: 0 0 14px rgba(255, 205, 20, 0.30);
-        }
-
-        /* BACKGROUND NUMBER */
-
-        .card-number {
-            position: absolute;
-            right: -8px;
-            bottom: -38px;
-
-            font-size: 180px;
-            font-weight: 800;
-            line-height: 1;
-
-            color: rgba(255,255,255,0.025);
-
-            pointer-events: none;
-            user-select: none;
-        }
-
-        .owner-pathetic .card-number {
-            color: rgba(150, 30, 38, 0.045);
-        }
-
-        .owner-gurkas .card-number {
-            color: rgba(200, 95, 20, 0.045);
-        }
-
-        .owner-james .card-number {
-            color: rgba(255, 205, 20, 0.075);
-        }
-
-        /* IMAGE */
-
-        .character-image {
-            position: relative;
-            height: 235px;
-            overflow: hidden;
-
-            border-bottom: 1px solid #292d32;
-            background: #101215;
-        }
-
-        .character-image img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-            display: block;
-
-            filter: brightness(0.88);
-
-            transition:
-                transform 0.45s ease,
-                filter 0.45s ease;
-        }
-
-        .character-card:hover .character-image img {
-            transform: scale(1.025);
-            filter: brightness(1);
-        }
-
-        .character-image::after {
-            content: "";
-
-            position: absolute;
-            inset: 0;
-
-            background:
-                linear-gradient(
-                    to top,
-                    rgba(13,15,17,0.72),
-                    transparent 55%
-                );
-
-            pointer-events: none;
-        }
-
-        .owner-pathetic .character-image::after {
-            background:
-                linear-gradient(
-                    to top,
-                    rgba(13,15,17,0.75),
-                    transparent 55%
-                ),
-                radial-gradient(
-                    circle at 100% 0%,
-                    rgba(120,20,28,0.12),
-                    transparent 55%
-                );
-        }
-
-        .owner-gurkas .character-image::after {
-            background:
-                linear-gradient(
-                    to top,
-                    rgba(13,15,17,0.75),
-                    transparent 55%
-                ),
-                radial-gradient(
-                    circle at 100% 0%,
-                    rgba(180,85,15,0.13),
-                    transparent 55%
-                );
-        }
-
-        .owner-james .character-image::after {
-            background:
-                linear-gradient(
-                    to top,
-                    rgba(13,15,17,0.75),
-                    transparent 55%
-                ),
-                radial-gradient(
-                    circle at 100% 0%,
-                    rgba(255,205,20,0.18),
-                    transparent 58%
-                );
-        }
-
-        /* CONTENT */
-
-        .character-content {
-            position: relative;
-            z-index: 2;
-            padding: 25px 27px 28px;
-        }
-
-        .character-label {
-            color: #59616b;
-            font-size: 9px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .character-name {
-            font-size: 28px;
-            font-weight: 500;
-            letter-spacing: -0.5px;
-            color: #f0f0f1;
-            margin-bottom: 17px;
-        }
-
-        /* STATUS */
-
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            padding: 7px 10px;
-
-            border: 1px solid #343940;
-            border-radius: 6px;
-
-            font-size: 9px;
-            letter-spacing: 1.4px;
-            text-transform: uppercase;
-
-            color: #aeb3b9;
-            margin-bottom: 22px;
-        }
-
-        .status-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: #777d84;
-        }
-
-        .owner-pathetic .status-dot {
-            background: #9a3038;
-        }
-
-        .owner-gurkas .status-dot {
-            background: #d16c1c;
-        }
-
-        /* INFORMATION */
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-
-            border-top: 1px solid #292d32;
-            border-bottom: 1px solid #292d32;
-
-            margin-bottom: 22px;
-        }
-
-        .info {
-            padding: 13px 0;
-        }
-
-        .info:nth-child(odd) {
-            border-right: 1px solid #292d32;
-            padding-right: 18px;
-        }
-
-        .info:nth-child(even) {
-            padding-left: 18px;
-        }
-
-        .info-label {
-            color: #535b65;
-            font-size: 8px;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .info-value {
-            color: #c8cbd0;
-            font-size: 11px;
-        }
-
-        .owner-pathetic .owner-value {
-            color: #a94a51;
-        }
-
-        .owner-gurkas .owner-value {
-            color: #c87829;
-        }
-
-        /* DESCRIPTION */
-
-        .description-label {
-            color: #535b65;
-            font-size: 8px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .description {
-            color: #747b84;
-            font-size: 11px;
-            line-height: 1.75;
-        }
-
-        /* FOOTER */
-
-        footer {
-            margin-top: 55px;
-            padding: 18px 3px 28px;
-
-            border-top: 1px solid #202328;
-
-            display: flex;
-            justify-content: space-between;
-        }
-
-        footer span {
-            color: #454b53;
-            font-size: 9px;
-            letter-spacing: 1.4px;
-            text-transform: uppercase;
-        }
-
-        /* =========================================================
-           CHARACTER MODAL
-        ========================================================= */
-
-        .character-modal {
-            position: fixed;
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-
-            padding: 25px;
-
-            border: none;
-            background: transparent;
-
-            color: #e8e9eb;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            opacity: 0;
-            pointer-events: none;
-
-            transition: opacity 0.3s ease;
-        }
-
-        .character-modal::backdrop {
-            background: rgba(3, 5, 7, 0.82);
-            backdrop-filter: blur(9px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .character-modal[open] {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .character-modal[open]::backdrop {
-            opacity: 1;
-        }
-
-        .modal-box {
-            position: relative;
-
-            width: min(900px, 100%);
-            max-height: 90vh;
-
-            overflow-y: auto;
-
-            border: 1px solid #34383d;
-            border-radius: 18px;
-
-            background:
-                radial-gradient(
-                    circle at 100% 0%,
-                    rgba(255,255,255,0.035),
-                    transparent 40%
-                ),
-                #101215;
-
-            box-shadow:
-                0 30px 100px rgba(0,0,0,0.55);
-
-            transform: translateY(18px) scale(0.985);
-            opacity: 0;
-
-            transition:
-                transform 0.35s cubic-bezier(.2,.8,.2,1),
-                opacity 0.3s ease;
-        }
-
-        .character-modal[open] .modal-box {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
-
-        /* MODAL TOP */
-
-        .modal-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 20px 23px;
-
-            border-bottom: 1px solid #292d32;
-        }
-
-        .modal-id {
-            color: #535b65;
-            font-size: 9px;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-        }
-
-        .close-modal {
-            border: 1px solid #343940;
-            background: #15181b;
-
-            color: #858c94;
-
-            width: 34px;
-            height: 34px;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-
-            font-size: 12px;
-
-            transition:
-                color 0.2s ease,
-                border-color 0.2s ease,
-                background 0.2s ease;
-        }
-
-        .close-modal:hover {
-            color: #f0f0f1;
-            border-color: #555b63;
-            background: #1a1d20;
-        }
-
-        /* MODAL HERO */
-
-        .modal-main {
-            display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            gap: 0;
-        }
-
-        .modal-image {
-            min-height: 420px;
-
-            background: #0d0f11;
-
-            border-right: 1px solid #292d32;
-
-            overflow: hidden;
-        }
-
-        .modal-image img {
-            width: 100%;
-            height: 100%;
-
-            min-height: 420px;
-
-            object-fit: cover;
-
-            display: block;
-
-            filter: brightness(0.9);
-
-            transition: filter 0.3s ease;
-        }
-
-        .modal-image img:hover {
-            filter: brightness(1);
-        }
-
-        .modal-information {
-            padding: 32px;
-        }
-
-        .modal-eyebrow {
-            color: #59616b;
-            font-size: 9px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-
-            margin-bottom: 10px;
-        }
-
-        .modal-name {
-            font-size: clamp(34px, 5vw, 48px);
-            line-height: 1;
-            font-weight: 500;
-
-            color: #f0f0f1;
-
-            margin-bottom: 18px;
-        }
-
-        .modal-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            padding: 7px 10px;
-
-            border: 1px solid #343940;
-            border-radius: 6px;
-
-            color: #aeb3b9;
-
-            font-size: 9px;
-            letter-spacing: 1.4px;
-            text-transform: uppercase;
-
-            margin-bottom: 25px;
-        }
-
-        .modal-status-dot {
-            width: 5px;
-            height: 5px;
-
-            border-radius: 50%;
-            background: #9a3038;
-        }
-
-        /* MODAL INFO GRID */
-
-        .modal-info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-
-            border-top: 1px solid #292d32;
-            border-bottom: 1px solid #292d32;
-
-            margin-bottom: 25px;
-        }
-
-        .modal-info {
-            padding: 14px 0;
-        }
-
-        .modal-info:nth-child(odd) {
-            border-right: 1px solid #292d32;
-            padding-right: 16px;
-        }
-
-        .modal-info:nth-child(even) {
-            padding-left: 16px;
-        }
-
-        .modal-info-label {
-            color: #535b65;
-            font-size: 8px;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-
-            margin-bottom: 5px;
-        }
-
-        .modal-info-value {
-            color: #c8cbd0;
-            font-size: 11px;
-            line-height: 1.5;
-        }
-
-        .modal-section {
-            margin-top: 22px;
-        }
-
-        .modal-section-title {
-            color: #535b65;
-
-            font-size: 8px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-
-            margin-bottom: 8px;
-        }
-
-        .modal-section-text {
-            color: #747b84;
-
-            font-size: 11px;
-            line-height: 1.75;
-        }
-
-        /* GALLERY */
-
-        .gallery-section {
-            padding: 30px 32px 34px;
-
-            border-top: 1px solid #292d32;
-        }
-
-        .gallery-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            margin-bottom: 15px;
-        }
-
-        .gallery-title {
-            color: #535b65;
-            font-size: 8px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .gallery-counter {
-            color: #454b53;
-            font-size: 8px;
-            letter-spacing: 1.5px;
-        }
-
-        .gallery-frame {
-            position: relative;
-
-            width: 100%;
-            height: 350px;
-
-            overflow: hidden;
-
-            border: 1px solid #292d32;
-            border-radius: 12px;
-
-            background: #0b0d0f;
-        }
-
-        .gallery-image {
-            position: absolute;
-
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-
-            object-fit: contain;
-
-            opacity: 0;
-
-            transform: scale(1.015);
-
-            transition:
-                opacity 0.8s ease,
-                transform 0.8s ease;
-        }
-
-        .gallery-image.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* GALLERY DOTS */
-
-        .gallery-dots {
-            display: flex;
-            justify-content: center;
-            gap: 7px;
-
-            margin-top: 13px;
-        }
-
-        .gallery-dot {
-            width: 5px;
-            height: 5px;
-
-            border: none;
-            border-radius: 50%;
-
-            background: #3a3f45;
-
-            cursor: pointer;
-
-            transition:
-                background 0.25s ease,
-                transform 0.25s ease;
-        }
-
-        .gallery-dot.active {
-            background: #d5d8dc;
-            transform: scale(1.25);
-        }
-
-
-        /* YELLOW ACCENT — G-TOILET 5.0 WIDGET */
-
-        .owner-james-modal {
-            border-color: #6b5715;
-
-            background:
-                radial-gradient(
-                    circle at 100% 0%,
-                    rgba(255, 205, 20, 0.14),
-                    transparent 42%
-                ),
-                #101215;
-        }
-
-        .owner-james-modal::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 55%;
-            height: 2px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 205, 20, 0.98),
-                rgba(255, 229, 84, 0.72)
-            );
-            box-shadow: 0 0 18px rgba(255, 205, 20, 0.28);
-        }
-
-        .owner-james-modal .modal-image {
-            background:
-                radial-gradient(
-                    circle at 100% 0%,
-                    rgba(255, 205, 20, 0.12),
-                    transparent 55%
-                ),
-                #0d0f11;
-        }
-
-        .owner-james-modal .modal-image img {
-            filter: brightness(0.88);
-        }
-
-        .owner-james-modal .modal-image img:hover {
-            filter: brightness(1);
-        }
-
-        .james-modal-status {
-            border-color: #6b5715;
-            color: #d8bd4d;
-            background: rgba(255, 205, 20, 0.035);
-        }
-
-        .james-modal-dot {
-            background: #ffd21c !important;
-            box-shadow: 0 0 9px rgba(255, 210, 28, 0.65);
-        }
-
-        /* Gallery image fitting:
-           fills the frame instead of leaving black letterbox borders. */
-        .gallery-frame {
-            overflow: hidden;
-        }
-
-        .gallery-frame .gallery-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            transform: scale(1.035);
-        }
-
-        .gallery-frame .gallery-image.active {
-            animation: galleryZoomIn 0.42s ease both;
-        }
-
-        @keyframes galleryZoomIn {
-            from {
-                transform: scale(1.075);
-            }
-            to {
-                transform: scale(1.035);
-            }
-        }
-
-        /* G-Toilet images get a little extra crop because several source
-           images are not the same aspect ratio as the gallery frame. */
-        .gtoilet-gallery-frame .gallery-image {
-            transform: scale(1.07);
-            opacity: 0;
-            transition:
-                opacity 0.8s ease,
-                transform 0.8s ease;
-        }
-
-        .gtoilet-gallery-frame .gallery-image.active {
-            opacity: 1;
-        }
-
-        .gtoilet-gallery-frame .gallery-image.active {
-            animation: gtoiletGalleryZoom 0.42s ease both;
-        }
-
-        @keyframes gtoiletGalleryZoom {
-            from {
-                transform: scale(1.11);
-            }
-            to {
-                transform: scale(1.07);
-            }
-        }
-
-        .owner-james-modal .gallery-frame {
-            border-color: #4d421d;
-        }
-
-        .owner-james-modal .gallery-dot.active {
-            background: #ffd21c;
-            box-shadow: 0 0 8px rgba(255, 210, 28, 0.35);
-        }
-
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
-
-        @media (max-width: 850px) {
-
-            .archive-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-main {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-image {
-                min-height: 300px;
-                height: 300px;
-
-                border-right: none;
-                border-bottom: 1px solid #292d32;
-            }
-
-            .modal-image img {
-                min-height: 300px;
-            }
-        }
-
-        @media (max-width: 650px) {
-
-            body {
-                padding: 0 22px;
-            }
-
-            header {
-                height: 72px;
-            }
-
-            .hero {
-                padding-top: 35px;
-                padding-bottom: 40px;
-            }
-
-            h1 {
-                font-size: 48px;
-            }
-
-            .character-image {
-                height: 200px;
-            }
-
-            .character-content {
-                padding: 22px 20px 24px;
-            }
-
-            .character-name {
-                font-size: 26px;
-            }
-
-            .card-number {
-                font-size: 130px;
-            }
-
-            .section-heading {
-                align-items: flex-start;
-                gap: 12px;
-                flex-direction: column;
-            }
-
-            .character-modal {
-                padding: 10px;
-            }
-
-            .modal-box {
-                max-height: 94vh;
-                border-radius: 15px;
-            }
-
-            .modal-top {
-                padding: 16px 17px;
-            }
-
-            .modal-information {
-                padding: 24px 20px;
-            }
-
-            .modal-image {
-                height: 250px;
-                min-height: 250px;
-            }
-
-            .modal-image img {
-                min-height: 250px;
-            }
-
-            .modal-name {
-                font-size: 34px;
-            }
-
-            .modal-info-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .gallery-section {
-                padding: 24px 20px 25px;
-            }
-
-            .gallery-frame {
-                height: 240px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                transition-duration: 0.01ms !important;
-                animation-duration: 0.01ms !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Characters — VOID CORE</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#0d0f11;
+    color:#e8e9eb;
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+    padding:0 4.5vw;
+}
+
+body.modal-open{
+    overflow:hidden;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    height:82px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.brand-icon{
+    width:31px;
+    height:31px;
+    border:1px solid #34383d;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#9da3aa;
+    font-size:12px;
+}
+
+.brand-name{
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:1.2px;
+}
+
+.archive-link{
+    color:#606873;
+    text-decoration:none;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:color .2s ease;
+}
+
+.archive-link:hover{
+    color:#cfd2d6;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    padding-top:38px;
+    padding-bottom:48px;
+}
+
+.eyebrow{
+    color:#6b737e;
+    font-size:10px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+h1{
+    font-size:clamp(54px,8vw,78px);
+    line-height:.95;
+    letter-spacing:2px;
+    font-weight:800;
+    color:#f0f0f1;
+}
+
+.subtitle{
+    margin-top:17px;
+    color:#666d76;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* =========================================================
+   ARCHIVE
+========================================================= */
+
+.archive-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+    align-items:start;
+}
+
+.section-heading{
+    grid-column:1/-1;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:-5px;
+}
+
+.section-heading h2{
+    font-size:14px;
+    font-weight:700;
+}
+
+.section-heading span{
+    font-size:9px;
+    color:#50565e;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+/* =========================================================
+   CHARACTER CARD
+========================================================= */
+
+.character-card{
+    position:relative;
+    border:1px solid #2c3035;
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            rgba(255,255,255,.005)
+        );
+
+    overflow:hidden;
+    cursor:pointer;
+
+    transition:
+        border-color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.character-card:hover{
+    border-color:#444a52;
+    transform:translateY(-3px);
+    box-shadow:0 12px 35px rgba(0,0,0,.22);
+}
+
+.character-card:active{
+    transform:translateY(-1px) scale(.998);
+}
+
+/* =========================================================
+   OWNER COLORS
+========================================================= */
+
+.owner-pathetic{
+    border-color:#3b2528;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(125,25,31,.20),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            rgba(255,255,255,.005)
+        );
+}
+
+.owner-pathetic:hover{
+    border-color:#633238;
+}
+
+.owner-pathetic::before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:45%;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(145,35,43,.8)
+        );
+}
+
+.owner-gurkas{
+    border-color:#493522;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(180,91,20,.20),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            rgba(255,255,255,.005)
+        );
+}
+
+.owner-gurkas:hover{
+    border-color:#735333;
+}
+
+.owner-gurkas::before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:45%;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(205,103,25,.85)
+        );
+}
+
+.owner-james{
+    border-color:#6b5715;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(255,205,20,.30),
+            transparent 48%
+        ),
+        radial-gradient(
+            circle at 72% 8%,
+            rgba(255,225,65,.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.03),
+            rgba(255,255,255,.005)
+        );
+}
+
+.owner-james:hover{
+    border-color:#b99a28;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.22),
+        0 0 28px rgba(255,205,20,.08);
+}
+
+.owner-james::before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:62%;
+    height:3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,205,20,.98),
+            rgba(255,229,84,.72)
+        );
+
+    box-shadow:0 0 14px rgba(255,205,20,.30);
+}
+
+/* =========================================================
+   BACKGROUND NUMBER
+========================================================= */
+
+.card-number{
+    position:absolute;
+    right:-8px;
+    bottom:-38px;
+
+    font-size:180px;
+    font-weight:800;
+    line-height:1;
+
+    color:rgba(255,255,255,.025);
+
+    pointer-events:none;
+    user-select:none;
+}
+
+.owner-pathetic .card-number{
+    color:rgba(150,30,38,.045);
+}
+
+.owner-gurkas .card-number{
+    color:rgba(200,95,20,.045);
+}
+
+.owner-james .card-number{
+    color:rgba(255,205,20,.075);
+}
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.character-image{
+    position:relative;
+    height:235px;
+    overflow:hidden;
+
+    border-bottom:1px solid #292d32;
+    background:#101215;
+}
+
+.character-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+    display:block;
+
+    filter:brightness(.88);
+
+    transition:
+        transform .45s ease,
+        filter .45s ease;
+}
+
+.character-card:hover .character-image img{
+    transform:scale(1.025);
+    filter:brightness(1);
+}
+
+.character-image::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(13,15,17,.72),
+            transparent 55%
+        );
+
+    pointer-events:none;
+}
+
+.owner-pathetic .character-image::after{
+    background:
+        linear-gradient(
+            to top,
+            rgba(13,15,17,.75),
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(120,20,28,.12),
+            transparent 55%
+        );
+}
+
+.owner-gurkas .character-image::after{
+    background:
+        linear-gradient(
+            to top,
+            rgba(13,15,17,.75),
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(180,85,15,.13),
+            transparent 55%
+        );
+}
+
+.owner-james .character-image::after{
+    background:
+        linear-gradient(
+            to top,
+            rgba(13,15,17,.75),
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(255,205,20,.18),
+            transparent 58%
+        );
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.character-content{
+    position:relative;
+    z-index:2;
+    padding:25px 27px 28px;
+}
+
+.character-label{
+    color:#59616b;
+    font-size:9px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.character-name{
+    font-size:28px;
+    font-weight:500;
+    letter-spacing:-.5px;
+    color:#f0f0f1;
+    margin-bottom:17px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:7px 10px;
+
+    border:1px solid #343940;
+    border-radius:6px;
+
+    font-size:9px;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+
+    color:#aeb3b9;
+    margin-bottom:22px;
+}
+
+.status-dot{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#777d84;
+}
+
+.owner-pathetic .status-dot{
+    background:#9a3038;
+}
+
+.owner-gurkas .status-dot{
+    background:#d16c1c;
+}
+
+.owner-james .status-dot{
+    background:#ffcd14;
+    box-shadow:0 0 8px rgba(255,205,20,.35);
+}
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+
+    border-top:1px solid #292d32;
+    border-bottom:1px solid #292d32;
+
+    margin-bottom:22px;
+}
+
+.info{
+    padding:13px 0;
+}
+
+.info:nth-child(odd){
+    border-right:1px solid #292d32;
+    padding-right:18px;
+}
+
+.info:nth-child(even){
+    padding-left:18px;
+}
+
+.info-label{
+    color:#535b65;
+    font-size:8px;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+    margin-bottom:5px;
+}
+
+.info-value{
+    color:#c8cbd0;
+    font-size:11px;
+}
+
+.owner-pathetic .owner-value{
+    color:#a94a51;
+}
+
+.owner-gurkas .owner-value{
+    color:#c87829;
+}
+
+.owner-james .owner-value{
+    color:#d7b31c;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.description-label{
+    color:#535b65;
+    font-size:8px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.description{
+    color:#747b84;
+    font-size:11px;
+    line-height:1.75;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    margin-top:55px;
+    padding:18px 3px 28px;
+
+    border-top:1px solid #202328;
+
+    display:flex;
+    justify-content:space-between;
+}
+
+footer span{
+    color:#454b53;
+    font-size:9px;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+}
+
+/* =========================================================
+   CHARACTER MODAL
+========================================================= */
+
+.character-modal{
+    position:fixed;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    padding:25px;
+
+    border:none;
+    background:transparent;
+
+    color:#e8e9eb;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:opacity .3s ease;
+}
+
+.character-modal::backdrop{
+    background:rgba(3,5,7,.82);
+    backdrop-filter:blur(9px);
+    opacity:0;
+    transition:opacity .3s ease;
+}
+
+.character-modal[open]{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.character-modal[open]::backdrop{
+    opacity:1;
+}
+
+.modal-box{
+    position:relative;
+
+    width:min(900px,100%);
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    border:1px solid #34383d;
+    border-radius:18px;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(255,255,255,.035),
+            transparent 40%
+        ),
+        #101215;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.55);
+
+    transform:translateY(18px) scale(.985);
+    opacity:0;
+
+    transition:
+        transform .35s cubic-bezier(.2,.8,.2,1),
+        opacity .3s ease;
+}
+
+.character-modal[open] .modal-box{
+    transform:translateY(0) scale(1);
+    opacity:1;
+}
+
+/* =========================================================
+   MODAL TOP
+========================================================= */
+
+.modal-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:20px 23px;
+
+    border-bottom:1px solid #292d32;
+}
+
+.modal-id{
+    color:#535b65;
+    font-size:9px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+}
+
+.close-modal{
+    border:1px solid #343940;
+    background:#15181b;
+
+    color:#858c94;
+
+    width:34px;
+    height:34px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+    font-size:12px;
+
+    transition:
+        color .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.close-modal:hover{
+    color:#f0f0f1;
+    border-color:#555b63;
+    background:#1a1d20;
+}
+
+/* =========================================================
+   MODAL HERO
+========================================================= */
+
+.modal-main{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+}
+
+.modal-image{
+    min-height:420px;
+
+    background:#0d0f11;
+
+    border-right:1px solid #292d32;
+
+    overflow:hidden;
+}
+
+.modal-image img{
+    width:100%;
+    height:100%;
+
+    min-height:420px;
+
+    object-fit:cover;
+    display:block;
+
+    filter:brightness(.9);
+
+    transition:filter .3s ease;
+}
+
+.modal-image img:hover{
+    filter:brightness(1);
+}
+
+.modal-information{
+    padding:32px;
+}
+
+.modal-eyebrow{
+    color:#59616b;
+    font-size:9px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:10px;
+}
+
+.modal-name{
+    font-size:clamp(34px,5vw,48px);
+    line-height:1;
+    font-weight:500;
+    color:#f0f0f1;
+    margin-bottom:18px;
+}
+
+.modal-status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:7px 10px;
+
+    border:1px solid #343940;
+    border-radius:6px;
+
+    color:#aeb3b9;
+
+    font-size:9px;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+
+    margin-bottom:25px;
+}
+
+.modal-status-dot{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#9a3038;
+}
+
+.modal-status-dot.orange{
+    background:#d16c1c;
+}
+
+.modal-status-dot.yellow{
+    background:#ffcd14;
+}
+
+/* =========================================================
+   MODAL INFO
+========================================================= */
+
+.modal-info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+
+    border-top:1px solid #292d32;
+    border-bottom:1px solid #292d32;
+
+    margin-bottom:25px;
+}
+
+.modal-info{
+    padding:14px 0;
+}
+
+.modal-info:nth-child(odd){
+    border-right:1px solid #292d32;
+    padding-right:16px;
+}
+
+.modal-info:nth-child(even){
+    padding-left:16px;
+}
+
+.modal-info-label{
+    color:#535b65;
+    font-size:8px;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+    margin-bottom:5px;
+}
+
+.modal-info-value{
+    color:#c8cbd0;
+    font-size:11px;
+    line-height:1.5;
+}
+
+.modal-section{
+    margin-top:22px;
+}
+
+.modal-section-title{
+    color:#535b65;
+    font-size:8px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.modal-section-text{
+    color:#747b84;
+    font-size:11px;
+    line-height:1.75;
+}
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery-section{
+    padding:30px 32px 34px;
+    border-top:1px solid #292d32;
+}
+
+.gallery-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.gallery-title{
+    color:#535b65;
+    font-size:8px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.gallery-counter{
+    color:#454b53;
+    font-size:8px;
+    letter-spacing:1.5px;
+}
+
+.gallery-frame{
+    position:relative;
+
+    width:100%;
+    height:350px;
+
+    overflow:hidden;
+
+    border:1px solid #292d32;
+    border-radius:12px;
+
+    background:#0b0d0f;
+}
+
+.gallery-image{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    opacity:0;
+    transform:scale(1.015);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.gallery-image.active{
+    opacity:1;
+    transform:scale(1);
+}
+
+.gallery-dots{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    margin-top:13px;
+}
+
+.gallery-dot{
+    width:5px;
+    height:5px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#3a3f45;
+
+    cursor:pointer;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.gallery-dot.active{
+    background:#d5d8dc;
+    transform:scale(1.25);
+}
+
+/* =========================================================
+   AFRODITA AHERIOLIS — SECRET EASTER EGG
+========================================================= */
+
+#afroditaSecretWidget{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:22px;
+
+    background:rgba(5,2,10,.78);
+    backdrop-filter:blur(14px) saturate(1.25);
+
+    opacity:0;
+    pointer-events:none;
+    visibility:hidden;
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+#afroditaSecretWidget.active{
+    opacity:1;
+    pointer-events:auto;
+    visibility:visible;
+}
+
+.afrodita-secret-card{
+    position:relative;
+
+    width:min(760px,100%);
+    max-height:88vh;
+
+    overflow:auto;
+
+    border:1px solid rgba(231,86,255,.55);
+    border-radius:24px;
+
+    background:
+        radial-gradient(
+            circle at 12% 0%,
+            rgba(255,55,196,.22),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(126,53,255,.25),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            #1c0a26,
+            #0d0718
+        );
+
+    box-shadow:
+        0 35px 110px rgba(0,0,0,.72),
+        0 0 45px rgba(216,52,255,.22),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    transform:translateY(18px) scale(.97);
+
+    transition:
+        transform .42s cubic-bezier(.2,.8,.2,1);
+}
+
+#afroditaSecretWidget.active .afrodita-secret-card{
+    transform:translateY(0) scale(1);
+}
+
+.afrodita-secret-card::before{
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:7%;
+
+    width:86%;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff48d0,
+            #a653ff,
+            transparent
+        );
+
+    box-shadow:0 0 18px rgba(255,72,208,.8);
+}
+
+.afrodita-secret-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:18px 20px;
+
+    border-bottom:1px solid rgba(229,91,255,.16);
+}
+
+.afrodita-secret-tag{
+    color:#ff6bdd;
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+.afrodita-secret-close{
+    width:34px;
+    height:34px;
+
+    border:1px solid rgba(255,106,222,.3);
+    border-radius:9px;
+
+    background:rgba(255,255,255,.035);
+    color:#e9b6ff;
+
+    cursor:pointer;
+    font-size:16px;
+}
+
+.afrodita-secret-close:hover{
+    color:#fff;
+    border-color:rgba(255,105,220,.75);
+    background:rgba(255,71,208,.12);
+    box-shadow:0 0 18px rgba(255,71,208,.18);
+}
+
+.afrodita-secret-body{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    min-height:430px;
+}
+
+.afrodita-secret-image{
+    min-height:430px;
+
+    overflow:hidden;
+
+    border-right:1px solid rgba(229,91,255,.16);
+
+    background:#0b0612;
+}
+
+.afrodita-secret-image img{
+    width:100%;
+    height:100%;
+
+    min-height:430px;
+
+    display:block;
+
+    object-fit:cover;
+
+    filter:saturate(1.08) contrast(1.04);
+}
+
+.afrodita-secret-info{
+    padding:31px;
+}
+
+.afrodita-secret-eyebrow{
+    color:#b75aff;
+    font-size:8px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:10px;
+}
+
+.afrodita-secret-name{
+    margin:0 0 14px;
+
+    font-size:clamp(32px,5vw,48px);
+    line-height:.98;
+
+    font-weight:700;
+    letter-spacing:-1.2px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #fff,
+            #ff75dc 42%,
+            #a968ff 88%
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.afrodita-secret-status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:7px 10px;
+    margin-bottom:23px;
+
+    border:1px solid rgba(255,95,218,.27);
+    border-radius:7px;
+
+    color:#ffb7eb;
+    background:rgba(255,65,207,.055);
+
+    font-size:8px;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+}
+
+.afrodita-secret-status-dot{
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#ff4dcc;
+
+    box-shadow:0 0 10px #ff4dcc;
+}
+
+.afrodita-secret-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+
+    border-top:1px solid rgba(229,91,255,.16);
+    border-bottom:1px solid rgba(229,91,255,.16);
+}
+
+.afrodita-secret-field{
+    padding:12px 0;
+}
+
+.afrodita-secret-field:nth-child(odd){
+    padding-right:14px;
+    border-right:1px solid rgba(229,91,255,.13);
+}
+
+.afrodita-secret-field:nth-child(even){
+    padding-left:14px;
+}
+
+.afrodita-secret-label{
+    color:#8e709b;
+    font-size:7px;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+    margin-bottom:5px;
+}
+
+.afrodita-secret-value{
+    color:#e7d9eb;
+    font-size:10px;
+    line-height:1.5;
+}
+
+.afrodita-secret-section{
+    margin-top:20px;
+}
+
+.afrodita-secret-section-title{
+    color:#b75aff;
+    font-size:7px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:7px;
+}
+
+.afrodita-secret-section-text{
+    color:#aa9aaf;
+    font-size:10px;
+    line-height:1.7;
+}
+
+.afrodita-secret-gallery{
+    position:relative;
+
+    height:95px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    border:1px dashed rgba(255,73,214,.35);
+    border-radius:12px;
+
+    background:
+        repeating-linear-gradient(
+            135deg,
+            rgba(255,255,255,.025) 0 7px,
+            transparent 7px 14px
+        ),
+        linear-gradient(
+            135deg,
+            rgba(255,56,203,.06),
+            rgba(125,69,255,.07)
+        );
+}
+
+.afrodita-secret-404{
+    font-size:42px;
+    font-weight:800;
+    letter-spacing:4px;
+
+    color:rgba(238,174,255,.26);
+
+    text-shadow:
+        0 0 24px rgba(225,76,255,.24);
+}
+
+.afrodita-secret-glitch{
+    position:absolute;
+
+    color:rgba(255,87,216,.3);
+
+    font-size:7px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+.afrodita-secret-glitch.one{
+    top:12px;
+    left:15px;
+}
+
+.afrodita-secret-glitch.two{
+    right:15px;
+    bottom:12px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:850px){
+
+    .archive-grid{
+        grid-template-columns:1fr;
+    }
+
+    .modal-main{
+        grid-template-columns:1fr;
+    }
+
+    .modal-image{
+        min-height:300px;
+        height:300px;
+
+        border-right:none;
+        border-bottom:1px solid #292d32;
+    }
+
+    .modal-image img{
+        min-height:300px;
+    }
+}
+
+@media(max-width:700px){
+
+    .afrodita-secret-body{
+        grid-template-columns:1fr;
+    }
+
+    .afrodita-secret-image{
+        min-height:250px;
+        height:250px;
+
+        border-right:none;
+        border-bottom:1px solid rgba(229,91,255,.16);
+    }
+
+    .afrodita-secret-image img{
+        min-height:250px;
+    }
+
+    .afrodita-secret-info{
+        padding:24px 20px;
+    }
+}
+
+@media(max-width:650px){
+
+    body{
+        padding:0 22px;
+    }
+
+    header{
+        height:72px;
+    }
+
+    .hero{
+        padding-top:35px;
+        padding-bottom:40px;
+    }
+
+    h1{
+        font-size:48px;
+    }
+
+    .character-image{
+        height:200px;
+    }
+
+    .character-content{
+        padding:22px 20px 24px;
+    }
+
+    .character-name{
+        font-size:26px;
+    }
+
+    .card-number{
+        font-size:130px;
+    }
+
+    .section-heading{
+        align-items:flex-start;
+        gap:12px;
+        flex-direction:column;
+    }
+
+    .character-modal{
+        padding:10px;
+    }
+
+    .modal-box{
+        max-height:94vh;
+        border-radius:15px;
+    }
+
+    .modal-top{
+        padding:16px 17px;
+    }
+
+    .modal-information{
+        padding:24px 20px;
+    }
+
+    .modal-image{
+        height:250px;
+        min-height:250px;
+    }
+
+    .modal-image img{
+        min-height:250px;
+    }
+
+    .modal-name{
+        font-size:34px;
+    }
+
+    .modal-info-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .gallery-section{
+        padding:24px 20px 25px;
+    }
+
+    .gallery-frame{
+        height:240px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        scroll-behavior:auto!important;
+        transition-duration:.01ms!important;
+        animation-duration:.01ms!important;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-    <header>
+<header>
 
-        <div class="brand">
-            <div class="brand-icon">RP</div>
-            <div class="brand-name">ROLEPLAY</div>
+    <div class="brand">
+        <div class="brand-icon">RP</div>
+        <div class="brand-name">ROLEPLAY</div>
+    </div>
+
+    <a href="index.html" class="archive-link">
+        Story Archive
+    </a>
+
+</header>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<main>
+
+<section class="hero">
+
+    <div class="eyebrow">
+        Roleplay Universe
+    </div>
+
+    <h1>
+        CHARACTERS
+    </h1>
+
+    <p class="subtitle">
+        Profiles of the individuals and entities that inhabit the Roleplay universe.
+    </p>
+
+</section>
+
+
+<!-- =========================================================
+     CHARACTER ARCHIVE
+========================================================= -->
+
+<section class="archive-grid">
+
+    <div class="section-heading">
+
+        <h2>
+            Character Archive
+        </h2>
+
+        <span>
+            004 Entries
+        </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHARACTER 001 — TITAN CAMERAMAN
+    ====================================================== -->
+
+    <article
+        class="character-card"
+        onclick="openCharacter('cameraman')"
+    >
+
+        <div class="card-number">
+            01
         </div>
 
-        <a href="index.html" class="archive-link">
-            Story Archive
-        </a>
+        <div class="character-image">
 
-    </header>
+            <img
+                src="https://media.discordapp.net/attachments/1321552941009731727/1537879007423500308/9bd9785c39b3097e129cadefb33fd9d6.png?ex=6a80a4ef&is=6a7f536f&hm=c737a56e674776ca86e41bb71e43e14dfec3b9a9c6d4f08a5ccaaa0b177ff6eb&=&format=webp&quality=lossless&width=512&height=288"
+                alt="Titan Cameraman"
+            >
 
+        </div>
 
-    <!-- HERO -->
+        <div class="character-content">
 
-    <main>
-
-        <section class="hero">
-
-            <div class="eyebrow">
-                Roleplay Universe
+            <div class="character-label">
+                Character 001
             </div>
 
-            <h1>
-                CHARACTERS
-            </h1>
+            <h2 class="character-name">
+                Titan Cameraman
+            </h2>
 
-            <p class="subtitle">
-                Profiles of the individuals and entities that inhabit the Roleplay universe.
+            <div class="status">
+                <span class="status-dot"></span>
+                Missing — Damaged
+            </div>
+
+            <div class="info-grid">
+
+                <div class="info">
+                    <div class="info-label">Faction</div>
+                    <div class="info-value">Cameraman</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Type</div>
+                    <div class="info-value">Titan</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">First Appearance</div>
+                    <div class="info-value">Genesis</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Current Version</div>
+                    <div class="info-value">V.2.1.1</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Owner</div>
+                    <div class="info-value">None</div>
+                </div>
+
+            </div>
+
+            <div class="description-label">
+                Description
+            </div>
+
+            <p class="description">
+                The first Titan to appear in the story.
+                Titan Cameraman is one of the most powerful members
+                of the Cameraman faction, built to confront the most
+                dangerous threats on the battlefield. After sustaining
+                severe damage during his battles, he eventually
+                disappeared, leaving his current location unknown.
             </p>
 
-        </section>
+        </div>
+
+    </article>
 
 
-        <!-- CHARACTER ARCHIVE -->
+    <!-- =====================================================
+         CHARACTER 002 — TITAN SPEAKERMAN
+    ====================================================== -->
 
-        <section class="archive-grid">
+    <article
+        class="character-card owner-pathetic"
+        onclick="openCharacter('speakerman')"
+    >
 
-            <div class="section-heading">
+        <div class="card-number">
+            02
+        </div>
 
-                <h2>
-                    Character Archive
+        <div class="character-image">
+
+            <img
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538217623110815744/217978c813d7a324b681f12e4bfa7717.png?ex=6a81e04c&is=6a808ecc&hm=d7dd95ed330eac270459b98c7cc25737edbed7e975acff309fce341850434bbc&=&format=webp&quality=lossless&width=512&height=512"
+                alt="Titan Speakerman"
+            >
+
+        </div>
+
+        <div class="character-content">
+
+            <div class="character-label">
+                Character 002
+            </div>
+
+            <h2 class="character-name">
+                Titan Speakerman
+            </h2>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Pending Upgrades
+            </div>
+
+            <div class="info-grid">
+
+                <div class="info">
+                    <div class="info-label">Faction</div>
+                    <div class="info-value">Speaker</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Type</div>
+                    <div class="info-value">Titan</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">First Appearance</div>
+                    <div class="info-value">Genesis</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Current Version</div>
+                    <div class="info-value">V.2.1.1</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Owner</div>
+                    <div class="info-value owner-value">Pathetic</div>
+                </div>
+
+            </div>
+
+            <div class="description-label">
+                Description
+            </div>
+
+            <p class="description">
+                The second Titan to appear in the story.
+                Titan Speakerman is the primary Titan of the
+                Speakerman faction, equipped with powerful
+                sound-based weaponry and immense physical strength.
+                His actions were directly responsible for the
+                beginning of the Dark Days era.
+            </p>
+
+        </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         CHARACTER 003 — TITAN TV MAN
+    ====================================================== -->
+
+    <article class="character-card owner-gurkas">
+
+        <div class="card-number">
+            03
+        </div>
+
+        <div class="character-image">
+
+            <img
+                src="https://media.discordapp.net/attachments/1321552941009731727/1537885888015630367/12215ab9f7cfcbd95c37291b043be75d.png?ex=6a80ab58&is=6a7f59d8&hm=ee8ba8cc444cdfafa9d01bb16a15967105c5ee5f3d069cb4dec3aded2f6598bb&=&format=webp&quality=lossless&width=512&height=313"
+                alt="Titan TV Man"
+            >
+
+        </div>
+
+        <div class="character-content">
+
+            <div class="character-label">
+                Character 003
+            </div>
+
+            <h2 class="character-name">
+                Titan TV Man
+            </h2>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                WOD
+            </div>
+
+            <div class="info-grid">
+
+                <div class="info">
+                    <div class="info-label">Faction</div>
+                    <div class="info-value">TV Man</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Type</div>
+                    <div class="info-value">Titan</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">First Appearance</div>
+                    <div class="info-value">Dark Days</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Current Version</div>
+                    <div class="info-value">V2.0.0 WOD</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Owner</div>
+                    <div class="info-value owner-value">Gurkas</div>
+                </div>
+
+            </div>
+
+            <div class="description-label">
+                Description
+            </div>
+
+            <p class="description">
+                The third Titan to appear in the story.
+                Titan TV Man is the primary Titan of the TV Man
+                faction, possessing immense power and a wide range
+                of advanced abilities. His current state is marked
+                by his infection and his status as WOD.
+            </p>
+
+        </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         CHARACTER 004 — G-TOILET 5.0
+    ====================================================== -->
+
+    <article
+        class="character-card owner-james"
+        onclick="openCharacter('gtoilet')"
+    >
+
+        <div class="card-number">
+            04
+        </div>
+
+        <div class="character-image">
+
+            <img
+                src="https://i.pinimg.com/1200x/8e/54/9e/8e549eb5cef957afa3aa7c02dd5627dd.jpg"
+                alt="G-Toilet 5.0"
+            >
+
+        </div>
+
+        <div class="character-content">
+
+            <div class="character-label">
+                Character 004
+            </div>
+
+            <h2 class="character-name">
+                G-Toilet 5.0
+            </h2>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Active
+            </div>
+
+            <div class="info-grid">
+
+                <div class="info">
+                    <div class="info-label">Faction</div>
+                    <div class="info-value">Skibidi</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Type</div>
+                    <div class="info-value">Boss</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">First Appearance</div>
+                    <div class="info-value">Pre-Genesis</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Current Version</div>
+                    <div class="info-value">5.0.0</div>
+                </div>
+
+                <div class="info">
+                    <div class="info-label">Owner</div>
+                    <div class="info-value owner-value">James</div>
+                </div>
+
+            </div>
+
+            <div class="description-label">
+                Description
+            </div>
+
+            <p class="description">
+                G-Toilet 5.0 is the latest and most powerful evolution
+                of the Skibidi Toilet leader. Equipped with advanced
+                technology, overwhelming firepower, and immense
+                durability, he stands as one of the most dangerous
+                entities in the Skibidi faction.
+            </p>
+
+        </div>
+
+    </article>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <span>Void Core</span>
+    <span>2026</span>
+
+</footer>
+
+
+<!-- =========================================================
+     TITAN CAMERAMAN MODAL
+========================================================= -->
+
+<dialog class="character-modal" id="cameramanModal">
+
+<div class="modal-box">
+
+    <div class="modal-top">
+
+        <span class="modal-id">
+            Character ID — 131185
+        </span>
+
+        <button
+            class="close-modal"
+            onclick="closeCharacter('cameramanModal')"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div class="modal-main">
+
+        <div class="modal-image">
+
+            <img
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538211209655099462/d527d96232b5472c4ebbd2a7ed221049.png?ex=6a81da52&is=6a8088d2&hm=93d8960bf4980446c882413ef347544db73860c4997146cfc8a9711087bbabcd&=&format=webp&quality=lossless&width=512&height=512"
+                alt="Titan Cameraman"
+            >
+
+        </div>
+
+        <div class="modal-information">
+
+            <div class="modal-eyebrow">
+                Character 001
+            </div>
+
+            <h2 class="modal-name">
+                Titan Cameraman
+            </h2>
+
+            <div class="modal-status">
+                <span class="modal-status-dot"></span>
+                Missing
+            </div>
+
+            <div class="modal-info-grid">
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Owner</div>
+                    <div class="modal-info-value">None</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Version</div>
+                    <div class="modal-info-value">2.1.1</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">First Appearance</div>
+                    <div class="modal-info-value">Genesis</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Faction</div>
+                    <div class="modal-info-value">Camera</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Type</div>
+                    <div class="modal-info-value">Titan</div>
+                </div>
+
+            </div>
+
+            <div class="modal-section">
+
+                <div class="modal-section-title">
+                    Lore
+                </div>
+
+                <p class="modal-section-text">
+                    A cameraman.
+                </p>
+
+            </div>
+
+            <div class="modal-section">
+
+                <div class="modal-section-title">
+                    Abilities
+                </div>
+
+                <p class="modal-section-text">
+                    Core flame, Blaster, and other advanced combat abilities.
+                </p>
+
+            </div>
+
+            <div class="modal-section">
+
+                <div class="modal-section-title">
+                    History
+                </div>
+
+                <p class="modal-section-text">
+                    It has just disappeared.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="gallery-section">
+
+        <div class="gallery-header">
+
+            <span class="gallery-title">
+                Gallery
+            </span>
+
+            <span
+                class="gallery-counter"
+                id="cameramanCounter"
+            >
+                01 / 04
+            </span>
+
+        </div>
+
+        <div class="gallery-frame">
+
+            <img class="gallery-image active"
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538213768373346355/718ea958ca83b441339a41b48833f00c.png?ex=6a81dcb5&is=6a808b35&hm=72b6033e7e08b757dd1fd6e0b1fee718d2011072209359c6e83809c5ef13d7a8&=&format=webp&quality=lossless&width=512&height=512">
+
+            <img class="gallery-image"
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538214050528231444/e90ea0443ac6766469fe8a9f8272f7fe.png?ex=6a81dcf8&is=6a808b78&hm=3c3132d3bfd13c02542a8803a449c999da2d7a04e85d6b4d7b982fee268ae116&=&format=webp&quality=lossless&width=512&height=286">
+
+            <img class="gallery-image"
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538214397913210950/98d22d5742a4b7f7aae2a3e79737f733.png?ex=6a81dd4b&is=6a808bcb&hm=3b7b49e97b65f7930b38b22128824f4f18727092f8199860983225d361e4c362&=&format=webp&quality=lossless&width=1024&height=576">
+
+            <img class="gallery-image"
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538214473125601352/d96caf34ce9ab654a5ad5b204b171c53.png?ex=6a81dd5d&is=6a808bdd&hm=efb62989c9356fba320eeda30f649df5224e1cbd2652efd703bb0e8b5b57f82c&=&format=webp&quality=lossless&width=512&height=292">
+
+        </div>
+
+        <div class="gallery-dots">
+
+            <button class="gallery-dot active"
+                onclick="setGallerySlide('cameraman',0)"></button>
+
+            <button class="gallery-dot"
+                onclick="setGallerySlide('cameraman',1)"></button>
+
+            <button class="gallery-dot"
+                onclick="setGallerySlide('cameraman',2)"></button>
+
+            <button class="gallery-dot"
+                onclick="setGallerySlide('cameraman',3)"></button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</dialog>
+
+
+<!-- =========================================================
+     TITAN SPEAKERMAN MODAL
+========================================================= -->
+
+<dialog class="character-modal" id="speakermanModal">
+
+<div class="modal-box">
+
+    <div class="modal-top">
+
+        <span class="modal-id">
+            Character ID — 265680
+        </span>
+
+        <button
+            class="close-modal"
+            onclick="closeCharacter('speakermanModal')"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div class="modal-main">
+
+        <div class="modal-image">
+
+            <img
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538217623110815744/217978c813d7a324b681f12e4bfa7717.png?ex=6a81e04c&is=6a808ecc&hm=d7dd95ed330eac270459b98c7cc25737edbed7e975acff309fce341850434bbc&=&format=webp&quality=lossless&width=512&height=512"
+                alt="Titan Speakerman"
+            >
+
+        </div>
+
+        <div class="modal-information">
+
+            <div class="modal-eyebrow">
+                Character 002
+            </div>
+
+            <h2 class="modal-name">
+                Titan Speakerman
+            </h2>
+
+            <div class="modal-status">
+
+                <span class="modal-status-dot"></span>
+
+                Pending Upgrades
+
+            </div>
+
+            <div class="modal-info-grid">
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Owner</div>
+                    <div class="modal-info-value">Pathetic</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Version</div>
+                    <div class="modal-info-value">2.1.1</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">First Appearance</div>
+                    <div class="modal-info-value">Genesis</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Faction</div>
+                    <div class="modal-info-value">Speaker</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Type</div>
+                    <div class="modal-info-value">Titan</div>
+                </div>
+
+            </div>
+
+            <div class="modal-section">
+
+                <div class="modal-section-title">
+                    Lore
+                </div>
+
+                <p class="modal-section-text">
+                    Erswhile human.
+                </p>
+
+            </div>
+
+            <div class="modal-section">
+
+                <div class="modal-section-title">
+                    Abilities
+                </div>
+
+                <p class="modal-section-text">
+                    Sound, Blaster, Overcharged Full Power, Agility, etc.
+                </p>
+
+            </div>
+
+            <div class="modal-section">
+
+                <div class="modal-section-title">
+                    History
+                </div>
+
+                <p class="modal-section-text">
+                    Now in the base Cameraman in upgrades.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="gallery-section">
+
+        <div class="gallery-header">
+
+            <span class="gallery-title">
+                Gallery
+            </span>
+
+            <span
+                class="gallery-counter"
+                id="speakermanCounter"
+            >
+                01 / 04
+            </span>
+
+        </div>
+
+        <div class="gallery-frame">
+
+            <img class="gallery-image active"
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538219253575192596/a7c68e75206f1cf0350845226321ad09.png?ex=6a81e1d0&is=6a809050&hm=44af083e95a8dffe25742fcc1269ca2b04a43fda25daaa17805fec0790e6152e&=&format=webp&quality=lossless&width=605&height=640">
+
+            <img class="gallery-image"
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538219483813118115/395614d2e7b40ff3431c0b15fbeb84fa.png?ex=6a81e207&is=6a809087&hm=bffc5476f8266e99a3609e730521bf2e1a000fc56c9457f26d83856656d6b06b&=&format=webp&quality=lossless&width=1024&height=572">
+
+            <img class="gallery-image"
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538219563798364180/0beb04e93e5c7b9d96a7e92a03f81f71.png?ex=6a81e21a&is=6a80909a&hm=ee5452e18be818aa014fb150018bc7d1a5bd6bc1e6e3a39c5fd9991da6494c54&=&format=webp&quality=lossless&width=512&height=283">
+
+            <img class="gallery-image"
+                src="https://media.discordapp.net/attachments/1321552941009731727/1538219636036730950/6791c118cc35a79320f577d0aa90136c.png?ex=6a81e22b&is=6a8090ab&hm=ffba5b791400dac7ec77f81ba09af4b22dc0e12723c1f75e9205a081617363dd&=&format=webp&quality=lossless&width=384&height=216">
+
+        </div>
+
+        <div class="gallery-dots">
+
+            <button class="gallery-dot active"
+                onclick="setGallerySlide('speakerman',0)"></button>
+
+            <button class="gallery-dot"
+                onclick="setGallerySlide('speakerman',1)"></button>
+
+            <button class="gallery-dot"
+                onclick="setGallerySlide('speakerman',2)"></button>
+
+            <button class="gallery-dot"
+                onclick="setGallerySlide('speakerman',3)"></button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</dialog>
+
+
+<!-- =========================================================
+     G-TOILET 5.0 MODAL
+========================================================= -->
+
+<dialog class="character-modal" id="gtoiletModal">
+
+<div class="modal-box">
+
+    <div class="modal-top">
+
+        <span class="modal-id">
+            Character ID — 593742
+        </span>
+
+        <button
+            class="close-modal"
+            onclick="closeCharacter('gtoiletModal')"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div class="modal-main">
+
+        <div class="modal-image">
+
+            <img
+                src="https://i.pinimg.com/1200x/8e/54/9e/8e549eb5cef957afa3aa7c02dd5627dd.jpg"
+                alt="G-Toilet 5.0"
+            >
+
+        </div>
+
+        <div class="modal-information">
+
+            <div class="modal-eyebrow">
+                Character 004
+            </div>
+
+            <h2 class="modal-name">
+                G-Toilet 5.0
+            </h2>
+
+            <div class="modal-status">
+                <span class="modal-status-dot yellow"></span>
+                Active
+            </div>
+
+            <div class="modal-info-grid">
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Owner</div>
+                    <div class="modal-info-value">James</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Version</div>
+                    <div class="modal-info-value">5.0.0</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">First Appearance</div>
+                    <div class="modal-info-value">Pre-Genesis</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Faction</div>
+                    <div class="modal-info-value">Skibidi</div>
+                </div>
+
+                <div class="modal-info">
+                    <div class="modal-info-label">Type</div>
+                    <div class="modal-info-value">Boss</div>
+                </div>
+
+            </div>
+
+            <div class="modal-section">
+
+                <div class="modal-section-title">
+                    Lore
+                </div>
+
+                <p class="modal-section-text">
+                    The current evolution of the Skibidi Toilet leader,
+                    upgraded with overwhelming firepower and advanced technology.
+                </p>
+
+            </div>
+
+            <div class="modal-section">
+
+                <div class="modal-section-title">
+                    Abilities
+                </div>
+
+                <p class="modal-section-text">
+                    Advanced weaponry, immense durability, high destructive
+                    power, aerial mobility, and powerful energy attacks.
+                </p>
+
+            </div>
+
+            <div class="modal-section">
+
+                <div class="modal-section-title">
+                    History
+                </div>
+
+                <p class="modal-section-text">
+                    G-Toilet continues to evolve through increasingly
+                    powerful versions, with 5.0 representing his latest
+                    major upgrade.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="gallery-section">
+
+        <div class="gallery-header">
+
+            <span class="gallery-title">
+                Gallery
+            </span>
+
+            <span
+                class="gallery-counter"
+                id="gtoiletCounter"
+            >
+                01 / 03
+            </span>
+
+        </div>
+
+        <div class="gallery-frame">
+
+            <!-- G-TOILET GALLERY 1 -->
+
+            <img
+                class="gallery-image active"
+                src="https://i.pinimg.com/1200x/73/54/ff/7354fffc8be6a002cf6aaae536b4a435.jpg"
+                alt="G-Toilet 5.0 Gallery 1"
+            >
+
+            <!-- G-TOILET GALLERY 2 -->
+
+            <img
+                class="gallery-image"
+                src="https://i.pinimg.com/1200x/73/54/ff/7354fffc8be6a002cf6aaae536b4a435.jpg"
+                alt="G-Toilet 5.0 Gallery 2"
+            >
+
+            <!-- G-TOILET GALLERY 3 -->
+
+            <img
+                class="gallery-image"
+                src="https://i.pinimg.com/1200x/73/54/ff/7354fffc8be6a002cf6aaae536b4a435.jpg"
+                alt="G-Toilet 5.0 Gallery 3"
+            >
+
+        </div>
+
+        <div class="gallery-dots">
+
+            <button
+                class="gallery-dot active"
+                onclick="setGallerySlide('gtoilet',0)"
+            ></button>
+
+            <button
+                class="gallery-dot"
+                onclick="setGallerySlide('gtoilet',1)"
+            ></button>
+
+            <button
+                class="gallery-dot"
+                onclick="setGallerySlide('gtoilet',2)"
+            ></button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</dialog>
+
+
+<!-- =========================================================
+     AFRODITA SECRET WIDGET
+========================================================= -->
+
+<div
+    id="afroditaSecretWidget"
+    aria-hidden="true"
+>
+
+    <div
+        class="afrodita-secret-card"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Afrodita Aheriolis"
+    >
+
+        <div class="afrodita-secret-top">
+
+            <span class="afrodita-secret-tag">
+                VOID CORE // SECRET ENTITY
+            </span>
+
+            <button
+                class="afrodita-secret-close"
+                type="button"
+                onclick="closeAfroditaSecret()"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="afrodita-secret-body">
+
+            <div class="afrodita-secret-image">
+
+                <!-- CORRECTED AFRODITA URL -->
+
+                <img
+                    src="https://media.discordapp.net/attachments/1321552941009731727/1538649481581559891/1786220408958.webp?ex=6a83727f&is=6a8220ff&hm=2499b3ebad7b8861b8435e819fece039cf5eb2158542a4db3078bb51f6809969&=&format=webp&width=482&height=512"
+                    alt="Afrodita Aheriolis"
+                >
+
+            </div>
+
+            <div class="afrodita-secret-info">
+
+                <div class="afrodita-secret-eyebrow">
+                    Unknown Archive Entry
+                </div>
+
+                <h2 class="afrodita-secret-name">
+                    Afrodita Aheriolis
                 </h2>
 
-                <span>
-                    004 Entries
-                </span>
+                <div class="afrodita-secret-status">
 
-            </div>
+                    <span class="afrodita-secret-status-dot"></span>
 
-
-            <!-- =====================================================
-                 CHARACTER 001 — TITAN CAMERAMAN
-            ====================================================== -->
-
-            <article
-                class="character-card"
-                onclick="openCharacter('cameraman')"
-            >
-
-                <div class="card-number">
-                    01
-                </div>
-
-                <div class="character-image">
-
-                    <img
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1537879007423500308/9bd9785c39b3097e129cadefb33fd9d6.png?ex=6a80a4ef&is=6a7f536f&hm=c737a56e674776ca86e41bb71e43e14dfec3b9a9c6d4f08a5ccaaa0b177ff6eb&=&format=webp&quality=lossless&width=512&height=288"
-                        alt="Titan Cameraman"
-                    >
+                    Status: Tsm
 
                 </div>
 
-                <div class="character-content">
+                <div class="afrodita-secret-grid">
 
-                    <div class="character-label">
-                        Character 001
-                    </div>
+                    <div class="afrodita-secret-field">
 
-                    <h2 class="character-name">
-                        Titan Cameraman
-                    </h2>
-
-                    <div class="status">
-
-                        <span class="status-dot"></span>
-
-                        Missing — Damaged
-
-                    </div>
-
-                    <div class="info-grid">
-
-                        <div class="info">
-                            <div class="info-label">Faction</div>
-                            <div class="info-value">Cameraman</div>
+                        <div class="afrodita-secret-label">
+                            Version
                         </div>
 
-                        <div class="info">
-                            <div class="info-label">Type</div>
-                            <div class="info-value">Titan</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">First Appearance</div>
-                            <div class="info-value">Genesis</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">Current Version</div>
-                            <div class="info-value">V.2.1.1</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">Owner</div>
-                            <div class="info-value">None</div>
+                        <div class="afrodita-secret-value">
+                            Unknown
                         </div>
 
                     </div>
 
-                    <div class="description-label">
-                        Description
-                    </div>
+                    <div class="afrodita-secret-field">
 
-                    <p class="description">
-                        The first Titan to appear in the story.
-                        Titan Cameraman is one of the most powerful members
-                        of the Cameraman faction, built to confront the most
-                        dangerous threats on the battlefield. After sustaining
-                        severe damage during his battles, he eventually
-                        disappeared, leaving his current location unknown.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================================
-                 CHARACTER 002 — TITAN SPEAKERMAN
-            ====================================================== -->
-
-            <article
-                class="character-card owner-pathetic"
-                onclick="openCharacter('speakerman')"
-            >
-
-                <div class="card-number">
-                    02
-                </div>
-
-                <div class="character-image">
-
-                    <img
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538217623110815744/217978c813d7a324b681f12e4bfa7717.png?ex=6a81e04c&is=6a808ecc&hm=d7dd95ed330eac270459b98c7cc25737edbed7e975acff309fce341850434bbc&=&format=webp&quality=lossless&width=512&height=512"
-                        alt="Titan Speakerman"
-                    >
-
-                </div>
-
-                <div class="character-content">
-
-                    <div class="character-label">
-                        Character 002
-                    </div>
-
-                    <h2 class="character-name">
-                        Titan Speakerman
-                    </h2>
-
-                    <div class="status">
-
-                        <span class="status-dot"></span>
-
-                        Pending Upgrades
-
-                    </div>
-
-                    <div class="info-grid">
-
-                        <div class="info">
-                            <div class="info-label">Faction</div>
-                            <div class="info-value">Speaker</div>
+                        <div class="afrodita-secret-label">
+                            Owner
                         </div>
 
-                        <div class="info">
-                            <div class="info-label">Type</div>
-                            <div class="info-value">Titan</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">First Appearance</div>
-                            <div class="info-value">Genesis</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">Current Version</div>
-                            <div class="info-value">V.2.1.1</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">Owner</div>
-                            <div class="info-value owner-value">Pathetic</div>
+                        <div class="afrodita-secret-value">
+                            Cesar
                         </div>
 
                     </div>
 
-                    <div class="description-label">
-                        Description
-                    </div>
+                    <div class="afrodita-secret-field">
 
-                    <p class="description">
-                        The second Titan to appear in the story.
-                        Titan Speakerman is the primary Titan of the
-                        Speakerman faction, equipped with powerful
-                        sound-based weaponry and immense physical strength.
-                        His actions were directly responsible for the
-                        beginning of the Dark Days era.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================================
-                 CHARACTER 003 — TITAN TV MAN
-            ====================================================== -->
-
-            <article class="character-card owner-gurkas">
-
-                <div class="card-number">
-                    03
-                </div>
-
-                <div class="character-image">
-
-                    <img
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1537885888015630367/12215ab9f7cfcbd95c37291b043be75d.png?ex=6a80ab58&is=6a7f59d8&hm=ee8ba8cc444cdfafa9d01bb16a15967105c5ee5f3d069cb4dec3aded2f6598bb&=&format=webp&quality=lossless&width=512&height=313"
-                        alt="Titan TV Man"
-                    >
-
-                </div>
-
-                <div class="character-content">
-
-                    <div class="character-label">
-                        Character 003
-                    </div>
-
-                    <h2 class="character-name">
-                        Titan TV Man
-                    </h2>
-
-                    <div class="status">
-
-                        <span class="status-dot"></span>
-
-                        WOD
-
-                    </div>
-
-                    <div class="info-grid">
-
-                        <div class="info">
-                            <div class="info-label">Faction</div>
-                            <div class="info-value">TV Man</div>
+                        <div class="afrodita-secret-label">
+                            Faction
                         </div>
 
-                        <div class="info">
-                            <div class="info-label">Type</div>
-                            <div class="info-value">Titan</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">First Appearance</div>
-                            <div class="info-value">Dark Days</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">Current Version</div>
-                            <div class="info-value">V2.0.0 WOD</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">Owner</div>
-                            <div class="info-value owner-value">Gurkas</div>
+                        <div class="afrodita-secret-value">
+                            Unknown
                         </div>
 
                     </div>
 
-                    <div class="description-label">
-                        Description
-                    </div>
+                    <div class="afrodita-secret-field">
 
-                    <p class="description">
-                        The third Titan to appear in the story.
-                        Titan TV Man is the primary Titan of the TV Man
-                        faction, possessing immense power and a wide range
-                        of advanced abilities. His current state is marked
-                        by his infection and his status as WOD.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-
-            <!-- =====================================================
-                 CHARACTER 004 — G-TOILET 5.0
-            ====================================================== -->
-
-            <article
-                class="character-card owner-james"
-                onclick="openCharacter('gtoilet')"
-            >
-
-                <div class="card-number">
-                    04
-                </div>
-
-                <div class="character-image">
-
-                    <img
-                        src="https://i.pinimg.com/1200x/8e/54/9e/8e549eb5cef957afa3aa7c02dd5627dd.jpg"
-                        alt="G-Toilet 5.0"
-                    >
-
-                </div>
-
-                <div class="character-content">
-
-                    <div class="character-label">
-                        Character 004
-                    </div>
-
-                    <h2 class="character-name">
-                        G-Toilet 5.0
-                    </h2>
-
-                    <div class="status">
-
-                        <span class="status-dot"></span>
-
-                        Active
-
-                    </div>
-
-                    <div class="info-grid">
-
-                        <div class="info">
-                            <div class="info-label">Faction</div>
-                            <div class="info-value">Skibidi</div>
+                        <div class="afrodita-secret-label">
+                            First Appearance
                         </div>
 
-                        <div class="info">
-                            <div class="info-label">Type</div>
-                            <div class="info-value">Boss</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">First Appearance</div>
-                            <div class="info-value">Pre-Genesis</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">Current Version</div>
-                            <div class="info-value">5.0.0</div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-label">Owner</div>
-                            <div class="info-value owner-value">James</div>
+                        <div class="afrodita-secret-value">
+                            L0ST DAYS
                         </div>
 
                     </div>
 
-                    <div class="description-label">
-                        Description
-                    </div>
+                    <div class="afrodita-secret-field">
 
-                    <p class="description">
-                        G-Toilet 5.0 is the latest and most powerful evolution
-                        of the Skibidi Toilet leader. Equipped with advanced
-                        technology, overwhelming firepower, and immense
-                        durability, he stands as one of the most dangerous
-                        entities in the Skibidi faction. His upgraded design
-                        allows him to dominate the battlefield and confront
-                        even the strongest opponents.
-                    </p>
-
-                </div>
-
-            </article>
-
-        </section>
-
-    </main>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <span>
-            Void Core
-        </span>
-
-        <span>
-            2026
-        </span>
-
-    </footer>
-
-
-    <!-- =============================================================
-         TITAN CAMERAMAN MODAL
-    ============================================================= -->
-
-    <dialog class="character-modal" id="cameramanModal">
-
-        <div class="modal-box">
-
-            <div class="modal-top">
-
-                <span class="modal-id">
-                    Character ID — 131185
-                </span>
-
-                <button
-                    class="close-modal"
-                    onclick="closeCharacter('cameramanModal')"
-                    aria-label="Close"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <div class="modal-main">
-
-                <div class="modal-image">
-
-                    <img
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538211209655099462/d527d96232b5472c4ebbd2a7ed221049.png?ex=6a81da52&is=6a8088d2&hm=93d8960bf4980446c882413ef347544db73860c4997146cfc8a9711087bbabcd&=&format=webp&quality=lossless&width=512&height=512"
-                        alt="Titan Cameraman"
-                    >
-
-                </div>
-
-
-                <div class="modal-information">
-
-                    <div class="modal-eyebrow">
-                        Character 001
-                    </div>
-
-                    <h2 class="modal-name">
-                        Titan Cameraman
-                    </h2>
-
-                    <div class="modal-status">
-
-                        <span class="modal-status-dot"></span>
-
-                        Missing
-
-                    </div>
-
-
-                    <div class="modal-info-grid">
-
-                        <div class="modal-info">
-                            <div class="modal-info-label">Owner</div>
-                            <div class="modal-info-value">None</div>
+                        <div class="afrodita-secret-label">
+                            Type
                         </div>
 
-                        <div class="modal-info">
-                            <div class="modal-info-label">Version</div>
-                            <div class="modal-info-value">2.1.1</div>
-                        </div>
-
-                        <div class="modal-info">
-                            <div class="modal-info-label">First Appearance</div>
-                            <div class="modal-info-value">Genesis</div>
-                        </div>
-
-                        <div class="modal-info">
-                            <div class="modal-info-label">Faction</div>
-                            <div class="modal-info-value">Camera</div>
-                        </div>
-
-                        <div class="modal-info">
-                            <div class="modal-info-label">Type</div>
-                            <div class="modal-info-value">Titan</div>
+                        <div class="afrodita-secret-value">
+                            Titan
                         </div>
 
                     </div>
 
+                    <div class="afrodita-secret-field">
 
-                    <div class="modal-section">
-
-                        <div class="modal-section-title">
-                            Lore
-                        </div>
-
-                        <p class="modal-section-text">
-                            A cameraman.
-                        </p>
-
-                    </div>
-
-
-                    <div class="modal-section">
-
-                        <div class="modal-section-title">
+                        <div class="afrodita-secret-label">
                             Abilities
                         </div>
 
-                        <p class="modal-section-text">
-                            Core flame, Blaster, and other advanced combat abilities.
-                        </p>
-
-                    </div>
-
-
-                    <div class="modal-section">
-
-                        <div class="modal-section-title">
-                            History
+                        <div class="afrodita-secret-value">
+                            Unknown, Blaster Hepgh
                         </div>
 
-                        <p class="modal-section-text">
-                            It has just disappeared.
-                        </p>
-
                     </div>
 
                 </div>
 
-            </div>
+                <div class="afrodita-secret-section">
 
+                    <div class="afrodita-secret-section-title">
+                        Lore / History
+                    </div>
 
-            <!-- GALLERY -->
+                    <p class="afrodita-secret-section-text">
+                        Unknown
+                    </p>
 
-            <div class="gallery-section">
+                </div>
 
-                <div class="gallery-header">
+                <div class="afrodita-secret-section">
 
-                    <span class="gallery-title">
+                    <div class="afrodita-secret-section-title">
                         Gallery
-                    </span>
+                    </div>
 
-                    <span
-                        class="gallery-counter"
-                        id="cameramanCounter"
-                    >
-                        01 / 04
-                    </span>
+                    <div class="afrodita-secret-gallery">
 
-                </div>
+                        <span class="afrodita-secret-404">
+                            404
+                        </span>
 
+                        <span class="afrodita-secret-glitch one">
+                            IMAGE NOT FOUND
+                        </span>
 
-                <div class="gallery-frame">
+                        <span class="afrodita-secret-glitch two">
+                            VOID ARCHIVE // NULL
+                        </span>
 
-                    <img
-                        class="gallery-image active"
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538213768373346355/718ea958ca83b441339a41b48833f00c.png?ex=6a81dcb5&is=6a808b35&hm=72b6033e7e08b757dd1fd6e0b1fee718d2011072209359c6e83809c5ef13d7a8&=&format=webp&quality=lossless&width=512&height=512"
-                        alt="Titan Cameraman Gallery 1"
-                    >
-
-                    <img
-                        class="gallery-image"
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538214050528231444/e90ea0443ac6766469fe8a9f8272f7fe.png?ex=6a81dcf8&is=6a808b78&hm=3c3132d3bfd13c02542a8803a449c999da2d7a04e85d6b4d7b982fee268ae116&=&format=webp&quality=lossless&width=512&height=286"
-                        alt="Titan Cameraman Gallery 2"
-                    >
-
-                    <img
-                        class="gallery-image"
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538214397913210950/98d22d5742a4b7f7aae2a3e79737f733.png?ex=6a81dd4b&is=6a808bcb&hm=3b7b49e97b65f7930b38b22128824f4f18727092f8199860983225d361e4c362&=&format=webp&quality=lossless&width=1024&height=576"
-                        alt="Titan Cameraman Gallery 3"
-                    >
-
-                    <img
-                        class="gallery-image"
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538214473125601352/d96caf34ce9ab654a5ad5b204b171c53.png?ex=6a81dd5d&is=6a808bdd&hm=efb62989c9356fba320eeda30f649df5224e1cbd2652efd703bb0e8b5b57f82c&=&format=webp&quality=lossless&width=512&height=292"
-                        alt="Titan Cameraman Gallery 4"
-                    >
-
-                </div>
-
-
-                <div class="gallery-dots">
-
-                    <button class="gallery-dot active" onclick="setGallerySlide('cameraman', 0)"></button>
-                    <button class="gallery-dot" onclick="setGallerySlide('cameraman', 1)"></button>
-                    <button class="gallery-dot" onclick="setGallerySlide('cameraman', 2)"></button>
-                    <button class="gallery-dot" onclick="setGallerySlide('cameraman', 3)"></button>
+                    </div>
 
                 </div>
 
@@ -1762,642 +2560,536 @@
 
         </div>
 
-    </dialog>
+    </div>
 
+</div>
 
-    <!-- =============================================================
-         TITAN SPEAKERMAN MODAL
-    ============================================================= -->
 
-    <dialog class="character-modal" id="speakermanModal">
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
-        <div class="modal-box">
+<script>
 
-            <div class="modal-top">
+/* =========================================================
+   GALLERY DATA
+========================================================= */
 
-                <span class="modal-id">
-                    Character ID — 265680
-                </span>
+const galleries = {
 
-                <button
-                    class="close-modal"
-                    onclick="closeCharacter('speakermanModal')"
-                    aria-label="Close"
-                >
-                    ×
-                </button>
+    cameraman:{
+        modal:"cameramanModal",
+        counter:"cameramanCounter",
+        interval:null
+    },
 
-            </div>
+    speakerman:{
+        modal:"speakermanModal",
+        counter:"speakermanCounter",
+        interval:null
+    },
 
+    gtoilet:{
+        modal:"gtoiletModal",
+        counter:"gtoiletCounter",
+        interval:null
+    }
 
-            <div class="modal-main">
+};
 
-                <div class="modal-image">
 
-                    <img
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538217623110815744/217978c813d7a324b681f12e4bfa7717.png?ex=6a81e04c&is=6a808ecc&hm=d7dd95ed330eac270459b98c7cc25737edbed7e975acff309fce341850434bbc&=&format=webp&quality=lossless&width=512&height=512"
-                        alt="Titan Speakerman"
-                    >
+/* =========================================================
+   OPEN CHARACTER
+========================================================= */
 
-                </div>
+function openCharacter(character){
 
+    const data = galleries[character];
 
-                <div class="modal-information">
+    if(!data) return;
 
-                    <div class="modal-eyebrow">
-                        Character 002
-                    </div>
+    const modal = document.getElementById(data.modal);
 
-                    <h2 class="modal-name">
-                        Titan Speakerman
-                    </h2>
+    if(!modal) return;
 
-                    <div class="modal-status">
+    resetGallery(character);
 
-                        <span class="modal-status-dot"></span>
+    modal.showModal();
 
-                        Pending Upgrades
+    document.body.classList.add("modal-open");
 
-                    </div>
+    startGallery(character);
 
+}
 
-                    <div class="modal-info-grid">
 
-                        <div class="modal-info">
-                            <div class="modal-info-label">Owner</div>
-                            <div class="modal-info-value">Pathetic</div>
-                        </div>
+/* =========================================================
+   CLOSE CHARACTER
+========================================================= */
 
-                        <div class="modal-info">
-                            <div class="modal-info-label">Version</div>
-                            <div class="modal-info-value">2.1.1</div>
-                        </div>
+function closeCharacter(modalId){
 
-                        <div class="modal-info">
-                            <div class="modal-info-label">First Appearance</div>
-                            <div class="modal-info-value">Genesis</div>
-                        </div>
+    const modal = document.getElementById(modalId);
 
-                        <div class="modal-info">
-                            <div class="modal-info-label">Faction</div>
-                            <div class="modal-info-value">Speaker</div>
-                        </div>
+    if(!modal) return;
 
-                        <div class="modal-info">
-                            <div class="modal-info-label">Type</div>
-                            <div class="modal-info-value">Titan</div>
-                        </div>
+    modal.close();
 
-                    </div>
+    document.body.classList.remove("modal-open");
 
+    Object.keys(galleries).forEach(character=>{
 
-                    <div class="modal-section">
-
-                        <div class="modal-section-title">
-                            Lore
-                        </div>
-
-                        <p class="modal-section-text">
-                            Erswhile human.
-                        </p>
-
-                    </div>
-
-
-                    <div class="modal-section">
-
-                        <div class="modal-section-title">
-                            Abilities
-                        </div>
-
-                        <p class="modal-section-text">
-                            Sound, Blaster, Overcharged Full Power, Agility, etc.
-                        </p>
-
-                    </div>
-
-
-                    <div class="modal-section">
-
-                        <div class="modal-section-title">
-                            History
-                        </div>
-
-                        <p class="modal-section-text">
-                            Now in the base Cameraman in upgrades.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- GALLERY -->
-
-            <div class="gallery-section">
-
-                <div class="gallery-header">
-
-                    <span class="gallery-title">
-                        Gallery
-                    </span>
-
-                    <span
-                        class="gallery-counter"
-                        id="speakermanCounter"
-                    >
-                        01 / 04
-                    </span>
-
-                </div>
-
-
-                <div class="gallery-frame">
-
-                    <img
-                        class="gallery-image active"
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538219253575192596/a7c68e75206f1cf0350845226321ad09.png?ex=6a81e1d0&is=6a809050&hm=44af083e95a8dffe25742fcc1269ca2b04a43fda25daaa17805fec0790e6152e&=&format=webp&quality=lossless&width=605&height=640"
-                        alt="Titan Speakerman Gallery 1"
-                    >
-
-                    <img
-                        class="gallery-image"
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538219483813118115/395614d2e7b40ff3431c0b15fbeb84fa.png?ex=6a81e207&is=6a809087&hm=bffc5476f8266e99a3609e730521bf2e1a000fc56c9457f26d83856656d6b06b&=&format=webp&quality=lossless&width=1024&height=572"
-                        alt="Titan Speakerman Gallery 2"
-                    >
-
-                    <img
-                        class="gallery-image"
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538219563798364180/0beb04e93e5c7b9d96a7e92a03f81f71.png?ex=6a81e21a&is=6a80909a&hm=ee5452e18be818aa014fb150018bc7d1a5bd6bc1e6e3a39c5fd9991da6494c54&=&format=webp&quality=lossless&width=512&height=283"
-                        alt="Titan Speakerman Gallery 3"
-                    >
-
-                    <img
-                        class="gallery-image"
-                        src="https://media.discordapp.net/attachments/1321552941009731727/1538219636036730950/6791c118cc35a79320f577d0aa90136c.png?ex=6a81e22b&is=6a8090ab&hm=ffba5b791400dac7ec77f81ba09af4b22dc0e12723c1f75e9205a081617363dd&=&format=webp&quality=lossless&width=384&height=216"
-                        alt="Titan Speakerman Gallery 4"
-                    >
-
-                </div>
-
-
-                <div class="gallery-dots">
-
-                    <button class="gallery-dot active" onclick="setGallerySlide('speakerman', 0)"></button>
-                    <button class="gallery-dot" onclick="setGallerySlide('speakerman', 1)"></button>
-                    <button class="gallery-dot" onclick="setGallerySlide('speakerman', 2)"></button>
-                    <button class="gallery-dot" onclick="setGallerySlide('speakerman', 3)"></button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </dialog>
-
-
-
-    <!-- =============================================================
-         G-TOILET 5.0 MODAL
-    ============================================================= -->
-
-    <dialog class="character-modal" id="gtoiletModal">
-
-        <div class="modal-box owner-james-modal">
-
-            <div class="modal-top">
-
-                <span class="modal-id">
-                    Character ID — 004
-                </span>
-
-                <button
-                    class="close-modal"
-                    onclick="closeCharacter('gtoiletModal')"
-                    aria-label="Close"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <div class="modal-main">
-
-                <div class="modal-image">
-
-                    <img
-                        src="https://i.pinimg.com/1200x/8e/54/9e/8e549eb5cef957afa3aa7c02dd5627dd.jpg"
-                        alt="G-Toilet 5.0"
-                    >
-
-                </div>
-
-
-                <div class="modal-information">
-
-                    <div class="modal-eyebrow">
-                        Character 004
-                    </div>
-
-                    <h2 class="modal-name">
-                        G-Toilet 5.0
-                    </h2>
-
-                    <div class="modal-status james-modal-status">
-
-                        <span class="modal-status-dot james-modal-dot"></span>
-
-                        Active
-
-                    </div>
-
-
-                    <div class="modal-info-grid">
-
-                        <div class="modal-info">
-                            <div class="modal-info-label">Owner</div>
-                            <div class="modal-info-value">James</div>
-                        </div>
-
-                        <div class="modal-info">
-                            <div class="modal-info-label">Version</div>
-                            <div class="modal-info-value">5.0.0</div>
-                        </div>
-
-                        <div class="modal-info">
-                            <div class="modal-info-label">First Appearance</div>
-                            <div class="modal-info-value">Pre-Genesis</div>
-                        </div>
-
-                        <div class="modal-info">
-                            <div class="modal-info-label">Faction</div>
-                            <div class="modal-info-value">Skibidi</div>
-                        </div>
-
-                        <div class="modal-info">
-                            <div class="modal-info-label">Type</div>
-                            <div class="modal-info-value">Boss</div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="modal-section">
-
-                        <div class="modal-section-title">
-                            Lore
-                        </div>
-
-                        <p class="modal-section-text">
-                            G-Toilet 5.0 is the latest and most powerful evolution
-                            of the Skibidi Toilet leader. His current form represents
-                            a major advancement in the Skibidi faction's technology
-                            and combat capabilities.
-                        </p>
-
-                    </div>
-
-
-                    <div class="modal-section">
-
-                        <div class="modal-section-title">
-                            Abilities
-                        </div>
-
-                        <p class="modal-section-text">
-                            Advanced energy weapons, immense durability, overwhelming
-                            firepower, powerful propulsion systems, and high-level
-                            combat capabilities.
-                        </p>
-
-                    </div>
-
-
-                    <div class="modal-section">
-
-                        <div class="modal-section-title">
-                            History
-                        </div>
-
-                        <p class="modal-section-text">
-                            Following the evolution of the Skibidi faction, G-Toilet
-                            reached Version 5.0, becoming one of its most dangerous
-                            and technologically advanced entities.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- GALLERY -->
-
-            <div class="gallery-section">
-
-                <div class="gallery-header">
-
-                    <span class="gallery-title">
-                        Gallery
-                    </span>
-
-                    <span
-                        class="gallery-counter"
-                        id="gtoiletCounter"
-                    >
-                        01 / 04
-                    </span>
-
-                </div>
-
-
-                <div class="gallery-frame gtoilet-gallery-frame">
-
-                    <img
-                        class="gallery-image active"
-                        src="https://i.pinimg.com/1200x/8e/54/9e/8e549eb5cef957afa3aa7c02dd5627dd.jpg"
-                        alt="G-Toilet 5.0 Gallery 1"
-                    >
-
-                    <img
-                        class="gallery-image"
-                        src="https://i.pinimg.com/1200x/73/54/ff/7354fffc8be6a002cf6aaae536b4a435.jpg"
-                        alt="G-Toilet 5.0 Gallery 2"
-                    >
-
-                    <img
-                        class="gallery-image"
-                        src="https://i.pinimg.com/736x/6c/92/3d/6c923d9051d3a47ff094e2cc8bc7c5e6.jpg"
-                        alt="G-Toilet 5.0 Gallery 3"
-                    >
-
-                    <img
-                        class="gallery-image"
-                        src="https://i.pinimg.com/736x/7a/b3/9d/7ab39d9885b06d7453a6bb516d69cee5.jpg"
-                        alt="G-Toilet 5.0 Gallery 4"
-                    >
-
-                </div>
-
-
-                <div class="gallery-dots">
-
-                    <button
-                        class="gallery-dot active"
-                        onclick="setGallerySlide('gtoilet', 0)"
-                        aria-label="Gallery image 1"
-                    ></button>
-
-                    <button
-                        class="gallery-dot"
-                        onclick="setGallerySlide('gtoilet', 1)"
-                        aria-label="Gallery image 2"
-                    ></button>
-
-                    <button
-                        class="gallery-dot"
-                        onclick="setGallerySlide('gtoilet', 2)"
-                        aria-label="Gallery image 3"
-                    ></button>
-
-                    <button
-                        class="gallery-dot"
-                        onclick="setGallerySlide('gtoilet', 3)"
-                        aria-label="Gallery image 4"
-                    ></button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </dialog>
-
-
-    <!-- =============================================================
-         JAVASCRIPT
-    ============================================================= -->
-
-    <script>
-
-        const galleries = {
-
-            cameraman: {
-                modal: "cameramanModal",
-                counter: "cameramanCounter",
-                interval: null
-            },
-
-            speakerman: {
-                modal: "speakermanModal",
-                counter: "speakermanCounter",
-                interval: null
-            },
-
-            gtoilet: {
-                modal: "gtoiletModal",
-                counter: "gtoiletCounter",
-                interval: null
-            }
-
-        };
-
-
-        /* OPEN CHARACTER */
-
-        function openCharacter(character) {
-
-            const data = galleries[character];
-
-            if (!data) return;
-
-            const modal = document.getElementById(data.modal);
-
-            if (!modal) return;
-
-            resetGallery(character);
-
-            modal.showModal();
-
-            document.body.classList.add("modal-open");
-
-            startGallery(character);
-        }
-
-
-        /* CLOSE CHARACTER */
-
-        function closeCharacter(modalId) {
-
-            const modal = document.getElementById(modalId);
-
-            if (!modal) return;
-
-            modal.close();
-
-            document.body.classList.remove("modal-open");
-
-            Object.keys(galleries).forEach(character => {
-
-                if (galleries[character].modal === modalId) {
-
-                    stopGallery(character);
-
-                }
-
-            });
-        }
-
-
-        /* STOP GALLERY */
-
-        function stopGallery(character) {
-
-            const data = galleries[character];
-
-            if (data.interval) {
-
-                clearInterval(data.interval);
-
-                data.interval = null;
-
-            }
-        }
-
-
-        /* START GALLERY */
-
-        function startGallery(character) {
-
-            const data = characterData[character];
-
-            if (!data) return;
+        if(galleries[character].modal === modalId){
 
             stopGallery(character);
 
-            data.interval = setInterval(() => {
-
-                const images = document.querySelectorAll(
-                    `#${data.modal} .gallery-image`
-                );
-
-                if (!images.length) return;
-
-                const current = Array.from(images).findIndex(
-                    image => image.classList.contains("active")
-                );
-
-                const next = current === -1
-                    ? 0
-                    : (current + 1) % images.length;
-
-                setGallerySlide(character, next);
-
-            }, 5000);
         }
 
+    });
 
-        /* SET GALLERY SLIDE */
+}
 
-        function setGallerySlide(character, index) {
 
-            const data = galleries[character];
+/* =========================================================
+   STOP GALLERY
+========================================================= */
 
-            const modal =
-                document.getElementById(data.modal);
+function stopGallery(character){
 
-            if (!modal) return;
+    const data = galleries[character];
 
-            const images =
-                modal.querySelectorAll(".gallery-image");
+    if(!data) return;
 
-            const dots =
-                modal.querySelectorAll(".gallery-dot");
+    if(data.interval){
 
-            images.forEach((image, i) => {
+        clearInterval(data.interval);
 
-                image.classList.toggle(
-                    "active",
-                    i === index
-                );
+        data.interval = null;
 
-            });
+    }
 
-            dots.forEach((dot, i) => {
+}
 
-                dot.classList.toggle(
-                    "active",
-                    i === index
-                );
 
-            });
+/* =========================================================
+   START GALLERY
+========================================================= */
 
-            const counter =
-                document.getElementById(data.counter);
+function startGallery(character){
 
-            if (counter) {
+    const data = galleries[character];
 
-                counter.textContent =
-                    String(index + 1).padStart(2, "0")
-                    + " / "
-                    + String(images.length).padStart(2, "0");
+    if(!data) return;
+
+    stopGallery(character);
+
+    data.interval = setInterval(()=>{
+
+        const modal =
+            document.getElementById(data.modal);
+
+        if(!modal || !modal.open){
+
+            stopGallery(character);
+
+            return;
+
+        }
+
+        const images =
+            modal.querySelectorAll(".gallery-image");
+
+        if(!images.length) return;
+
+        let current = 0;
+
+        images.forEach((image,index)=>{
+
+            if(image.classList.contains("active")){
+
+                current = index;
 
             }
 
+        });
+
+        const next =
+            (current + 1) % images.length;
+
+        setGallerySlide(character,next);
+
+    },5000);
+
+}
+
+
+/* =========================================================
+   SET GALLERY SLIDE
+========================================================= */
+
+function setGallerySlide(character,index){
+
+    const data = galleries[character];
+
+    if(!data) return;
+
+    const modal =
+        document.getElementById(data.modal);
+
+    if(!modal) return;
+
+    const images =
+        modal.querySelectorAll(".gallery-image");
+
+    const dots =
+        modal.querySelectorAll(".gallery-dot");
+
+    if(!images.length) return;
+
+    if(index < 0 || index >= images.length){
+
+        index = 0;
+
+    }
+
+    images.forEach((image,i)=>{
+
+        image.classList.toggle(
+            "active",
+            i === index
+        );
+
+    });
+
+    dots.forEach((dot,i)=>{
+
+        dot.classList.toggle(
+            "active",
+            i === index
+        );
+
+    });
+
+    const counter =
+        document.getElementById(data.counter);
+
+    if(counter){
+
+        counter.textContent =
+            String(index + 1).padStart(2,"0")
+            +
+            " / "
+            +
+            String(images.length).padStart(2,"0");
+
+    }
+
+}
+
+
+/* =========================================================
+   RESET GALLERY
+========================================================= */
+
+function resetGallery(character){
+
+    setGallerySlide(character,0);
+
+}
+
+
+/* =========================================================
+   CLOSE MODALS BY CLICKING OUTSIDE
+========================================================= */
+
+document
+.querySelectorAll(".character-modal")
+.forEach(modal=>{
+
+    modal.addEventListener("click",event=>{
+
+        if(event.target === modal){
+
+            closeCharacter(modal.id);
+
         }
 
+    });
 
-        /* RESET GALLERY */
+});
 
-        function resetGallery(character) {
 
-            setGallerySlide(character, 0);
+/* =========================================================
+   AFRODITA SECRET EASTER EGG
+========================================================= */
+
+const afroditaSequence = [
+
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowRight",
+    "Backspace",
+    "Backspace",
+    "g",
+    "f",
+    " ",
+    "b",
+    "f",
+    "Enter"
+
+];
+
+let afroditaProgress = 0;
+
+
+/* =========================================================
+   CHECK SPEAKERMAN
+========================================================= */
+
+function isSpeakermanOpen(){
+
+    const modal =
+        document.getElementById("speakermanModal");
+
+    return !!(
+        modal &&
+        modal.open
+    );
+
+}
+
+
+/* =========================================================
+   RESET SECRET SEQUENCE
+========================================================= */
+
+function resetAfroditaSequence(){
+
+    afroditaProgress = 0;
+
+}
+
+
+/* =========================================================
+   SHOW AFRODITA
+========================================================= */
+
+function showAfroditaSecret(){
+
+    const widget =
+        document.getElementById(
+            "afroditaSecretWidget"
+        );
+
+    if(!widget) return;
+
+    widget.classList.add("active");
+
+    widget.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    document.body.classList.add("modal-open");
+
+}
+
+
+/* =========================================================
+   CLOSE AFRODITA
+========================================================= */
+
+function closeAfroditaSecret(){
+
+    const widget =
+        document.getElementById(
+            "afroditaSecretWidget"
+        );
+
+    if(!widget) return;
+
+    widget.classList.remove("active");
+
+    widget.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    resetAfroditaSequence();
+
+    if(
+        !document.querySelector(
+            ".character-modal[open]"
+        )
+    ){
+
+        document.body.classList.remove(
+            "modal-open"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   HANDLE AFRODITA KEY SEQUENCE
+========================================================= */
+
+function handleAfroditaKey(event){
+
+    if(!isSpeakermanOpen()){
+
+        resetAfroditaSequence();
+
+        return;
+
+    }
+
+    const widget =
+        document.getElementById(
+            "afroditaSecretWidget"
+        );
+
+    if(
+        widget &&
+        widget.classList.contains("active")
+    ){
+
+        return;
+
+    }
+
+    let pressed = event.key;
+
+    const expected =
+        afroditaSequence[
+            afroditaProgress
+        ];
+
+    if(
+        ["g","f","b"].includes(
+            expected
+        )
+    ){
+
+        pressed =
+            pressed.toLowerCase();
+
+    }
+
+    if(pressed === expected){
+
+        afroditaProgress++;
+
+        if(
+            afroditaProgress ===
+            afroditaSequence.length
+        ){
+
+            afroditaProgress = 0;
+
+            showAfroditaSecret();
 
         }
 
+    }else{
 
-        /* CLOSE WHEN CLICKING OUTSIDE */
+        resetAfroditaSequence();
 
-        document.querySelectorAll(".character-modal").forEach(modal => {
+    }
 
-            modal.addEventListener("click", event => {
+}
 
-                if (event.target === modal) {
+document.addEventListener(
+    "keydown",
+    handleAfroditaKey
+);
 
-                    closeCharacter(modal.id);
 
-                }
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
 
-            });
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(event.key !== "Escape") return;
+
+        const afrodita =
+            document.getElementById(
+                "afroditaSecretWidget"
+            );
+
+        if(
+            afrodita &&
+            afrodita.classList.contains("active")
+        ){
+
+            closeAfroditaSecret();
+
+            return;
+
+        }
+
+        document
+        .querySelectorAll(
+            ".character-modal"
+        )
+        .forEach(modal=>{
+
+            if(modal.open){
+
+                closeCharacter(
+                    modal.id
+                );
+
+            }
 
         });
 
+    }
+);
 
-        /* ESCAPE KEY */
 
-        document.addEventListener("keydown", event => {
+/* =========================================================
+   CLICK OUTSIDE AFRODITA
+========================================================= */
 
-            if (event.key !== "Escape") return;
+document
+.getElementById("afroditaSecretWidget")
+?.addEventListener(
+    "click",
+    event=>{
 
-            document.querySelectorAll(".character-modal").forEach(modal => {
+        if(
+            event.target.id ===
+            "afroditaSecretWidget"
+        ){
 
-                if (modal.open) {
+            closeAfroditaSecret();
 
-                    closeCharacter(modal.id);
+        }
 
-                }
+    }
+);
 
-            });
-
-        });
-
-    </script>
+</script>
 
 </body>
 </html>
