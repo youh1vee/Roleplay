@@ -249,6 +249,32 @@
                 );
         }
 
+        /* YELLOW ACCENT — JAMES / G-TOILET 5.0 */
+
+        .owner-james {
+            border-color: #6b5715;
+            background:
+                radial-gradient(circle at 100% 0%, rgba(255, 205, 20, 0.30), transparent 48%),
+                radial-gradient(circle at 72% 8%, rgba(255, 225, 65, 0.10), transparent 35%),
+                linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.005));
+        }
+
+        .owner-james:hover {
+            border-color: #b99a28;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.22), 0 0 28px rgba(255, 205, 20, 0.08);
+        }
+
+        .owner-james::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 62%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255, 205, 20, 0.98), rgba(255, 229, 84, 0.72));
+            box-shadow: 0 0 14px rgba(255, 205, 20, 0.30);
+        }
+
         /* BACKGROUND NUMBER */
 
         .card-number {
@@ -272,6 +298,10 @@
 
         .owner-gurkas .card-number {
             color: rgba(200, 95, 20, 0.045);
+        }
+
+        .owner-james .card-number {
+            color: rgba(255, 205, 20, 0.075);
         }
 
         /* IMAGE */
@@ -345,6 +375,20 @@
                     circle at 100% 0%,
                     rgba(180,85,15,0.13),
                     transparent 55%
+                );
+        }
+
+        .owner-james .character-image::after {
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(13,15,17,0.75),
+                    transparent 55%
+                ),
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(255,205,20,0.18),
+                    transparent 58%
                 );
         }
 
@@ -1033,7 +1077,7 @@
                 </h2>
 
                 <span>
-                    003 Entries
+                    004 Entries
                 </span>
 
             </div>
@@ -1289,6 +1333,95 @@
                         faction, possessing immense power and a wide range
                         of advanced abilities. His current state is marked
                         by his infection and his status as WOD.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =====================================================
+                 CHARACTER 004 — G-TOILET 5.0
+            ====================================================== -->
+
+            <article
+                class="character-card owner-james"
+                onclick="openCharacter('gtoilet')"
+            >
+
+                <div class="card-number">
+                    04
+                </div>
+
+                <div class="character-image">
+
+                    <img
+                        src="https://i.pinimg.com/1200x/8e/54/9e/8e549eb5cef957afa3aa7c02dd5627dd.jpg"
+                        alt="G-Toilet 5.0"
+                    >
+
+                </div>
+
+                <div class="character-content">
+
+                    <div class="character-label">
+                        Character 004
+                    </div>
+
+                    <h2 class="character-name">
+                        G-Toilet 5.0
+                    </h2>
+
+                    <div class="status">
+
+                        <span class="status-dot"></span>
+
+                        Active
+
+                    </div>
+
+                    <div class="info-grid">
+
+                        <div class="info">
+                            <div class="info-label">Faction</div>
+                            <div class="info-value">Skibidi</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">Type</div>
+                            <div class="info-value">Boss</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">First Appearance</div>
+                            <div class="info-value">Pre-Genesis</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">Current Version</div>
+                            <div class="info-value">5.0.0</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-label">Owner</div>
+                            <div class="info-value owner-value">James</div>
+                        </div>
+
+                    </div>
+
+                    <div class="description-label">
+                        Description
+                    </div>
+
+                    <p class="description">
+                        G-Toilet 5.0 is the latest and most powerful evolution
+                        of the Skibidi Toilet leader. Equipped with advanced
+                        technology, overwhelming firepower, and immense
+                        durability, he stands as one of the most dangerous
+                        entities in the Skibidi faction. His upgraded design
+                        allows him to dominate the battlefield and confront
+                        even the strongest opponents.
                     </p>
 
                 </div>
@@ -1721,6 +1854,12 @@
                 modal: "speakermanModal",
                 counter: "speakermanCounter",
                 interval: null
+            },
+
+            gtoilet: {
+                modal: "gtoiletModal",
+                counter: "gtoiletCounter",
+                interval: null
             }
 
         };
@@ -1735,6 +1874,8 @@
             if (!data) return;
 
             const modal = document.getElementById(data.modal);
+
+            if (!modal) return;
 
             resetGallery(character);
 
