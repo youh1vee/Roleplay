@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Compare — VOID CORE</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+
+:root {
+
+    --bg: #0b0c0f;
+    --panel: #111216;
+    --panel-hover: #15161a;
+
+    --border: #292b30;
+
+    --text: #eeeeef;
+    --muted: #73757c;
+
+    --camera: #438cff;
+    --speaker: #ff4747;
+    --tv: #a855f7;
+
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    padding: 0 40px;
+
+    background:
+        radial-gradient(
+            circle at 50% -15%,
+            rgba(255,255,255,.035),
+            transparent 35%
+        ),
+        var(--bg);
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.nav {
+
+    max-width: 1200px;
+
+    height: 68px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: var(--text);
+
+    text-decoration: none;
+
+}
+
+
+.brand-box {
+
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #aeb0b5;
+
+    font-size: 11px;
+
+}
+
+
+.brand-name {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.archive-link {
+
+    color: #62646b;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    transition: color .2s;
+
+}
+
+
+.archive-link:hover {
+    color: #b8bac0;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding-top: 58px;
+
+    padding-bottom: 80px;
+
+    animation:
+        appear .6s ease both;
+
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.eyebrow {
+
+    color: #676970;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 16px;
+
+}
+
+
+h1 {
+
+    color: #f0f0f1;
+
+    font-size:
+        clamp(48px, 7vw, 76px);
+
+    line-height: .95;
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+
+}
+
+
+.hero-description {
+
+    max-width: 650px;
+
+    margin-top: 20px;
+
+    color: #676970;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================
+   LAYOUT
+========================================= */
+
+.compare-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        285px
+        1fr;
+
+    gap: 14px;
+
+    margin-top: 55px;
+
+}
+
+
+/* =========================================
+   CHARACTER PANEL
+========================================= */
+
+.character-panel {
+
+    height: fit-content;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 12px;
+
+    background:
+        rgba(17,18,22,.78);
+
+}
+
+
+.panel-header {
+
+    height: 52px;
+
+    padding: 0 17px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.panel-title {
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.panel-count {
+
+    color: #55575e;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+}
+
+
+.character-list {
+    padding: 7px;
+}
+
+
+.character-item {
+
+    width: 100%;
+
+    padding: 11px 10px;
+
+    border:
+        1px solid
+        transparent;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #d5d6d9;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    font-family:
+        Inter,
+        sans-serif;
+
+    transition:
+        background .18s,
+        border .18s,
+        transform .18s;
+
+}
+
+
+.character-item:hover {
+
+    background:
+        var(--panel-hover);
+
+    border-color:
+        #25272c;
+
+    transform:
+        translateX(2px);
+
+}
+
+
+.character-dot {
+
+    width: 7px;
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+}
+
+
+.character-dot.camera {
+    background: var(--camera);
+}
+
+
+.character-dot.speaker {
+    background: var(--speaker);
+}
+
+
+.character-dot.tv {
+    background: var(--tv);
+}
+
+
+.character-info {
+
+    min-width: 0;
+
+    flex: 1;
+
+}
+
+
+.character-name {
+
+    overflow: hidden;
+
+    color: #d9dade;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.character-height {
+
+    margin-top: 3px;
+
+    color: #55575e;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+}
+
+
+.character-arrow {
+
+    color: #45474d;
+
+    font-size: 13px;
+
+    transition:
+        transform .18s,
+        color .18s;
+
+}
+
+
+.character-item:hover
+.character-arrow {
+
+    color: #777980;
+
+    transform:
+        translateX(3px);
+
+}
+
+
+/* =========================================
+   COMPARISON AREA
+========================================= */
+
+.comparison {
+
+    position: relative;
+
+    min-height: 700px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 12px;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.012),
+            transparent
+        ),
+
+        #101115;
+
+}
+
+
+.comparison-header {
+
+    position: relative;
+
+    z-index: 10;
+
+    height: 56px;
+
+    padding: 0 18px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.comparison-title {
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.comparison-meta {
+
+    color: #55575e;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+}
+
+
+/* =========================================
+   SCALE INDICATOR
+========================================= */
+
+.scale-mode {
+
+    position: absolute;
+
+    top: 72px;
+
+    right: 18px;
+
+    z-index: 8;
+
+    padding: 5px 8px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    border-radius: 6px;
+
+    background:
+        rgba(10,11,14,.7);
+
+    color: #4f5158;
+
+    font-family: monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+}
+
+
+/* =========================================
+   GRID
+========================================= */
+
+.grid {
+
+    position: absolute;
+
+    top: 56px;
+
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    pointer-events: none;
+
+}
+
+
+.grid-line {
+
+    position: absolute;
+
+    right: 0;
+
+    left: 70px;
+
+    height: 1px;
+
+    background:
+        rgba(255,255,255,.045);
+
+}
+
+
+.grid-label {
+
+    position: absolute;
+
+    left: 17px;
+
+    transform:
+        translateY(50%);
+
+    color: #4d4f56;
+
+    font-family: monospace;
+
+    font-size: 7px;
+
+}
+
+
+/* =========================================
+   FLOOR
+========================================= */
+
+.floor {
+
+    position: absolute;
+
+    right: 20px;
+
+    bottom: 55px;
+
+    left: 70px;
+
+    height: 1px;
+
+    background:
+        #373940;
+
+}
+
+
+/* =========================================
+   SELECTED CHARACTERS
+========================================= */
+
+.selected-area {
+
+    position: absolute;
+
+    top: 75px;
+
+    right: 20px;
+
+    bottom: 0;
+
+    left: 70px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    gap: 50px;
+
+    padding:
+        0
+        35px
+        55px;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+}
+
+
+.selected-area::-webkit-scrollbar {
+    height: 4px;
+}
+
+
+.selected-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.selected-area::-webkit-scrollbar-thumb {
+
+    background: #292b30;
+
+    border-radius: 99px;
+
+}
+
+
+/* =========================================
+   PERSON CONTAINER
+========================================= */
+
+.selected-character {
+
+    position: relative;
+
+    height: 100%;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+}
+
+
+/*
+    319 / 640 = 0.4984375
+
+    Keeping this ratio prevents
+    the silhouette from stretching.
+*/
+
+.person {
+
+    position: relative;
+
+    width:
+        calc(
+            var(--character-height)
+            * .4984375
+        );
+
+    height:
+        var(--character-height);
+
+    flex-shrink: 0;
+
+    animation:
+        personAppear .35s ease both;
+
+}
+
+
+/* =========================================
+   DEFAULT HUMAN SILHOUETTE
+========================================= */
+
+.person-silhouette {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        var(--faction-color);
+
+    -webkit-mask-image:
+        url("https://media.discordapp.net/attachments/1321552941009731727/1539734015257481457/6PC3cYAAAAGSURBVAMAV2t2XyaL6qEAAAAASUVORK5CYII.png?ex=6a87648c&is=6a86130c&hm=ab8622d6f77a60ce6e58213463eb1d8f531ada8a0f8a04c871c0839c220f55d1&=&format=webp&quality=lossless&width=319&height=640");
+
+    mask-image:
+        url("https://media.discordapp.net/attachments/1321552941009731727/1539734015257481457/6PC3cYAAAAGSURBVAMAV2t2XyaL6qEAAAAASUVORK5CYII.png?ex=6a87648c&is=6a86130c&hm=ab8622d6f77a60ce6e58213463eb1d8f531ada8a0f8a04c871c0839c220f55d1&=&format=webp&quality=lossless&width=319&height=640");
+
+    -webkit-mask-size:
+        100% 100%;
+
+    mask-size:
+        100% 100%;
+
+    -webkit-mask-position:
+        center;
+
+    mask-position:
+        center;
+
+    -webkit-mask-repeat:
+        no-repeat;
+
+    mask-repeat:
+        no-repeat;
+
+}
+
+
+/* =========================================
+   FUTURE SPECIAL SILHOUETTES
+========================================= */
+
+/*
+    Later we can simply give a character:
+
+        silhouette: "tcm"
+
+    and add its image here.
+
+    For now EVERY character uses
+    the default human silhouette.
+*/
+
+.person.special-silhouette {
+
+    /* Reserved for future character silhouettes */
+
+}
+
+
+/* =========================================
+   LABEL
+========================================= */
+
+.selected-label {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: -50px;
+
+    width: 150px;
+
+    transform:
+        translateX(-50%);
+
+    text-align: center;
+
+}
+
+
+.selected-name {
+
+    overflow: hidden;
+
+    color: #c4c5c9;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.selected-version {
+
+    margin-top: 4px;
+
+    color: #55575e;
+
+    font-family: monospace;
+
+    font-size: 7px;
+
+}
+
+
+.remove-character {
+
+    margin-top: 5px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #45474d;
+
+    cursor: pointer;
+
+    font-size: 7px;
+
+    letter-spacing: .5px;
+
+}
+
+
+.remove-character:hover {
+    color: #b1b2b7;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-state {
+
+    position: absolute;
+
+    top: 56px;
+
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #4d4f56;
+
+    text-align: center;
+
+}
+
+
+.empty-icon {
+
+    width: 44px;
+    height: 44px;
+
+    margin-bottom: 13px;
+
+    border:
+        1px solid
+        #292b30;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #686a71;
+
+    font-size: 16px;
+
+}
+
+
+.empty-title {
+
+    color: #686a71;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.empty-description {
+
+    max-width: 280px;
+
+    margin-top: 7px;
+
+    color: #494b52;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   VERSION MODAL
+========================================= */
+
+.version-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    padding: 20px;
+
+    background:
+        rgba(0,0,0,.65);
+
+    backdrop-filter:
+        blur(9px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .2s;
+
+}
+
+
+.version-overlay.active {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+.version-box {
+
+    width:
+        min(390px,100%);
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 14px;
+
+    background:
+        #111216;
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,.55);
+
+    transform:
+        translateY(10px)
+        scale(.98);
+
+    transition:
+        transform .2s;
+
+}
+
+
+.version-overlay.active
+.version-box {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+.version-top {
+
+    padding: 20px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+}
+
+
+.version-character {
+
+    color: #e1e2e5;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+
+.version-height {
+
+    margin-top: 5px;
+
+    color: #606269;
+
+    font-family: monospace;
+
+    font-size: 9px;
+
+}
+
+
+.close-button {
+
+    width: 28px;
+    height: 28px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 8px;
+
+    background:
+        transparent;
+
+    color: #696b72;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+}
+
+
+.close-button:hover {
+
+    background:
+        #1a1b20;
+
+    color: #ddd;
+
+}
+
+
+.version-body {
+    padding: 18px;
+}
+
+
+.version-label {
+
+    margin-bottom: 10px;
+
+    color: #55575e;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+}
+
+
+.version-options {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 8px;
+
+}
+
+
+.version-option {
+
+    padding: 14px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 9px;
+
+    background:
+        #0f1013;
+
+    color: #aeb0b5;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    font-family:
+        Inter,
+        sans-serif;
+
+    transition:
+        background .2s,
+        border .2s,
+        transform .15s;
+
+}
+
+
+.version-option:hover {
+
+    background:
+        #17181c;
+
+    border-color:
+        #3a3c42;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.version-option-name {
+
+    color: #d7d8db;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+}
+
+
+.version-option-height {
+
+    margin-top: 5px;
+
+    color: #55575e;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes appear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes personAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(14px)
+            scale(.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:850px) {
+
+    body {
+        padding: 0 18px;
+    }
+
+
+    .compare-layout {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .character-list {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap: 4px;
+
+    }
+
+
+    .comparison {
+        min-height: 650px;
+    }
+
+}
+
+
+@media(max-width:500px) {
+
+    .character-list {
+        grid-template-columns: 1fr;
+    }
+
+
+    h1 {
+
+        font-size: 50px;
+
+        letter-spacing: -2px;
+
+    }
+
+
+    .hero-description {
+        font-size: 12px;
+    }
+
+
+    .selected-area {
+
+        gap: 25px;
+
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<nav class="nav">
+
+    <a
+        href="index.html"
+        class="brand"
+    >
+
+        <div class="brand-box">
+            RP
+        </div>
+
+        <div class="brand-name">
+            ROLEPLAY
+        </div>
+
+    </a>
+
+
+    <a
+        href="size.html"
+        class="archive-link"
+    >
+        Size Database
+    </a>
+
+</nav>
+
+
+
+<main class="main">
+
+
+    <div class="eyebrow">
+        Roleplay Universe
+    </div>
+
+
+    <h1>
+        COMPARE
+    </h1>
+
+
+    <p class="hero-description">
+
+        Compare the recorded dimensions
+        of characters and entities within
+        the VOID CORE universe using
+        proportional scale.
+
+    </p>
+
+
+
+    <div class="compare-layout">
+
+
+        <!-- =================================
+             CHARACTER DATABASE
+        ================================== -->
+
+        <aside class="character-panel">
+
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+                    Characters
+                </div>
+
+                <div class="panel-count">
+                    010
+                </div>
+
+            </div>
+
+
+            <div
+                class="character-list"
+                id="characterList"
+            ></div>
+
+
+        </aside>
+
+
+
+        <!-- =================================
+             COMPARISON
+        ================================== -->
+
+        <section class="comparison">
+
+
+            <div class="comparison-header">
+
+                <div class="comparison-title">
+                    Size Comparison
+                </div>
+
+                <div
+                    class="comparison-meta"
+                    id="comparisonMeta"
+                >
+                    0 SELECTED
+                </div>
+
+            </div>
+
+
+            <div
+                class="scale-mode"
+                id="scaleMode"
+            >
+                AUTO SCALE
+            </div>
+
+
+
+            <!-- GRID -->
+
+            <div class="grid">
+
+
+                <div
+                    class="grid-line"
+                    style="bottom:0%"
+                ></div>
+
+                <div
+                    class="grid-label"
+                    style="bottom:0%"
+                >
+                    0M
+                </div>
+
+
+                <div
+                    class="grid-line"
+                    style="bottom:25%"
+                ></div>
+
+                <div
+                    class="grid-label"
+                    style="bottom:25%"
+                >
+                    22.5M
+                </div>
+
+
+                <div
+                    class="grid-line"
+                    style="bottom:50%"
+                ></div>
+
+                <div
+                    class="grid-label"
+                    style="bottom:50%"
+                >
+                    45M
+                </div>
+
+
+                <div
+                    class="grid-line"
+                    style="bottom:75%"
+                ></div>
+
+                <div
+                    class="grid-label"
+                    style="bottom:75%"
+                >
+                    67.5M
+                </div>
+
+
+                <div
+                    class="grid-line"
+                    style="bottom:100%"
+                ></div>
+
+                <div
+                    class="grid-label"
+                    style="bottom:100%"
+                >
+                    90M
+                </div>
+
+
+            </div>
+
+
+
+            <div class="floor"></div>
+
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                class="empty-state"
+                id="emptyState"
+            >
+
+                <div class="empty-icon">
+                    ↕
+                </div>
+
+
+                <div class="empty-title">
+                    Select a character
+                </div>
+
+
+                <div class="empty-description">
+
+                    Choose a character from the
+                    database to select a version
+                    and add it to the comparison.
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SELECTED CHARACTERS -->
+
+            <div
+                class="selected-area"
+                id="selectedArea"
+            ></div>
+
+
+        </section>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =========================================
+     VERSION SELECTOR
+========================================= -->
+
+<div
+    class="version-overlay"
+    id="versionOverlay"
+>
+
+
+    <div class="version-box">
+
+
+        <div class="version-top">
+
+
+            <div>
+
+                <div
+                    class="version-character"
+                    id="versionCharacter"
+                >
+                    Character
+                </div>
+
+
+                <div
+                    class="version-height"
+                    id="versionHeight"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+            <button
+                class="close-button"
+                id="closeVersion"
+            >
+                ×
+            </button>
+
+
+        </div>
+
+
+
+        <div class="version-body">
+
+
+            <div class="version-label">
+                Select Version
+            </div>
+
+
+            <div
+                class="version-options"
+                id="versionOptions"
+            ></div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================
+   CHARACTER DATABASE
+========================================= */
+
+/*
+    silhouette:
+
+    "default"
+        → temporary human silhouette
+
+    "tcm"
+        → reserved for Titan Cameraman
+
+    "tsm"
+        → reserved for Titan Speakerman
+
+    "ttm"
+        → reserved for Titan TV Man
+
+    "shiro"
+        → reserved for Shiro
+
+    These will receive their real silhouettes
+    later.
+*/
+
+
+const characters = [
+
+    {
+        id: "camera-troop",
+
+        name: "Camera Troop",
+
+        faction: "camera",
+
+        silhouette: "default",
+
+        versions: {
+
+            V1: "1.85M",
+
+            V2: "1.85M",
+
+            V3: "2.40M"
+
+        }
+
+    },
+
+
+    {
+        id: "speaker-troop",
+
+        name: "Speaker Troop",
+
+        faction: "speaker",
+
+        silhouette: "default",
+
+        versions: {
+
+            V1: "1.85M",
+
+            V2: "1.85M",
+
+            V3: "2.40M"
+
+        }
+
+    },
+
+
+    {
+        id: "tv-troop",
+
+        name: "TV Troop",
+
+        faction: "tv",
+
+        silhouette: "default",
+
+        versions: {
+
+            V1: "2.00M",
+
+            V2: "2.20M",
+
+            V3: "2.40M"
+
+        }
+
+    },
+
+
+    {
+        id: "large-camera",
+
+        name: "Large Camera Troop",
+
+        faction: "camera",
+
+        silhouette: "default",
+
+        versions: {
+
+            V1: "3M",
+
+            V2: "3M",
+
+            V3: "5M"
+
+        }
+
+    },
+
+
+    {
+        id: "large-speaker",
+
+        name: "Large Speaker Troop",
+
+        faction: "speaker",
+
+        silhouette: "default",
+
+        versions: {
+
+            V1: "13M",
+
+            V3: "16M"
+
+        }
+
+    },
+
+
+    {
+        id: "large-tv",
+
+        name: "Large TV Man Poly",
+
+        faction: "tv",
+
+        silhouette: "default",
+
+        versions: {
+
+            V1: "14M",
+
+            V2: "15M"
+
+        }
+
+    },
+
+
+    /* =====================================
+       SHIRO
+    ===================================== */
+
+    {
+        id: "shiro",
+
+        name: "Shiro",
+
+        faction: "tv",
+
+        silhouette: "shiro",
+
+        versions: {
+
+            V1: "2.40M",
+
+            V2: "2.80M"
+
+        }
+
+    },
+
+
+    /* =====================================
+       TITAN CAMERAMAN
+    ===================================== */
+
+    {
+        id: "titan-camera",
+
+        name: "Titan Cameraman",
+
+        faction: "camera",
+
+        silhouette: "tcm",
+
+        versions: {
+
+            V1: "65M",
+
+            V2: "85M"
+
+        }
+
+    },
+
+
+    /* =====================================
+       TITAN SPEAKERMAN
+    ===================================== */
+
+    {
+        id: "titan-speaker",
+
+        name: "Titan Speakerman",
+
+        faction: "speaker",
+
+        silhouette: "tsm",
+
+        versions: {
+
+            V1: "60M",
+
+            V2: "72M",
+
+            Special: "90M"
+
+        },
+
+        specialNames: {
+
+            Special: "TFS"
+
+        }
+
+    },
+
+
+    /* =====================================
+       TITAN TV MAN
+    ===================================== */
+
+    {
+        id: "titan-tv",
+
+        name: "Titan TV Man",
+
+        faction: "tv",
+
+        silhouette: "ttm",
+
+        versions: {
+
+            V1: "67M",
+
+            V2: "87M",
+
+            Special: "90M"
+
+        }
+
+    }
+
+];
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const characterList =
+    document.getElementById(
+        "characterList"
+    );
+
+
+const versionOverlay =
+    document.getElementById(
+        "versionOverlay"
+    );
+
+
+const versionCharacter =
+    document.getElementById(
+        "versionCharacter"
+    );
+
+
+const versionHeight =
+    document.getElementById(
+        "versionHeight"
+    );
+
+
+const versionOptions =
+    document.getElementById(
+        "versionOptions"
+    );
+
+
+const closeVersion =
+    document.getElementById(
+        "closeVersion"
+    );
+
+
+const selectedArea =
+    document.getElementById(
+        "selectedArea"
+    );
+
+
+const emptyState =
+    document.getElementById(
+        "emptyState"
+    );
+
+
+const comparisonMeta =
+    document.getElementById(
+        "comparisonMeta"
+    );
+
+
+const scaleMode =
+    document.getElementById(
+        "scaleMode"
+    );
+
+
+let selectedCharacters = [];
+
+let activeCharacter = null;
+
+
+/* =========================================
+   BUILD CHARACTER LIST
+========================================= */
+
+function buildCharacterList() {
+
+    characterList.innerHTML = "";
+
+
+    characters.forEach(
+        character => {
+
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "character-item";
+
+
+            const heights =
+                Object.values(
+                    character.versions
+                );
+
+
+            const latest =
+                heights[
+                    heights.length - 1
+                ];
+
+
+            button.innerHTML = `
+
+                <span
+                    class="
+                        character-dot
+                        ${character.faction}
+                    "
+                ></span>
+
+
+                <span
+                    class="character-info"
+                >
+
+                    <span
+                        class="character-name"
+                    >
+                        ${character.name}
+                    </span>
+
+
+                    <span
+                        class="character-height"
+                    >
+                        ${latest}
+                    </span>
+
+                </span>
+
+
+                <span
+                    class="character-arrow"
+                >
+                    ›
+                </span>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                () =>
+                    openVersionSelector(
+                        character
+                    )
+            );
+
+
+            characterList.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   OPEN VERSION SELECTOR
+========================================= */
+
+function openVersionSelector(
+    character
+) {
+
+    activeCharacter =
+        character;
+
+
+    versionCharacter.textContent =
+        character.name;
+
+
+    const heights =
+        Object.values(
+            character.versions
+        );
+
+
+    versionHeight.textContent =
+        `${heights[heights.length - 1]} maximum recorded`;
+
+
+    versionOptions.innerHTML = "";
+
+
+    Object.entries(
+        character.versions
+    ).forEach(
+        ([version,height]) => {
+
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "version-option";
+
+
+            /*
+                If a Special has a custom
+                display name, use it.
+
+                Example:
+
+                TFS
+                90M
+
+                instead of:
+
+                Special
+                90M
+            */
+
+            const displayName =
+                character.specialNames &&
+                character.specialNames[version]
+                    ? character.specialNames[version]
+                    : version;
+
+
+            button.innerHTML = `
+
+                <div
+                    class="
+                        version-option-name
+                    "
+                >
+                    ${displayName}
+                </div>
+
+
+                <div
+                    class="
+                        version-option-height
+                    "
+                >
+                    ${height}
+                </div>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                () =>
+                    selectVersion(
+                        character,
+                        version,
+                        height,
+                        displayName
+                    )
+            );
+
+
+            versionOptions.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    versionOverlay.classList.add(
+        "active"
+    );
+
+}
+
+
+/* =========================================
+   SELECT VERSION
+========================================= */
+
+function selectVersion(
+    character,
+    version,
+    height,
+    displayName
+) {
+
+    const existing =
+        selectedCharacters.findIndex(
+            item =>
+                item.character.id ===
+                character.id
+        );
+
+
+    const data = {
+
+        character,
+
+        version,
+
+        height,
+
+        displayName
+
+    };
+
+
+    if(existing !== -1) {
+
+        selectedCharacters[
+            existing
+        ] = data;
+
+    }
+
+    else {
+
+        selectedCharacters.push(
+            data
+        );
+
+    }
+
+
+    closeVersionSelector();
+
+    renderCharacters();
+
+}
+
+
+/* =========================================
+   RENDER CHARACTERS
+========================================= */
+
+function renderCharacters() {
+
+    selectedArea.innerHTML = "";
+
+
+    if(
+        selectedCharacters.length === 0
+    ) {
+
+        emptyState.style.display =
+            "flex";
+
+        comparisonMeta.textContent =
+            "0 SELECTED";
+
+        scaleMode.textContent =
+            "AUTO SCALE";
+
+        return;
+
+    }
+
+
+    emptyState.style.display =
+        "none";
+
+
+    comparisonMeta.textContent =
+        `${selectedCharacters.length} SELECTED`;
+
+
+    /*
+        REAL PROPORTIONAL SCALE
+
+        The largest selected character
+        becomes the reference.
+
+        This means:
+
+        2.4M alone
+        → large enough to see.
+
+        90M + 2.4M
+        → 2.4M is genuinely much smaller.
+    */
+
+    const heights =
+        selectedCharacters.map(
+            item =>
+                parseFloat(
+                    item.height
+                )
+        );
+
+
+    const largest =
+        Math.max(
+            ...heights
+        );
+
+
+    const stageHeight =
+        selectedArea.clientHeight - 55;
+
+
+    /*
+        The largest character occupies
+        roughly 78% of the available height.
+    */
+
+    const targetHeight =
+        stageHeight * .78;
+
+
+    const pixelsPerMeter =
+        targetHeight /
+        largest;
+
+
+    scaleMode.textContent =
+        `AUTO SCALE · ${largest}M REF`;
+
+
+    selectedCharacters.forEach(
+        (item,index) => {
+
+
+            const meters =
+                parseFloat(
+                    item.height
+                );
+
+
+            const pixelHeight =
+                meters *
+                pixelsPerMeter;
+
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+
+            wrapper.className =
+                "selected-character";
+
+
+            /*
+                Faction color is applied
+                automatically.
+            */
+
+            const factionVariable =
+                `var(--${item.character.faction})`;
+
+
+            /*
+                Future special silhouettes
+                are already supported.
+
+                For now every one uses
+                "default".
+            */
+
+            const silhouetteClass =
+                item.character.silhouette !==
+                "default"
+
+                    ? "special-silhouette"
+
+                    : "";
+
+
+            wrapper.innerHTML = `
+
+                <div
+
+                    class="person
+                    ${silhouetteClass}"
+
+                    style="
+
+                        --character-height:
+                        ${pixelHeight}px;
+
+                        --faction-color:
+                        ${factionVariable};
+
+                    "
+
+                >
+
+                    <div
+                        class="person-silhouette"
+                    ></div>
+
+
+                    <div
+                        class="selected-label"
+                    >
+
+                        <div
+                            class="selected-name"
+                        >
+                            ${item.character.name}
+                        </div>
+
+
+                        <div
+                            class="selected-version"
+                        >
+
+                            ${item.displayName}
+
+                            ·
+
+                            ${item.height}
+
+                        </div>
+
+
+                        <button
+                            class="
+                                remove-character
+                            "
+
+                            data-index="${index}"
+                        >
+                            REMOVE
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            wrapper
+                .querySelector(
+                    ".remove-character"
+                )
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        selectedCharacters.splice(
+                            index,
+                            1
+                        );
+
+                        renderCharacters();
+
+                    }
+                );
+
+
+            selectedArea.appendChild(
+                wrapper
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   CLOSE VERSION SELECTOR
+========================================= */
+
+function closeVersionSelector() {
+
+    versionOverlay.classList.remove(
+        "active"
+    );
+
+    activeCharacter = null;
+
+}
+
+
+/* =========================================
+   EVENTS
+========================================= */
+
+closeVersion.addEventListener(
+    "click",
+    closeVersionSelector
+);
+
+
+versionOverlay.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            versionOverlay
+        ) {
+
+            closeVersionSelector();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key ===
+            "Escape"
+        ) {
+
+            closeVersionSelector();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   RESPONSIVE RESCALING
+========================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        if(
+            selectedCharacters.length > 0
+        ) {
+
+            renderCharacters();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+buildCharacterList();
+
+</script>
+
+</body>
+
+</html>
