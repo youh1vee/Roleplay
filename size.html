@@ -1,1272 +1,2057 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VOID CORE — Archive</title>
+<title>Size — VOID CORE</title>
 
-    <style>
+<style>
 
-        /* =========================
-           RESET
-           ========================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+:root {
+    --bg: #0b0c0f;
+    --panel: #111216;
+    --panel-hover: #15161a;
+    --border: #292b30;
+    --text: #eeeeef;
+    --muted: #73757c;
+    --subtle: #4e5056;
+}
 
-        body {
-            background:
-                radial-gradient(
-                    circle at top,
-                    #17191d 0%,
-                    #0c0d0f 45%,
-                    #08090a 100%
-                );
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-            color: #f2f2f2;
+html {
+    scroll-behavior: smooth;
+}
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+body {
+    background:
+        radial-gradient(
+            circle at 50% -15%,
+            rgba(255,255,255,0.035),
+            transparent 35%
+        ),
+        var(--bg);
 
-            min-height: 100vh;
-        }
+    color: var(--text);
 
-        button,
-        input {
-            font: inherit;
-        }
+    font-family: Inter, Arial, sans-serif;
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+    min-height: 100vh;
 
+    padding: 0 40px;
+}
 
-        /* =========================
-           PAGE
-           ========================= */
 
-        .page {
-            width: min(1100px, calc(100% - 28px));
-            margin: auto;
+/* =========================================
+   TOP NAVIGATION
+========================================= */
 
-            padding: 28px 0 50px;
-        }
+.nav {
+    max-width: 1150px;
+    margin: auto;
 
+    height: 68px;
 
-        /* =========================
-           HEADER
-           ========================= */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
-            padding: 8px 4px 24px;
-        }
+    text-decoration: none;
+    color: var(--text);
+}
 
-        .brand {
-            display: flex;
-            align-items: center;
+.brand-box {
+    width: 30px;
+    height: 30px;
 
-            gap: 12px;
-        }
+    border: 1px solid var(--border);
+    border-radius: 9px;
 
-        .brand-icon {
-            width: 34px;
-            height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            display: grid;
-            place-items: center;
+    color: #aeb0b5;
+    font-size: 11px;
+}
 
-            border: 1px solid #34363a;
-            border-radius: 10px;
+.brand-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
 
-            background: #151619;
+.archive-link {
+    color: #62646b;
+    text-decoration: none;
 
-            font-size: 14px;
-            color: #bdbfc3;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
 
-            cursor: default;
+    transition: color .2s;
+}
 
-            user-select: none;
+.archive-link:hover {
+    color: #b8bac0;
+}
 
-            -webkit-tap-highlight-color: transparent;
-        }
 
-        .brand-name {
-            font-size: 14px;
+/* =========================================
+   MAIN
+========================================= */
 
-            font-weight: 600;
+.main {
+    max-width: 1150px;
+    margin: auto;
 
-            letter-spacing: 2px;
-        }
+    padding-top: 58px;
+    padding-bottom: 80px;
+}
 
-        .archive {
-            color: #686b70;
 
-            font-size: 11px;
+/* =========================================
+   HERO
+========================================= */
 
-            letter-spacing: 2px;
-        }
+.eyebrow {
+    color: #676970;
 
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
 
-        /* =========================
-           HERO
-           ========================= */
+    margin-bottom: 16px;
+}
 
-        .hero {
-            padding: 55px 6px 35px;
-        }
+h1 {
+    font-size: clamp(48px, 7vw, 76px);
 
-        .hero-label {
-            color: #73767c;
+    line-height: .95;
 
-            font-size: 11px;
+    letter-spacing: -3px;
 
-            letter-spacing: 3px;
+    font-weight: 800;
 
-            text-transform: uppercase;
+    color: #f0f0f1;
+}
 
-            margin-bottom: 9px;
-        }
+.hero-description {
+    max-width: 650px;
 
-        .void-core {
-            font-family:
-                "FWC26",
-                "Arial Black",
-                Arial,
-                Helvetica,
-                sans-serif;
+    margin-top: 20px;
 
-            font-size:
-                clamp(42px, 8vw, 78px);
+    color: #676970;
 
-            font-weight: 900;
+    font-size: 13px;
+    line-height: 1.7;
+}
 
-            letter-spacing: 2px;
 
-            line-height: .95;
+/* =========================================
+   DATABASE HEADER
+========================================= */
 
-            color: #eeeeee;
+.database-header {
+    margin-top: 58px;
 
-            text-transform: uppercase;
-        }
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
 
-        .hero p {
-            margin-top: 17px;
+    gap: 20px;
 
-            max-width: 500px;
+    border-bottom: 1px solid var(--border);
 
-            color: #696c71;
+    padding-bottom: 14px;
+}
 
-            font-size: 13px;
+.section-title {
+    font-size: 13px;
+    font-weight: 600;
+}
 
-            line-height: 1.6;
-        }
+.section-meta {
+    color: #55575e;
 
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
-        /* =========================
-           MENU HEADER
-           ========================= */
 
-        .menu-header {
-            display: flex;
+/* =========================================
+   CONTROLS
+========================================= */
 
-            justify-content: space-between;
+.controls {
+    display: flex;
+    align-items: center;
 
-            align-items: end;
+    gap: 10px;
 
-            margin: 12px 2px 12px;
-        }
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
 
-        .menu-title {
-            font-size: 13px;
+.search {
+    flex: 1;
 
-            font-weight: 600;
+    height: 40px;
 
-            letter-spacing: 1px;
-        }
+    padding: 0 14px;
 
-        .menu-subtitle {
-            color: #55585d;
+    background: #101115;
 
-            font-size: 9px;
+    border: 1px solid var(--border);
 
-            letter-spacing: 2px;
+    border-radius: 8px;
 
-            text-transform: uppercase;
-        }
+    outline: none;
 
+    color: #d9dade;
 
-        /* =========================
-           MENU GRID
-           ========================= */
+    font-family: Inter, sans-serif;
+    font-size: 11px;
 
-        .menu {
-            display: grid;
+    transition:
+        border .2s,
+        background .2s;
+}
 
-            grid-template-columns:
-                repeat(2, 1fr);
+.search::placeholder {
+    color: #55575d;
+}
 
-            gap: 10px;
-        }
+.search:focus {
+    border-color: #3a3c42;
+    background: #131419;
+}
 
+.filter {
+    height: 40px;
 
-        /* =========================
-           MENU CARD
-           ========================= */
+    padding: 0 13px;
 
-        .menu-card {
-            position: relative;
+    background: #101115;
 
-            min-height: 155px;
+    border: 1px solid var(--border);
 
-            display: flex;
+    border-radius: 8px;
 
-            flex-direction: column;
+    color: #777980;
 
-            justify-content: space-between;
+    outline: none;
 
-            overflow: hidden;
+    font-family: Inter, sans-serif;
+    font-size: 10px;
+}
 
-            padding: 22px;
 
-            border: 1px solid #292b2f;
+/* =========================================
+   TABLE
+========================================= */
 
-            border-radius: 15px;
+.table-container {
+    width: 100%;
 
-            background:
-                linear-gradient(
-                    115deg,
-                    #18191c 0%,
-                    #111214 55%,
-                    #0d0e10 100%
-                );
+    overflow-x: auto;
 
-            cursor: pointer;
+    border: 1px solid var(--border);
 
-            transition:
-                transform .25s ease,
-                border-color .25s ease,
-                background .25s ease;
-        }
+    border-radius: 12px;
 
-        .menu-card:hover {
-            transform: translateY(-3px);
+    background: rgba(17,18,22,.75);
+}
 
-            border-color: #44474c;
+table {
+    width: 100%;
 
-            background:
-                linear-gradient(
-                    115deg,
-                    #1d1e21 0%,
-                    #141518 55%,
-                    #101113 100%
-                );
-        }
+    min-width: 900px;
 
+    border-collapse: collapse;
+}
 
-        /* =========================
-           BIG BACKGROUND NUMBER
-           ========================= */
+thead {
+    background: rgba(255,255,255,.015);
+}
 
-        .menu-card::before {
-            content: attr(data-number);
+th {
+    height: 46px;
 
-            position: absolute;
+    padding: 0 18px;
 
-            right: 15px;
-            bottom: -38px;
+    text-align: left;
 
-            font-size: 145px;
+    color: #55575e;
 
-            font-weight: 700;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 
-            color: rgba(255,255,255,.018);
+    font-weight: 600;
 
-            pointer-events: none;
-        }
+    border-bottom: 1px solid var(--border);
+}
 
+td {
+    padding: 16px 18px;
 
-        /* =========================
-           CARD TOP
-           ========================= */
+    border-bottom: 1px solid rgba(255,255,255,.045);
 
-        .menu-card-top {
-            display: flex;
+    font-size: 11px;
 
-            justify-content: space-between;
+    white-space: nowrap;
+}
 
-            align-items: center;
-        }
+tbody tr {
+    transition: background .2s;
+}
 
-        .menu-number {
-            width: 38px;
-            height: 38px;
+tbody tr:hover {
+    background: var(--panel-hover);
+}
 
-            display: grid;
-            place-items: center;
+tbody tr:last-child td {
+    border-bottom: none;
+}
 
-            border: 1px solid #34363a;
 
-            border-radius: 10px;
+/* =========================================
+   CHARACTER CELL
+========================================= */
 
-            background: #111214;
+.character {
+    display: flex;
+    align-items: center;
 
-            color: #8c8f94;
+    gap: 11px;
+}
 
-            font-size: 10px;
+.character-number {
+    width: 31px;
+    height: 31px;
 
-            letter-spacing: 1px;
-        }
+    border: 1px solid #292b30;
 
-        .menu-arrow {
-            color: #55585d;
+    border-radius: 8px;
 
-            font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            transition:
-                transform .25s ease,
-                color .25s ease;
-        }
+    color: #676970;
 
-        .menu-card:hover .menu-arrow {
-            transform: translateX(4px);
+    font-family: monospace;
+    font-size: 9px;
+}
 
-            color: #bdbfc3;
-        }
+.character-name {
+    font-weight: 600;
 
+    color: #dedfe1;
+}
 
-        /* =========================
-           CARD TEXT
-           ========================= */
+.character-id {
+    margin-top: 3px;
 
-        .menu-card-content {
-            position: relative;
+    color: #50525a;
 
-            z-index: 1;
-        }
+    font-size: 8px;
+    letter-spacing: 1px;
+}
 
-        .menu-card h2 {
-            font-size:
-                clamp(21px, 3vw, 28px);
 
-            font-weight: 500;
+/* =========================================
+   TYPE
+========================================= */
 
-            letter-spacing: .3px;
+.type {
+    color: #777980;
 
-            margin-bottom: 7px;
-        }
+    font-size: 9px;
 
-        .menu-card p {
-            max-width: 420px;
+    text-transform: uppercase;
 
-            color: #696c71;
+    letter-spacing: 1.3px;
+}
 
-            font-size: 10px;
+.type.titan {
+    color: #b2b3b8;
+}
 
-            line-height: 1.5;
-        }
 
+/* =========================================
+   VERSION CELLS
+========================================= */
 
-        /* =========================
-           LARGE CARD
-           ========================= */
+.size {
+    font-family: monospace;
 
-        .menu-card.large {
-            grid-column: span 2;
+    color: #c9cacf;
 
-            min-height: 190px;
-        }
+    font-size: 11px;
+}
 
+.version-label {
+    display: block;
 
-        /* =========================
-           STATUS
-           ========================= */
+    margin-top: 3px;
 
-        .status {
-            display: inline-flex;
+    color: #484a51;
 
-            align-items: center;
+    font-family: Inter, sans-serif;
 
-            gap: 7px;
+    font-size: 7px;
 
-            margin-top: 13px;
+    letter-spacing: 1px;
+}
 
-            color: #55585d;
 
-            font-size: 8px;
+/* =========================================
+   SPECIAL
+========================================= */
 
-            letter-spacing: 1.5px;
+.special {
+    color: #85878e;
 
-            text-transform: uppercase;
-        }
+    font-family: monospace;
 
-        .status-dot {
-            width: 5px;
-            height: 5px;
+    font-size: 10px;
+}
 
-            border-radius: 50%;
+.unknown {
+    color: #4f5158;
+}
 
-            background: #777a80;
-        }
 
+/* =========================================
+   SCALE BAR
+========================================= */
 
-        /* =========================
-           SIZE DATABASE BUTTON
-           ========================= */
+.scale-cell {
+    width: 180px;
+}
 
-        .secondary-actions {
-            display: flex;
+.scale {
+    display: flex;
 
-            justify-content: flex-start;
+    align-items: center;
 
-            margin-top: 12px;
-        }
+    gap: 10px;
+}
 
-        .secondary-button {
-            display: inline-flex;
+.scale-bar {
+    width: 95px;
+    height: 3px;
 
-            align-items: center;
+    background: #22242a;
 
-            gap: 9px;
+    border-radius: 99px;
 
-            padding: 9px 12px;
+    overflow: hidden;
+}
 
-            border: 1px solid #25272b;
+.scale-fill {
+    height: 100%;
 
-            border-radius: 9px;
+    background: #85878d;
 
-            background: #101113;
+    border-radius: inherit;
 
-            color: #5d6065;
+    transition: width .35s ease;
+}
 
-            font-size: 8px;
+.scale-number {
+    color: #55575e;
 
-            font-weight: 600;
+    font-family: monospace;
 
-            letter-spacing: 1.5px;
+    font-size: 8px;
+}
 
-            text-transform: uppercase;
 
-            transition:
-                transform .25s ease,
-                border-color .25s ease,
-                background .25s ease,
-                color .25s ease;
-        }
+/* =========================================
+   INFORMATION BLOCKS
+========================================= */
 
-        .secondary-button:hover {
-            transform: translateY(-2px);
+.info-section {
+    margin-top: 42px;
+}
 
-            border-color: #3b3e43;
+.info-title {
+    color: #62646b;
 
-            background: #151619;
+    font-size: 9px;
 
-            color: #bfc1c5;
-        }
+    letter-spacing: 3px;
 
-        .secondary-arrow {
-            color: #4d5055;
+    text-transform: uppercase;
 
-            font-size: 13px;
+    margin-bottom: 12px;
+}
 
-            transition:
-                transform .25s ease,
-                color .25s ease;
-        }
+.info-grid {
+    display: grid;
 
-        .secondary-button:hover .secondary-arrow {
-            transform: translateX(3px);
+    grid-template-columns: repeat(3, 1fr);
 
-            color: #aeb1b5;
-        }
+    gap: 10px;
+}
 
+.info-card {
+    border: 1px solid var(--border);
 
-        /* =========================
-           FOOTER
-           ========================= */
+    border-radius: 10px;
 
-        .footer {
-            display: flex;
+    background: #101115;
 
-            justify-content: space-between;
+    padding: 18px;
 
-            margin-top: 35px;
+    min-height: 100px;
 
-            padding: 18px 4px;
+    transition:
+        background .2s,
+        border .2s;
+}
 
-            border-top: 1px solid #1d1f22;
+.info-card:hover {
+    background: #141519;
+    border-color: #34363c;
+}
 
-            color: #484b50;
+.info-card-label {
+    color: #55575e;
 
-            font-size: 9px;
+    font-size: 8px;
 
-            letter-spacing: 2px;
+    letter-spacing: 2px;
 
-            text-transform: uppercase;
-        }
+    text-transform: uppercase;
+}
 
+.info-card-value {
+    margin-top: 10px;
 
-        /* =========================
-           MOBILE
-           ========================= */
+    font-family: monospace;
 
-        @media (max-width: 700px) {
+    font-size: 19px;
 
-            .page {
-                width:
-                    min(100% - 18px, 600px);
+    color: #d9dadd;
+}
 
-                padding-top: 18px;
-            }
+.info-card-description {
+    margin-top: 5px;
 
-            .archive {
-                display: none;
-            }
+    color: #55575e;
 
-            .hero {
-                padding-top: 42px;
-            }
+    font-size: 9px;
 
-            .void-core {
-                font-size: 46px;
-            }
+    line-height: 1.5;
+}
 
-            .menu {
-                grid-template-columns: 1fr;
-            }
 
-            .menu-card.large {
-                grid-column: span 1;
-            }
+/* =========================================
+   FOOTER
+========================================= */
 
-            .menu-card {
-                min-height: 145px;
-            }
+.footer {
+    max-width: 1150px;
 
-            .secondary-actions {
-                justify-content: flex-start;
-            }
+    margin: 0 auto;
 
-            .footer {
-                flex-direction: column;
+    border-top: 1px solid #202126;
 
-                gap: 8px;
-            }
+    padding: 18px 3px 30px;
 
-        }
+    display: flex;
 
+    justify-content: space-between;
 
-        /* =========================
-           VOID CORE — ENTRY ANIMATION
-           ========================= */
+    color: #45474d;
 
-        body {
-            opacity: 0;
+    font-size: 8px;
 
-            animation:
-                voidPageIn .9s
-                cubic-bezier(.22, .61, .36, 1)
-                forwards;
-        }
+    letter-spacing: 1.5px;
 
-        .page {
-            animation:
-                voidContentIn 1s
-                cubic-bezier(.22, .61, .36, 1)
-                .08s both;
-        }
+    text-transform: uppercase;
+}
 
-        @keyframes voidPageIn {
-            from {
-                opacity: 0;
-            }
 
-            to {
-                opacity: 1;
-            }
-        }
+/* =========================================
+   MOBILE
+========================================= */
 
-        @keyframes voidContentIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-                filter: blur(5px);
-            }
+@media (max-width: 700px) {
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
-        }
+    body {
+        padding: 0 18px;
+    }
 
+    .nav {
+        height: 62px;
+    }
 
-        /* =========================
-           VOID CORE — AFK SPARKS
-           ========================= */
+    .archive-link {
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
 
-        #afkParticles {
-            position: fixed;
+    .main {
+        padding-top: 42px;
+    }
 
-            inset: 0;
+    h1 {
+        font-size: 50px;
+        letter-spacing: -2px;
+    }
 
-            overflow: hidden;
+    .hero-description {
+        font-size: 12px;
+    }
 
-            pointer-events: none;
+    .database-header {
+        margin-top: 45px;
+    }
 
-            z-index: 9999;
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
-            opacity: 0;
+    .search,
+    .filter {
+        width: 100%;
+    }
 
-            transition:
-                opacity 1.8s ease;
-        }
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
 
-        #afkParticles.active {
-            opacity: 1;
-        }
+    .footer {
+        font-size: 7px;
+    }
 
-        .afk-spark {
-            position: absolute;
+}
 
-            width: 2px;
-            height: 2px;
 
-            border-radius: 50%;
+/* =========================================
+   ENTRY ANIMATION
+========================================= */
 
-            background: #ffffff;
+@keyframes appear {
 
-            box-shadow:
-                0 0 4px #ffffff,
-                0 0 9px rgba(255,255,255,.9),
-                0 0 16px rgba(255,255,255,.45);
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
 
-            animation:
-                afkSparkFloat
-                var(--duration)
-                ease-out
-                forwards;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-            will-change:
-                transform,
-                opacity;
-        }
+}
 
-        @keyframes afkSparkFloat {
+.main {
+    animation: appear .6s ease both;
+}
 
-            0% {
-                opacity: 0;
-
-                transform:
-                    translate3d(0, 8px, 0)
-                    scale(.35)
-                    rotate(0deg);
-            }
-
-            15% {
-                opacity: .9;
-            }
-
-            65% {
-                opacity: .65;
-            }
-
-            100% {
-                opacity: 0;
-
-                transform:
-                    translate3d(
-                        var(--drift-x),
-                        -65px,
-                        0
-                    )
-                    scale(.05)
-                    rotate(90deg);
-            }
-        }
-
-
-        /* =========================
-           REDUCED MOTION
-           ========================= */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            body,
-            .page {
-                animation: none;
-
-                opacity: 1;
-
-                filter: none;
-
-                transform: none;
-            }
-
-            #afkParticles {
-                display: none;
-            }
-
-        }
-
-    </style>
+</style>
 </head>
 
 
 <body>
 
-<div id="afkParticles" aria-hidden="true"></div>
 
-<div class="page">
+<!-- =====================================
+     NAVIGATION
+===================================== -->
 
+<nav class="nav">
 
-    <!-- =========================
-         HEADER
-         ========================= -->
+    <a href="index.html" class="brand">
 
-    <header class="header">
-
-        <div class="brand">
-
-            <!--
-                HIDDEN ALL'UI EASTER EGG
-
-                Click "RP" 7 times quickly.
-            -->
-
-            <div
-                class="brand-icon"
-                id="secretTablet"
-                aria-hidden="true"
-            >
-                RP
-            </div>
-
-            <div class="brand-name">
-                ROLEPLAY
-            </div>
-
+        <div class="brand-box">
+            RP
         </div>
 
-        <div class="archive">
-            STORY ARCHIVE
+        <div class="brand-name">
+            ROLEPLAY
         </div>
 
-    </header>
+    </a>
 
 
-    <!-- =========================
+    <a href="index.html" class="archive-link">
+        Story Archive
+    </a>
+
+</nav>
+
+
+
+<main class="main">
+
+
+    <!-- =================================
          HERO
-         ========================= -->
+    ================================== -->
 
-    <section class="hero">
+    <div class="eyebrow">
+        Roleplay Universe
+    </div>
 
-        <div class="hero-label">
-            Roleplay Universe
+    <h1>
+        SIZE
+    </h1>
+
+    <p class="hero-description">
+        A dimensional reference archive documenting the recorded
+        heights of characters and entities within the VOID CORE universe.
+    </p>
+
+
+
+    <!-- =================================
+         DATABASE
+    ================================== -->
+
+    <div class="database-header">
+
+        <div class="section-title">
+            Character Dimensions
         </div>
 
-        <div class="void-core">
-            VOID CORE
-        </div>
-
-        <p>
-            The central archive for the universe,
-            its history, characters and stories.
-        </p>
-
-    </section>
-
-
-    <!-- =========================
-         MENU HEADER
-         ========================= -->
-
-    <div class="menu-header">
-
-        <div class="menu-title">
-            Archive
-        </div>
-
-        <div class="menu-subtitle">
-            Select a section
+        <div class="section-meta">
+            014 Entries
         </div>
 
     </div>
 
 
-    <!-- =========================
-         MENU
-         ========================= -->
 
-    <section class="menu">
+    <!-- CONTROLS -->
 
+    <div class="controls">
 
-        <!-- SEASONS -->
-
-        <a
-            href="seasons.html"
-            class="menu-card large"
-            data-number="01"
+        <input
+            id="search"
+            class="search"
+            type="text"
+            placeholder="Search characters..."
         >
 
-            <div class="menu-card-top">
 
-                <div class="menu-number">
-                    01
-                </div>
+        <select id="filter" class="filter">
 
-                <div class="menu-arrow">
-                    →
-                </div>
+            <option value="all">
+                All Types
+            </option>
 
-            </div>
+            <option value="normal">
+                Normal
+            </option>
 
-            <div class="menu-card-content">
+            <option value="large">
+                Large
+            </option>
 
-                <h2>
-                    Seasons
-                </h2>
+            <option value="titan">
+                Titan
+            </option>
 
-                <p>
-                    Explore the eras that shaped the
-                    story and follow the evolution of
-                    the Roleplay universe.
-                </p>
+            <option value="elite">
+                Elite
+            </option>
 
-                <div class="status">
+            <option value="unknown">
+                Unknown
+            </option>
 
-                    <span class="status-dot"></span>
-
-                    Available
-
-                </div>
-
-            </div>
-
-        </a>
-
-
-        <!-- EPISODES -->
-
-        <a
-            href="episodes.html"
-            class="menu-card"
-            data-number="02"
-        >
-
-            <div class="menu-card-top">
-
-                <div class="menu-number">
-                    02
-                </div>
-
-                <div class="menu-arrow">
-                    →
-                </div>
-
-            </div>
-
-            <div class="menu-card-content">
-
-                <h2>
-                    Episodes
-                </h2>
-
-                <p>
-                    Browse the complete collection
-                    of chapters and events.
-                </p>
-
-                <div class="status">
-
-                    <span class="status-dot"></span>
-
-                    WIP
-
-                </div>
-
-            </div>
-
-        </a>
-
-
-        <!-- CHARACTERS -->
-
-        <a
-            href="characters.html"
-            class="menu-card"
-            data-number="03"
-        >
-
-            <div class="menu-card-top">
-
-                <div class="menu-number">
-                    03
-                </div>
-
-                <div class="menu-arrow">
-                    →
-                </div>
-
-            </div>
-
-            <div class="menu-card-content">
-
-                <h2>
-                    Characters
-                </h2>
-
-                <p>
-                    Discover the characters that
-                    inhabit the universe.
-                </p>
-
-                <div class="status">
-
-                    <span class="status-dot"></span>
-
-                    WIP
-
-                </div>
-
-            </div>
-
-        </a>
-
-
-        <!-- LORE -->
-
-        <a
-            href="lore.html"
-            class="menu-card"
-            data-number="04"
-        >
-
-            <div class="menu-card-top">
-
-                <div class="menu-number">
-                    04
-                </div>
-
-                <div class="menu-arrow">
-                    →
-                </div>
-
-            </div>
-
-            <div class="menu-card-content">
-
-                <h2>
-                    Lore
-                </h2>
-
-                <p>
-                    The history, events and hidden
-                    details behind the universe.
-                </p>
-
-                <div class="status">
-
-                    <span class="status-dot"></span>
-
-                    WIP
-
-                </div>
-
-            </div>
-
-        </a>
-
-
-        <!-- ARCHIVE -->
-
-        <a
-            href="archive.html"
-            class="menu-card"
-            data-number="05"
-        >
-
-            <div class="menu-card-top">
-
-                <div class="menu-number">
-                    05
-                </div>
-
-                <div class="menu-arrow">
-                    →
-                </div>
-
-            </div>
-
-            <div class="menu-card-content">
-
-                <h2>
-                    Archive
-                </h2>
-
-                <p>
-                    Previous versions, classified
-                    material and archived content.
-                </p>
-
-                <div class="status">
-
-                    <span class="status-dot"></span>
-
-                    WIP
-
-                </div>
-
-            </div>
-
-        </a>
-
-
-    </section>
-
-
-    <!-- =========================
-         SECONDARY SIZE BUTTON
-         ========================= -->
-
-    <div class="secondary-actions">
-
-        <a
-            href="size.html"
-            class="secondary-button"
-        >
-
-            <span>
-                SIZE DATABASE
-            </span>
-
-            <span class="secondary-arrow">
-                →
-            </span>
-
-        </a>
+        </select>
 
     </div>
 
 
-    <!-- =========================
-         FOOTER
-         ========================= -->
 
-    <footer class="footer">
+    <!-- =================================
+         TABLE
+    ================================== -->
 
-        <span>
-            VOID CORE
-        </span>
+    <div class="table-container">
 
-        <span>
-            2026
-        </span>
+        <table>
 
-    </footer>
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Character
+                    </th>
+
+                    <th>
+                        Type
+                    </th>
+
+                    <th>
+                        V1.0
+                    </th>
+
+                    <th>
+                        V2.0
+                    </th>
+
+                    <th>
+                        V3.0
+                    </th>
+
+                    <th>
+                        Special
+                    </th>
+
+                    <th>
+                        Scale
+                    </th>
+
+                </tr>
+
+            </thead>
 
 
-</div>
+            <tbody id="sizeTable">
 
 
-<!-- =========================
-     ALL'UI EASTER EGG SYSTEM
-     ========================= -->
+                <!-- CAMERA NORMAL -->
+
+                <tr
+                    data-name="Camera Troop"
+                    data-type="normal"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                01
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Camera Troop
+                                </div>
+
+                                <div class="character-id">
+                                    CAMERA-001
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Normal
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        1.85M
+                        <span class="version-label">
+                            1.0 — 2.0
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        1.85M
+                        <span class="version-label">
+                            2.0
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        2.20M
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:2.05%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                2.20M
+                            </span>
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- LARGE CAMERA -->
+
+                <tr
+                    data-name="Large Camera"
+                    data-type="large"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                02
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Large Camera
+                                </div>
+
+                                <div class="character-id">
+                                    CAMERA-002
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Large
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        3M
+                        <span class="version-label">
+                            1.0 — 2.0
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        3M
+                    </td>
+
+                    <td class="size">
+                        5M
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:5.55%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                5M
+                            </span>
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- TITAN CAMERA -->
+
+                <tr
+                    data-name="Titan Cameraman"
+                    data-type="titan"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                03
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Titan Cameraman
+                                </div>
+
+                                <div class="character-id">
+                                    CAMERA-TITAN-001
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type titan">
+                            Titan
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        65M
+                    </td>
+
+                    <td class="size">
+                        85M
+                    </td>
+
+                    <td class="size">
+                        —
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:94.44%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                85M
+                            </span>
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- SPEAKER NORMAL -->
+
+                <tr
+                    data-name="Speaker Troop"
+                    data-type="normal"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                04
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Speaker Troop
+                                </div>
+
+                                <div class="character-id">
+                                    SPEAKER-001
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Normal
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        1.85M
+                        <span class="version-label">
+                            1.0 — 2.0
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        1.85M
+                    </td>
+
+                    <td class="size">
+                        2.40M
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:2.66%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                2.40M
+                            </span>
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- LARGE SPEAKER -->
+
+                <tr
+                    data-name="Large Speaker"
+                    data-type="large"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                05
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Large Speaker
+                                </div>
+
+                                <div class="character-id">
+                                    SPEAKER-002
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Large
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        13M
+                    </td>
+
+                    <td class="size">
+                        —
+                    </td>
+
+                    <td class="size">
+                        16M
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:17.77%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                16M
+                            </span>
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- TITAN SPEAKER -->
+
+                <tr
+                    data-name="Titan Speakerman"
+                    data-type="titan"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                06
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Titan Speakerman
+                                </div>
+
+                                <div class="character-id">
+                                    SPEAKER-TITAN-001
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type titan">
+                            Titan
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        60M
+                    </td>
+
+                    <td class="size">
+                        72M
+                    </td>
+
+                    <td class="size">
+                        —
+                    </td>
+
+                    <td class="special">
+                        TFS - 90M
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:100%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                90M
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- TV NORMAL -->
+
+                <tr
+                    data-name="TV Troop"
+                    data-type="normal"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                07
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    TV Troop
+                                </div>
+
+                                <div class="character-id">
+                                    TV-001
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Normal
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        2M
+                    </td>
+
+                    <td class="size">
+                        2.2M
+                    </td>
+
+                    <td class="size">
+                        2.4M
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:2.66%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                2.4M
+                            </span>
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- LARGE TV -->
+
+                <tr
+                    data-name="Large TV Man"
+                    data-type="large"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                08
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Large TV Man
+                                </div>
+
+                                <div class="character-id">
+                                    TV-002
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Large
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        14M
+                    </td>
+
+                    <td class="size">
+                        15M
+                    </td>
+
+                    <td class="size">
+                        —
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:16.66%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                15M
+                            </span>
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- SHIRO -->
+
+                <tr
+                    data-name="Shiro"
+                    data-type="elite"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                09
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Shiro
+                                </div>
+
+                                <div class="character-id">
+                                    TV-063
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Elite
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        2.40M
+                    </td>
+
+                    <td class="size">
+                        2.80M
+                    </td>
+
+                    <td class="size unknown">
+                        ???
+                    </td>
+
+                    <td class="special unknown">
+                        ???
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:3.11%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                2.80M
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- TITAN TV -->
+
+                <tr
+                    data-name="Titan TV Man"
+                    data-type="titan"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                10
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Titan TV Man
+                                </div>
+
+                                <div class="character-id">
+                                    TV-TITAN-001
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type titan">
+                            Titan
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        67M
+                    </td>
+
+                    <td class="size">
+                        87M
+                    </td>
+
+                    <td class="size">
+                        —
+                    </td>
+
+                    <td class="special">
+                        90M
+                        <span class="version-label">
+                            WOD
+                        </span>
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:100%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                90M
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- TOILET -->
+
+                <tr
+                    data-name="Toilet"
+                    data-type="normal"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                11
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Toilet
+                                </div>
+
+                                <div class="character-id">
+                                    TOILET-001
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Normal
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        1.40M
+                    </td>
+
+                    <td class="size">
+                        1.60M
+                    </td>
+
+                    <td class="size">
+                        2.40M
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:2.66%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                2.40M
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- LARGE TOILET -->
+
+                <tr
+                    data-name="Large Toilet"
+                    data-type="large"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                12
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Large Toilet
+                                </div>
+
+                                <div class="character-id">
+                                    TOILET-002
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Large
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        3M
+                    </td>
+
+                    <td class="size">
+                        4M
+                    </td>
+
+                    <td class="size">
+                        6M
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:6.66%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                6M
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- BIG TOILET -->
+
+                <tr
+                    data-name="Big Toilet"
+                    data-type="large"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                13
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    Big Toilet
+                                </div>
+
+                                <div class="character-id">
+                                    TOILET-003
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type">
+                            Large
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        6M
+                    </td>
+
+                    <td class="size">
+                        7M
+                    </td>
+
+                    <td class="size">
+                        9M
+                    </td>
+
+                    <td class="special">
+                        —
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:10%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                9M
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+
+                <!-- G-TOILET -->
+
+                <tr
+                    data-name="G-Toilet"
+                    data-type="titan"
+                >
+
+                    <td>
+                        <div class="character">
+
+                            <div class="character-number">
+                                14
+                            </div>
+
+                            <div>
+
+                                <div class="character-name">
+                                    G-Toilet
+                                </div>
+
+                                <div class="character-id">
+                                    TOILET-CORE-001
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="type titan">
+                            Titan
+                        </span>
+                    </td>
+
+                    <td class="size">
+                        65M
+                    </td>
+
+                    <td class="size">
+                        72M
+                    </td>
+
+                    <td class="size">
+                        74M
+                    </td>
+
+                    <td class="special">
+                        85M / 90M
+                        <span class="version-label">
+                            V4 / V5
+                        </span>
+                    </td>
+
+                    <td class="scale-cell">
+
+                        <div class="scale">
+
+                            <div class="scale-bar">
+                                <div
+                                    class="scale-fill"
+                                    style="width:100%"
+                                ></div>
+                            </div>
+
+                            <span class="scale-number">
+                                90M
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- =================================
+         DATABASE NOTES
+    ================================== -->
+
+    <section class="info-section">
+
+        <div class="info-title">
+            Database Overview
+        </div>
+
+
+        <div class="info-grid">
+
+
+            <div class="info-card">
+
+                <div class="info-card-label">
+                    Maximum Recorded
+                </div>
+
+                <div class="info-card-value">
+                    90M
+                </div>
+
+                <div class="info-card-description">
+                    Multiple entities currently reach the highest documented dimension.
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-card-label">
+                    Largest Recorded
+                </div>
+
+                <div class="info-card-value">
+                    90M
+                </div>
+
+                <div class="info-card-description">
+                    Current highest documented dimension across the database.
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-card-label">
+                    Unknown Data
+                </div>
+
+                <div class="info-card-value">
+                    None
+                </div>
+
+                <div class="info-card-description">
+                    No character currently has completely undisclosed dimensional data.
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer class="footer">
+
+    <span>
+        VOID CORE
+    </span>
+
+    <span>
+        2026
+    </span>
+
+</footer>
+
+
 
 <script>
 
-    const secretTablet =
-        document.getElementById("secretTablet");
+/* =========================================
+   SEARCH + FILTER
+========================================= */
 
-    let clickCount = 0;
-    let clickTimer = null;
+const searchInput =
+    document.getElementById("search");
 
-    /*
-        The player has 2 seconds to
-        complete the sequence.
-    */
+const filter =
+    document.getElementById("filter");
 
-    secretTablet.addEventListener("click", () => {
-
-        clickCount++;
-
-        clearTimeout(clickTimer);
-
-        clickTimer = setTimeout(() => {
-
-            clickCount = 0;
-
-        }, 2000);
+const rows =
+    document.querySelectorAll("#sizeTable tr");
 
 
-        /*
-            7 clicks = ALL'UI TABLET
-        */
+function updateTable() {
 
-        if (clickCount === 7) {
+    const search =
+        searchInput.value
+            .toLowerCase()
+            .trim();
 
-            window.location.href =
-                "tablet.html";
+    const type =
+        filter.value;
+
+
+    rows.forEach(row => {
+
+        const name =
+            row.dataset.name
+                .toLowerCase();
+
+        const rowType =
+            row.dataset.type;
+
+
+        const matchesSearch =
+            name.includes(search);
+
+
+        const matchesType =
+            type === "all" ||
+            rowType === type;
+
+
+        if (
+            matchesSearch &&
+            matchesType
+        ) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
 
         }
 
     });
 
-
-    /* =========================
-       VOID CORE — AFK PARTICLES
-       ========================= */
-
-    const afkParticles =
-        document.getElementById("afkParticles");
-
-    let afkTimer = null;
-    let afkActive = false;
-
-    const AFK_DELAY = 12000;
-
-    function resetAFK() {
-
-        clearTimeout(afkTimer);
-
-        if (afkActive) {
-
-            afkActive = false;
-
-            afkParticles.classList.remove("active");
-
-            setTimeout(() => {
-
-                if (!afkActive) {
-
-                    afkParticles.innerHTML = "";
-
-                }
-
-            }, 1900);
-        }
-
-        afkTimer =
-            setTimeout(
-                startAFK,
-                AFK_DELAY
-            );
-    }
+}
 
 
-    function createSpark() {
-
-        if (!afkActive) return;
-
-        const spark =
-            document.createElement("span");
-
-        spark.className =
-            "afk-spark";
-
-        spark.style.left =
-            `${Math.random() * 100}vw`;
-
-        spark.style.top =
-            `${35 + Math.random() * 60}vh`;
-
-        spark.style.setProperty(
-            "--drift-x",
-            `${(Math.random() - 0.5) * 45}px`
-        );
-
-        spark.style.setProperty(
-            "--duration",
-            `${1.8 + Math.random() * 2.2}s`
-        );
-
-        const size =
-            1 + Math.random() * 2.2;
-
-        spark.style.width =
-            `${size}px`;
-
-        spark.style.height =
-            `${size}px`;
-
-        afkParticles.appendChild(spark);
-
-        setTimeout(() => {
-
-            spark.remove();
-
-        }, 4500);
-    }
+searchInput.addEventListener(
+    "input",
+    updateTable
+);
 
 
-    function startAFK() {
-
-        afkActive = true;
-
-        afkParticles.classList.add("active");
-
-        const burst = () => {
-
-            if (!afkActive) return;
-
-            const amount =
-                2 + Math.floor(
-                    Math.random() * 3
-                );
-
-            for (
-                let i = 0;
-                i < amount;
-                i++
-            ) {
-
-                setTimeout(
-                    createSpark,
-                    i * 120
-                );
-
-            }
-
-            setTimeout(
-                burst,
-                450 + Math.random() * 700
-            );
-        };
-
-        burst();
-    }
-
-
-    [
-        "mousemove",
-        "mousedown",
-        "keydown",
-        "touchstart",
-        "wheel"
-    ].forEach(event => {
-
-        window.addEventListener(
-            event,
-            resetAFK,
-            { passive: true }
-        );
-
-    });
-
-
-    resetAFK();
+filter.addEventListener(
+    "change",
+    updateTable
+);
 
 </script>
+
 
 </body>
 </html>
