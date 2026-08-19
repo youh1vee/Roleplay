@@ -48,6 +48,10 @@ body {
     padding: 0 40px;
 }
 
+a {
+    color: inherit;
+}
+
 
 /* =========================================
    TOP NAVIGATION
@@ -485,6 +489,79 @@ tbody tr:last-child td {
 
 
 /* =========================================
+   COMPARE BUTTON
+========================================= */
+
+.compare-action {
+    display: flex;
+
+    justify-content: flex-start;
+
+    margin-top: 13px;
+}
+
+.compare-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 13px;
+
+    border: 1px solid #25272b;
+
+    border-radius: 9px;
+
+    background: #101115;
+
+    color: #5d6065;
+
+    text-decoration: none;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        color .25s ease;
+}
+
+.compare-button:hover {
+    transform: translateY(-2px);
+
+    border-color: #3b3e43;
+
+    background: #151619;
+
+    color: #bfc1c5;
+}
+
+.compare-arrow {
+    color: #4d5055;
+
+    font-size: 13px;
+
+    transition:
+        transform .25s ease,
+        color .25s ease;
+}
+
+.compare-button:hover .compare-arrow {
+    transform: translateX(3px);
+
+    color: #aeb1b5;
+}
+
+
+/* =========================================
    INFORMATION BLOCKS
 ========================================= */
 
@@ -754,7 +831,6 @@ tbody tr:last-child td {
             type="text"
             placeholder="Search characters..."
         >
-
 
         <select id="filter" class="filter">
 
@@ -1878,6 +1954,30 @@ tbody tr:last-child td {
             </tbody>
 
         </table>
+
+    </div>
+
+
+    <!-- =================================
+         COMPARE
+    ================================== -->
+
+    <div class="compare-action">
+
+        <a
+            href="compare.html"
+            class="compare-button"
+        >
+
+            <span>
+                COMPARE
+            </span>
+
+            <span class="compare-arrow">
+                →
+            </span>
+
+        </a>
 
     </div>
 
